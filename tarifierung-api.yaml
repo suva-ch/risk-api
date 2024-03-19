@@ -1,0 +1,579 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0-FIXME
+  title: Tariff classification REST API
+  description: >-
+    Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der individuellen Berufscodes.
+  license:
+    name: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: fixme
+
+paths:
+  /v1/suva-occupation-codes:
+    get:
+      summary: Abfrage Suva Berufscodes
+      description: >-
+        Liefert alle von der Suva bereitgestellten branchenüblichen Berufscodes mit der Zuordnung zu den ISCO-Berufsart
+      tags:
+        - Suva Occupation Codes
+      operationId: getSuvaOccupationCodes
+      responses:
+        200:
+          description: Liste von Suva Berufscodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SuvaOccupationCode"
+
+  /v1/isco-occupation-types:
+    get:
+      summary: Abfrage ISCO-Berufsart und zugeordnete Risiko-Klassen.
+      description: >-
+        Liefert alle auf der Suva-Seite unterstützen ISCO-Berufsarten.
+        fixme: Fehlersituation Code ausweisen oder leere Liste?
+      tags:
+        - ISCO Occupation Types
+      operationId: getIscoOccupationTypes
+      parameters:
+        - $ref: "#/components/parameters/PremiumYear"
+      responses:
+        200:
+          description: Liste von ISCO-Berufsarten und zugeordnete Risiko-Klassen.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IscoOccupationType"
+
+  /v1/operating-unit-profiles:
+    get:
+      summary: Abfrage der Betribsteil-Situation.
+      description: >-
+        Liefert die Betriebsteil-Situation für alle Betriebsteile (ggf. auch Betriebsteile die keine Personalverleih-Tätigkeiten durchführen).
+      tags:
+        - Occupation Codes
+      operationId: getOperatingUnitProfiles
+      parameters:
+        - $ref: "#/components/parameters/PremiumYear"
+      responses:
+        200:
+          description: Liste von Betriebsteil-Situationen.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OperatingUnitProfile"
+
+  /v1/occupation-codes:
+    get:
+      summary: Abfrage aktuelle Berufscodes.
+      description: >-
+        Liefert alle Berufscodes (Individuell und Suva).
+      tags:
+        - Occupation Codes
+      operationId: getOccupationCodes
+      security:
+        - ApiKeyAuth: []
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        200:
+          description: Liste von aktuellen Berufscodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OccupationCode"
+                  
+    put:
+      summary: Aktivierung eines Suva Berufscodes.
+      description: >-
+        Einen Berufscode aus den Suva-Berufscodes aktivieren.
+      tags:
+        - Occupation Codes
+      operationId: activateOccupationCode
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: Der zu aktivierende Suva Berufscode.
+        required: true
+        content:
+          application/json:
+            schema:
+              title: OccupationCodeActivation
+              type: object
+              properties:
+                suvaOccupationCodeId:
+                  $ref: "#/components/schemas/SuvaOccupationCodeId"
+                occupationCodeNr1:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNr2:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+              required:
+                - suvaOccupationCodeId
+                - occupationCodeNr1 # fixme können die Nr1 und Nr2 required sein?
+                - occupationCodeNr2
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequestError"
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationCode"
+
+    post:
+      summary: Einreichen eines Berufscodes.
+      description: >-
+        Einen individuellen Berufscode einreichen.
+      tags:
+        - Occupation Codes
+      operationId: submitOccupationCode
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: Der individuelle Berufscode inklusive führender Sprache.
+        required: true
+        content:
+          application/json:
+            schema:
+              title: SubmitOccupationCode
+              type: object
+              properties:
+                occupationCodeNr1:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNr2:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+                preferredLanguage:
+                  $ref: "#/components/schemas/Language"
+                descriptions:
+                  type: array
+                  minItems: 1
+                  items:
+                    $ref: "#/components/schemas/OccupationDescription"
+              required:
+                - occupationCodeNr1 # fixme können die Nr1 und Nr2 required sein?
+                - occupationCodeNr2
+                - preferredLanguage
+                - descriptions
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequestError"
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: OccupationCodeSubmitted
+                type: object
+                properties:
+                  occupationCodeId:
+                    $ref: "#/components/schemas/OccupationCodeId"
+                  eventId:
+                    $ref: "#/components/schemas/EventId"
+                required:
+                  - occupationCodeId
+                  - eventId
+
+  /v1/occupation-codes/{occupationCodeId}:
+    parameters:
+      - $ref: "#/components/parameters/OccupationCodeId"
+
+    delete:
+      summary: Ein Berufscode deaktivieren.
+      description: >-
+        Der Berufscode wird auf Seite Suva auf das aktuelle Datum deaktiviert. Eine Aktivierung ist danach nicht mehr möglich.
+      tags:
+        - Occupation Codes
+      operationId: deactivateOccupationCode
+      security:
+        - ApiKeyAuth: []
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        204:
+          description: Berufscode deaktiviert.
+
+  /v1/events:
+    get:
+      summary: Offene Events abholen.
+      description: >-
+        Abfrage aller nicht quittierten Events.
+      tags:
+        - Events
+      operationId: getEvents
+      security:
+        - ApiKeyAuth: []
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        200:
+          description: Liste von Events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+
+  /v1/events/{eventId}:
+    parameters:
+      - $ref: "#/components/parameters/EventId"
+
+    delete:
+      summary: Einen offenen Event quittierten.
+      description: >-
+        Wird ein offener Event quittiert, wird dieser nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt.
+      tags:
+        - Events
+      operationId: aknowledgeEvent
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        204:
+          description: Der Event ist quittiert.
+
+components:
+  parameters:
+    PremiumYear:
+      name: year
+      description: >-
+        Prämienjahr (Default: Kalenderjahr)
+      in: query
+      schema:
+        $ref: "#/components/schemas/PremiumYear"
+
+    OccupationCodeId:
+      name: occupationCodeId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/OccupationCodeId"
+
+    EventId:
+      name: eventId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/EventId"
+
+  responses:
+    BadRequestError:
+      description: >-
+        Anfrage kann nicht verarbeitet werden.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotAuthenticatedError:
+      description: >-
+        Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotFoundError:
+      description: >-
+        Die angeforderte Resource konnte nicht gefunden werden.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+    # suva occuption code
+
+    SuvaOccupationCode:
+      description: Suva-Berufscode
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/SuvaOccupationCodeId"
+        descriptions:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/OccupationDescription"
+        iscoOccupationTypeId:
+          $ref: "#/components/schemas/IscoOccupationTypeId"
+      required:
+        - id
+        - descriptions
+        - iscoOccupationTypeId
+    
+    SuvaOccupationCodeId:
+      description: Identifikator für einen Suva-Berufscode.
+      type: string
+      format: uuid
+
+    # isco occupation type
+
+    IscoOccupationType:
+      description: ISCO-Berufsart
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/IscoOccupationTypeId"
+        operatingUnitCode:
+          $ref: "#/components/schemas/OperatingUnitCode"
+        subclassSection:
+          $ref: "#/components/schemas/SubclassSection"
+      required:
+        - id
+        - operatingUnitCode
+        - subclassSection
+    
+    IscoOccupationTypeId:
+      description: 5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
+      type: integer
+
+    # occupation code
+
+    OccupationCode:
+      description: Berufscode (Individuell oder Suva)
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/OccupationCodeId"
+        occupationCodeNr1:
+          $ref: "#/components/schemas/OccupationCodeNr"
+        occupationCodeNr2:
+          $ref: "#/components/schemas/OccupationCodeNr"
+        descriptions:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/OccupationDescription"
+        suvaOccupationCode:
+          $ref: "#/components/schemas/SuvaOccupationCode"
+        status:
+          $ref: "#/components/schemas/OccupationCodeStatus"
+        active:
+          $ref: "#/components/schemas/OccupationCodeActive"
+      required:
+        - id
+        - status
+    
+    OccupationCodeId:
+      description: Identifikator für ein Berfuscode.
+      type: string
+      format: uuid
+
+    # operating unit
+
+    OperatingUnitProfile:
+      type: object
+      properties:
+        operatingUnitCode:
+          $ref: "#/components/schemas/OperatingUnitCode"
+        temporalProfiles:
+          type: array
+          items:
+            $ref: "#/components/schemas/OperatingUnitTemporalProfile"
+      required:
+        - operatingUnitCode
+    
+    OperatingUnitCode:
+      description: Betriebsteil-Code (BT-Code)
+      type: string
+      minLength: 1
+      maxLength: 1
+    
+    OperatingUnitTemporalProfile:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date
+        upto:
+          type: string
+          format: date
+        subclassSection:
+          $ref: "#/components/schemas/SubclassSection"
+        descriptions:
+          description: Betriebsteil-Bezeichnungen.
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/LocalizedValue"
+        premiums:
+          $ref: "#/components/schemas/GrossPremium"
+        iscoOccupationTypeIds:
+          description: Liste von ISCO-Berufsarten.
+          type: array
+          items:
+            $ref: "#/components/schemas/IscoOccupationTypeId"
+      required:
+        - from
+        - upto
+        - subclassSection
+        - descriptions
+        - iscoOccupationTypeIds
+
+    # events
+
+    Event:
+      description: Ein Event
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/EventId"
+        timestamp:
+          description: Ereigniszeitpunkt
+          type: string
+          format: date-time
+        detail:
+          oneOf:
+            - $ref: "#/components/schemas/EventOccupationCodeSubmitted"
+            - $ref: "#/components/schemas/EventIscoOccupationTypeChanged"
+            - $ref: "#/components/schemas/EventGrossPremiumChanged"
+    
+    EventId:
+      description: Identifikator für einen Event.
+      type: string
+      format: uuid
+    
+    EventOccupationCodeSubmitted:
+      description: >-
+        Ergebnis zu "Einreichen eines Berufscodes".
+      type: object
+      properties:
+        occupation:
+          $ref: "#/components/schemas/OccupationCode"
+    
+    EventIscoOccupationTypeChanged:
+      description: >-
+        Ein für den Kunden aktiver ISCO-Berufsart wurde auf Seite Suva einem neuen Risiko (UKT) zugeordnet. 
+        Tätigkeiten mit dem geänderten Risiko erhalten potentiell anderen Prämiensätze.
+      type: object
+      properties:
+        premiumYear:
+          $ref: "#/components/schemas/PremiumYear"
+        iscoOccupationType:
+          $ref: "#/components/schemas/IscoOccupationType"
+    
+    EventGrossPremiumChanged:
+      description: >-
+        Von der Suva wurden für einen Betriebsteil neue Prämiensätze verfügt.
+      type: object
+      properties:
+        premiumYear:
+          $ref: "#/components/schemas/PremiumYear"
+        operatingUnitCode:
+          $ref: "#/components/schemas/OperatingUnitCode"
+
+    # commons
+
+    OccupationDescription:
+      description: Mehrsprachige geschlechtsspezifische Berufsbezeichnung.
+      allOf:
+        - $ref: "#/components/schemas/LocalizedValue"
+        - type: object
+          properties:
+            gender:
+              type: string
+              enum: [female, genderless, male]
+
+    GrossPremium:
+      description: Bruttoprämiensätze (BPS)
+      type: object
+      properties:
+        occupationalAccidentInsurance:
+          description: Berufsunfallversicherung (BUV)
+          type: number
+          format: float
+        nonOccupationalAccidentInsurance:
+          description: Nichtberufsunfallversicherung (NBUV)
+          type: number
+          format: float
+      required:
+        - occupationalAccidentInsurance
+        - nonOccupationalAccidentInsurance
+
+    LocalizedValue:
+      description: Ein sprachbezogener Wert.
+      type: object
+      properties:
+        language:
+          $ref: "#/components/schemas/Language"
+        value:
+          type: string
+      required:
+        - language
+        - value
+
+    OccupationCodeStatus:
+      description: >-
+        eingereicht: vom Kunden erfasst und an die Suva gesendet.
+        zugeordnet: wenn Standard-Berufscode wird dies automatisch gesetzt, sonst erst nach Zuordnung auf Seite Suva.
+        abgebrochen: im Status eingereicht wurde Prozess abgebrochen.
+      type: string
+      enum: [submitted, assigned, canceled]
+
+    OccupationCodeActive:
+      description: >-
+        Gibt an, ob ein Berufscode aktiv ist oder nicht
+      type: boolean 
+
+    SubclassSection:
+      description: Unterklassenteil (UKT)
+      type: string
+
+    PremiumYear:
+      description: >-
+        Prämienjahr (Default: Kalenderjahr)
+      type: integer
+      minimum: 2000
+      maximum: 3000
+
+    Language:
+      description: Sprache
+      type: string
+      enum: [de, fr, it, en]
+
+    OccupationCodeNr:
+      description: individueller Schlüssel zur Kennzeichnung des Berufscodes.
+      maxLength: 40
+      type: string
+
+    Error:
+      description: Fehlermeldung
+      properties:
+        id:
+          description: Identifikation der Fehlertypes.
+          type: string
+        messageId:
+          description: Identifikation der Fehlermeldung.
+          type: string
+        messages:
+          description: Fehlermeldung
+          type: array
+          items:
+            $ref: "#/components/schemas/LocalizedValue"
+
+  securitySchemes:
+    ApiKeyAuth:
+      description: fixme
+      type: apiKey
+      in: header
+      name: X-suva-api-key
