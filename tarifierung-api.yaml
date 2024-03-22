@@ -2,8 +2,12 @@ openapi: 3.0.0
 info:
   version: 1.0.0-FIXME
   title: Tariff classification REST API
-  description: >-
+  description: |
+    # de
     Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der individuellen Berufscodes.
+    # en
+    Describes the interfaces offered to an ERP system by Suva for maintaining individual occupational codes.
+
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -34,6 +38,7 @@ paths:
       summary: Abfrage ISCO-Berufsart und zugeordnete Risiko-Klassen.
       description: >-
         Liefert alle auf der Suva-Seite unterstützen ISCO-Berufsarten.
+        XXX
         fixme: Fehlersituation Code ausweisen oder leere Liste?
       tags:
         - ISCO Occupation Types
@@ -50,7 +55,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/IscoOccupationType"
 
-  /v1/operating-unit-profiles:
+  /v1/business-units:
     get:
       summary: Abfrage der Betribsteil-Situation.
       description: >-
@@ -334,13 +339,13 @@ components:
       properties:
         id:
           $ref: "#/components/schemas/IscoOccupationTypeId"
-        operatingUnitCode:
-          $ref: "#/components/schemas/OperatingUnitCode"
+        businessUnitCode:
+          $ref: "#/components/schemas/BusinessUnitCode"
         subclassSection:
           $ref: "#/components/schemas/SubclassSection"
       required:
         - id
-        - operatingUnitCode
+        - businessUnitCode
         - subclassSection
     
     IscoOccupationTypeId:
@@ -384,16 +389,16 @@ components:
     OperatingUnitProfile:
       type: object
       properties:
-        operatingUnitCode:
-          $ref: "#/components/schemas/OperatingUnitCode"
+        businessUnitCode:
+          $ref: "#/components/schemas/BusinessUnitCode"
         temporalProfiles:
           type: array
           items:
             $ref: "#/components/schemas/OperatingUnitTemporalProfile"
       required:
-        - operatingUnitCode
+        - businessUnitCode
     
-    OperatingUnitCode:
+    BusinessUnitCode:
       description: Betriebsteil-Code (BT-Code)
       type: string
       minLength: 1
@@ -479,12 +484,12 @@ components:
       properties:
         premiumYear:
           $ref: "#/components/schemas/PremiumYear"
-        operatingUnitCode:
-          $ref: "#/components/schemas/OperatingUnitCode"
+        businessUnitCode:
+          $ref: "#/components/schemas/BusinessUnitCode"
 
     # commons
 
-    OccupationDescription:
+    OccupationDescription: # FIXME: Fach muss entscheiden, wie nun das Modell ist - vor allem sind immer alle Sprachen und alle Geschlechter definiert?
       description: Mehrsprachige geschlechtsspezifische Berufsbezeichnung.
       allOf:
         - $ref: "#/components/schemas/LocalizedValue"
