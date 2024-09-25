@@ -19,7 +19,7 @@ paths:
     get:
       summary: Abfrage Suva Berufscodes
       description: >-
-        Liefert alle von der Suva bereitgestellten branchenüblichen Berufscodes mit der Zuordnung zu den ISCO-Berufsart
+        Liefert alle von der Suva bereitgestellten branchenüblichen Berufscodes mit der Zuordnung zu der ISCO-Berufsart
       tags:
         - Suva Occupation Codes
       operationId: getSuvaOccupationCodes
@@ -496,8 +496,11 @@ components:
         - type: object
           properties:
             gender:
-              type: string
-              enum: [female, genderless, male]
+              $ref: "#/components/schemas/Gender"
+      required:
+        - language
+        - gender
+        - value
 
     GrossPremium:
       description: Bruttoprämiensätze (BPS)
@@ -550,6 +553,11 @@ components:
       type: integer
       minimum: 2000
       maximum: 3000
+
+    Gender:
+      description: Geschlecht
+      type: string
+      enum: [female, genderless, male]
 
     Language:
       description: Sprache
