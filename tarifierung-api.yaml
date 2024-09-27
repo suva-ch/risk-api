@@ -329,7 +329,6 @@ components:
     SuvaOccupationCodeId:
       description: Identifikator für einen Suva-Berufscode.
       type: string
-      format: uuid
 
     # isco occupation type
 
