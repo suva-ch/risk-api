@@ -2,6 +2,7 @@ openapi: 3.0.0
 info:
   version: 1.0.0-FIXME
   title: Tariff classification REST API
+  x-audience: partner
   description: |
     # de
     Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der individuellen Berufscodes.
