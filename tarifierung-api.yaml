@@ -582,7 +582,7 @@ components:
           description: "Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key."
           type: string
         args:
-          description: "Argumente für die Aufbereitung einer Fehlermeldung auf Seite ERP auf Basis des 'key'. Beispiel: 'Für die Partner-Nr. {} existiert keine Berufscode-Liste.' Der Platzhalter wird durch die Partner-Nr. ersetzt, die als Argument geliefert wird."
+          description: "Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'"
           type: array
           items:
             type: string
