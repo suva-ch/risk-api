@@ -581,7 +581,7 @@ components:
         args:
           type: array
           items:
-            type: object
+            type: string
       required:
         - message
         - id
