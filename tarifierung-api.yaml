@@ -85,7 +85,7 @@ paths:
         - Occupation Codes
       operationId: getOccupationCodes
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -97,7 +97,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OccupationCode"
-                  
+
     put:
       summary: Aktivierung eines Suva Berufscodes.
       description: >-
@@ -106,7 +106,7 @@ paths:
         - Occupation Codes
       operationId: activateOccupationCode
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       requestBody:
         description: Der zu aktivierende Suva Berufscode.
         required: true
@@ -148,7 +148,7 @@ paths:
         - Occupation Codes
       operationId: submitOccupationCode
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       requestBody:
         description: Der individuelle Berufscode inklusive führender Sprache.
         required: true
@@ -207,7 +207,7 @@ paths:
         - Occupation Codes
       operationId: deactivateOccupationCode
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -225,7 +225,7 @@ paths:
         - Events
       operationId: getEvents
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -536,12 +536,12 @@ components:
         zugeordnet: wenn Standard-Berufscode wird dies automatisch gesetzt, sonst erst nach Zuordnung auf Seite Suva.
         abgebrochen: im Status eingereicht wurde Prozess abgebrochen.
       type: string
-      enum: [submitted, assigned, canceled]
+      enum: [ submitted, assigned, canceled ]
 
     OccupationCodeActive:
       description: >-
         Gibt an, ob ein Berufscode aktiv ist oder nicht
-      type: boolean 
+      type: boolean
 
     SubclassSection:
       description: Unterklassenteil (UKT)
@@ -557,12 +557,12 @@ components:
     Gender:
       description: Geschlecht
       type: string
-      enum: [female, genderless, male]
+      enum: [ female, genderless, male ]
 
     Language:
       description: Sprache
       type: string
-      enum: [de, fr, it, en]
+      enum: [ de, fr, it, en ]
 
     OccupationCodeNr:
       description: individueller Schlüssel zur Kennzeichnung des Berufscodes.
@@ -572,17 +572,24 @@ components:
     Error:
       description: Fehlermeldung
       properties:
+        message:
+          description: "Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'."
+          type: string
         id:
-          description: Identifikation der Fehlertypes.
+          description: "Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's."
           type: string
-        messageId:
-          description: Identifikation der Fehlermeldung.
+        key:
+          description: "Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key."
           type: string
-        messages:
-          description: Fehlermeldung
+        args:
+          description: "Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'"
           type: array
           items:
-            $ref: "#/components/schemas/LocalizedValue"
+            type: string
+      required:
+        - message
+        - id
+        - key
 
   securitySchemes:
     ApiKeyAuth:
