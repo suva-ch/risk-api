@@ -39,14 +39,14 @@ paths:
       summary: Abfrage ISCO-Berufsart und zugeordnete Risiko-Klassen.
       description: >-
         Liefert alle auf der Suva-Seite unterstützen ISCO-Berufsarten.
-        XXX
-        fixme: Fehlersituation Code ausweisen oder leere Liste?
       tags:
         - ISCO Occupation Types
       operationId: getIscoOccupationTypes
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
       responses:
+        400:
+          $ref: "#/components/responses/BadRequestError"
         200:
           description: Liste von ISCO-Berufsarten und zugeordnete Risiko-Klassen.
           content:
@@ -67,6 +67,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
       responses:
+        400:
+          $ref: "#/components/responses/BadRequestError"
         200:
           description: Liste von Betriebsteil-Situationen.
           content:
@@ -262,7 +264,7 @@ components:
     PremiumYear:
       name: year
       description: >-
-        Prämienjahr (Default: Kalenderjahr)
+        Prämienjahr, muss zwischen 2024 und dem aktuellen Kalenderjahr liegen (Default: Kalenderjahr)
       in: query
       schema:
         $ref: "#/components/schemas/PremiumYear"
