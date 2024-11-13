@@ -40,7 +40,7 @@ paths:
         - $ref: "#/components/parameters/X-Client-Name"
         - $ref: "#/components/parameters/X-Client-Version"
       security:
-        - ApiKeyAuth: [] # Optional - oder anonymer Zugriff ohne Authentifizierung
+        - ApiKeyAuth: [] # entweder mit API-Key oder anonym - in dem Fall werden nicht alle Daten geliefert
       responses:
         200:
           description: Liste von Subnummern mit Policendaten.
@@ -66,7 +66,7 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      description: fixme
+      description: Kunden-spezifischer API-Key aus dem mySuva-Kundenportal
       type: apiKey
       in: header
       name: X-suva-api-key
@@ -106,7 +106,9 @@ components:
           pattern: "^\\d{2}$"
         subnummerText:
           type: string
-          description: Beschreibung der Subnummer in der Sprache des Kunden.
+          description: |
+            Beschreibung der Subnummer in der Sprache des Kunden.
+            Bei anonymen Zugriff werden diese Daten nicht geliefert.
         praemienmodell:
           type: string
           enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
@@ -133,7 +135,9 @@ components:
           pattern: "^[A-Z]$"
         betriebsTeilText:
           type: string
-          description: Textbeschreibung des Betriebsteils in der Sprache des Kunden.
+          description: |
+            Textbeschreibung des Betriebsteils in der Sprache des Kunden.
+            Bei anonymen Zugriff werden diese Daten nicht geliefert.
 
     Berufscode:
       description: Details zu einem Berufscode.
