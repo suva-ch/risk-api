@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0-FIXME
+  title: Policendaten Schadenmeldung API
+  description: |
+    Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
+  license:
+    name: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: FIXME
+
+paths:
+  /policendaten:
+    get:
+      summary: Liefere Policendaten
+      description: |
+        Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der KundenNr. 
+        Falls keine KundenNr angegeben wird, wird die Authentifizierung zur Identifikation des Kunden verwendet.
+      tags:
+        - Policendaten
+      operationId: getPolicendaten
+      parameters:
+        - name: ereignisDatum
+          in: query
+          required: true
+          description: |
+            Das Datum des Ereignisses. Wenn das Tagesdatum verwendet wird, muss im späteren Verlauf die Schnittstelle mit 
+            dem Ereignis-Datum des Schadens noch einmal aufgerufen werden, insbesondere wenn dazwischen ein Jahreswechsel liegt.
+          schema:
+            type: string
+            format: date
+        - name: kundenNr
+          in: query
+          required: false
+          description: Die Suva-Kundennummer (z.B. 8-01747-90000).
+          schema:
+            type: string
+        - $ref: "#/components/parameters/X-Client-Vendor"
+        - $ref: "#/components/parameters/X-Client-Name"
+        - $ref: "#/components/parameters/X-Client-Version"
+      security:
+        - ApiKeyAuth: [] # Optional - oder anonymer Zugriff ohne Authentifizierung
+      responses:
+        200:
+          description: Liste von Subnummern mit Policendaten.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SubnummerData"
+        401:
+          description: Authentifizierungsfehler. Keine gültigen Authentifizierungsdaten vorhanden.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        400:
+          description: Anfrage konnte nicht verarbeitet werden.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      description: fixme
+      type: apiKey
+      in: header
+      name: X-suva-api-key
+
+  parameters:
+    X-Client-Vendor:
+      name: X-Client-Vendor
+      in: header
+      description: Name des Herstellers der Client-Anwendung.
+      required: false
+      schema:
+        type: string
+    X-Client-Name:
+      name: X-Client-Name
+      in: header
+      description: Produkt-Name der Client-Anwendung.
+      required: false
+      schema:
+        type: string
+    X-Client-Version:
+      name: X-Client-Version
+      in: header
+      description: Version der Anwendung.
+      required: false
+      schema:
+        type: string
+      
+  schemas:
+    SubnummerData:
+      description: Datenstruktur einer Subnummer.
+      type: object
+      properties:
+        subnummer:
+          type: string
+          description: Subnummer als 2-stellige Zahl.
+          example: "01"
+          pattern: "^\\d{2}$"
+        subnummerText:
+          type: string
+          description: Beschreibung der Subnummer in der Sprache des Kunden.
+        praemienmodell:
+          type: string
+          enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
+          description: Modell der Police.
+        betriebsTeile:
+          type: array
+          description: Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
+          items:
+            $ref: "#/components/schemas/BetriebsTeil"
+        berufscodes:
+          type: array
+          description: Enthält Berufscodes, wenn das Prämienmodell `UVG_OCCUPATION_CODES` ist.
+          items:
+            $ref: "#/components/schemas/Berufscode"
+
+    BetriebsTeil:
+      description: Ein Betriebsteil innerhalb einer Subnummer.
+      type: object
+      properties:
+        betriebsTeilBuchstabe:
+          type: string
+          description: Buchstabe zur Identifikation des Betriebsteils.
+          example: "A"
+          pattern: "^[A-Z]$"
+        betriebsTeilText:
+          type: string
+          description: Textbeschreibung des Betriebsteils in der Sprache des Kunden.
+
+    Berufscode:
+      description: Details zu einem Berufscode.
+      type: object
+      properties:
+        occupationCodeNr1:
+          type: string
+          description: Berufscode-Nummer 1 - vom Kunden vergeben
+        occupationCodeNr2:
+          type: string
+          description: Berufscode-Nummer 2 - vom Kunden vergeben
+        suvaOccupationCodeId:
+          type: string
+          format: uuid
+          description: Eindeutige ID des Suva-Berufscodes.
+        active:
+          type: boolean
+          description: Gibt an, ob der Berufscode aktiv ist.
+        descriptions:
+          type: array
+          description: Mehrsprachige Beschreibung des Berufscodes.
+          items:
+            $ref: "#/components/schemas/LocalizedValue"
+        betriebsTeilBuchstabe:
+          type: string
+          description: Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
+          example: "A"
+          pattern: "^[A-Z]$"
+
+    LocalizedValue:
+      description: Ein sprachbezogener Wert.
+      type: object
+      properties:
+        language:
+          type: string
+          description: Sprache des Wertes.
+          enum: [de, fr, it, en]
+        value:
+          type: string
+          description: Text in der entsprechenden Sprache.
+
+    Error:
+      description: Fehlermeldung
+      properties:
+        message:
+          description: "Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'."
+          type: string
+        id:
+          description: "Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's."
+          type: string
+        key:
+          description: "Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key."
+          type: string
+        args:
+          description: "Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'"
+          type: array
+          items:
+            type: string
+      required:
+        - message
+        - id
+        - key
+
+  responses:
+    NotAuthenticatedError:
+      description: Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
