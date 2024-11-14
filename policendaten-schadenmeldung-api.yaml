@@ -3,7 +3,11 @@ info:
   version: 1.0.0-FIXME
   title: Policendaten Schadenmeldung API
   description: |
+    # de
     Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
+
+    # en
+    This API provides policy data based on the event date for an accident report.
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -11,39 +15,65 @@ servers:
   - url: FIXME
 
 paths:
-  /policendaten:
+  /policy:
     get:
-      summary: Liefere Policendaten
       description: |
-        Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der KundenNr. 
+        # de
+        Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der Suva KundenNr. 
         Falls keine KundenNr angegeben wird, wird die Authentifizierung zur Identifikation des Kunden verwendet.
+
+        # en
+        Provides a list of subnumbers based on the event date and optionally the Suva customer ID. 
+        If no customer ID is specified, authentication will identify the customer.
       tags:
         - Policendaten
-      operationId: getPolicendaten
+      operationId: getPolicy
       parameters:
-        - name: ereignisDatum
+        - name: eventDate
           in: query
           required: true
           description: |
-            Das Datum des Ereignisses. Wenn das Tagesdatum verwendet wird, muss im späteren Verlauf die Schnittstelle mit 
-            dem Ereignis-Datum des Schadens noch einmal aufgerufen werden, insbesondere wenn dazwischen ein Jahreswechsel liegt.
+            # de
+            Das Datum des Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
+            später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
+            um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
+
+            # en
+            The event date. If the current date is used, the API should later be called again
+            with the accident event date, particularly if a year change occurs in between,
+            to ensure objects referenced in the accident report are valid at the event date.
           schema:
             type: string
             format: date
-        - name: kundenNr
+        - name: customerID
           in: query
           required: false
-          description: Die Suva-Kundennummer (z.B. 8-01747-90000).
+          description: |
+            # de
+            Die Suva-Kundennummer (z.B. 8-01747-90000).
+
+            # en
+            Suva customer ID (e.g., 8-01747-90000).
           schema:
             type: string
         - $ref: "#/components/parameters/X-Client-Vendor"
         - $ref: "#/components/parameters/X-Client-Name"
         - $ref: "#/components/parameters/X-Client-Version"
       security:
-        - ApiKeyAuth: [] # entweder mit API-Key oder anonym - in dem Fall werden nicht alle Daten geliefert
+        # de
+        # Entweder mit API-Key oder anonym - im Fall von anonymem Zugriff werden nicht alle Daten geliefert.
+        # 
+        # en
+        # Access can be anonymous, but API-key usage is recommended as anonymous access may limit data retrieval.
+        - ApiKeyAuth: [] 
       responses:
         200:
-          description: Liste von Subnummern mit Policendaten.
+          description: |
+            # de
+            Liste von Subnummern der Police.
+
+            # en
+            List of policy subnumbers.
           content:
             application/json:
               schema:
@@ -51,13 +81,23 @@ paths:
                 items:
                   $ref: "#/components/schemas/SubnummerData"
         401:
-          description: Authentifizierungsfehler. Keine gültigen Authentifizierungsdaten vorhanden.
+          description: |
+            # de
+            Ungültige Authentifizierung oder Daten mit der Authentifizierung nicht zugänglich.
+
+            # en
+            Invalid authentication or inaccessible data for the provided authentication.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
         400:
-          description: Anfrage konnte nicht verarbeitet werden.
+          description: |
+            # de
+            Anfrage konnte nicht verarbeitet werden.
+
+            # en
+            The request could not be processed due to an error.
           content:
             application/json:
               schema:
@@ -66,7 +106,12 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      description: Kunden-spezifischer API-Key aus dem mySuva-Kundenportal
+      description: |
+        # de
+        Kunden-spezifischer API-Key aus dem mySuva-Kundenportal
+
+        # en
+        Customer-specific API key provided through the mySuva customer portal.
       type: apiKey
       in: header
       name: X-suva-api-key
@@ -75,124 +120,258 @@ components:
     X-Client-Vendor:
       name: X-Client-Vendor
       in: header
-      description: Name des Herstellers der Client-Anwendung.
+      description: |
+        # de
+        Name des Herstellers der Client-Anwendung.
+
+        # en
+        Name of the vendor responsible for the client application.
       required: false
       schema:
         type: string
     X-Client-Name:
       name: X-Client-Name
       in: header
-      description: Produkt-Name der Client-Anwendung.
+      description: |
+        # de
+        Produkt-Name der Client-Anwendung.
+
+        # en
+        Product name of the client application.
       required: false
       schema:
         type: string
     X-Client-Version:
       name: X-Client-Version
       in: header
-      description: Version der Anwendung.
+      description: |
+        # de
+        Version der Anwendung.
+
+        # en
+        Version of the application.
       required: false
       schema:
         type: string
       
   schemas:
     SubnummerData:
-      description: Datenstruktur einer Subnummer.
+      description: |
+        # de          
+        Datenstruktur einer Subnummer.
+
+        # en
+        Data structure of a subnumber.
       type: object
       properties:
         subnummer:
           type: string
-          description: Subnummer als 2-stellige Zahl.
+          description: |
+            # de
+            Subnummer als 2-stellige Zahl.
+            # en
+            Subnumber as a 2-digit code.
           example: "01"
           pattern: "^\\d{2}$"
         subnummerText:
           type: string
           description: |
+            # de
             Beschreibung der Subnummer in der Sprache des Kunden.
-            Bei anonymen Zugriff werden diese Daten nicht geliefert.
-        praemienmodell:
+            Bei anonymem Zugriff werden diese Daten nicht geliefert.
+
+            # en
+            Description of the subnumber in the customer's language.
+            This data is not available for anonymous access.
+        premiumModel:
           type: string
           enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
-          description: Modell der Police.
+          description: |
+            # de
+            Modell der Police.
+
+            # en
+            Policy model.
         betriebsTeile:
           type: array
-          description: Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
+          description: |
+            # de
+            Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
+
+            # en
+            Contains business parts if the premium model is `UVG_CLASSIC`.
           items:
             $ref: "#/components/schemas/BetriebsTeil"
-        berufscodes:
+        occupationCodes:
           type: array
-          description: Enthält Berufscodes, wenn das Prämienmodell `UVG_OCCUPATION_CODES` ist.
+          description: |
+            # de
+            Enthält Berufscodes, wenn das Prämienmodell `UVG_OCCUPATION_CODES` ist.
+
+            # en
+            Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
           items:
-            $ref: "#/components/schemas/Berufscode"
+            $ref: "#/components/schemas/OccupationCode"
 
     BetriebsTeil:
-      description: Ein Betriebsteil innerhalb einer Subnummer.
+      description: |
+        # de
+        Ein Betriebsteil innerhalb einer Subnummer.
+
+        # en
+        A business part within a subnumber.
       type: object
       properties:
-        betriebsTeilBuchstabe:
+        betriebsTeilLetter:
           type: string
-          description: Buchstabe zur Identifikation des Betriebsteils.
+          description: |
+            # de
+            Buchstabe zur Identifikation des Betriebsteils.
+
+            # en
+            Letter identifier for the business part.
           example: "A"
           pattern: "^[A-Z]$"
         betriebsTeilText:
           type: string
           description: |
+            # de
             Textbeschreibung des Betriebsteils in der Sprache des Kunden.
-            Bei anonymen Zugriff werden diese Daten nicht geliefert.
+            Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
-    Berufscode:
-      description: Details zu einem Berufscode.
+            # en
+            Text description of the business part in the customer's language.
+            This data is not available for anonymous access.
+
+    OccupationCode:
+      description: |
+        # de
+        Details zu einem Berufscode.
+
+        # en
+        Details of an occupation code.
       type: object
       properties:
         occupationCodeNr1:
           type: string
-          description: Berufscode-Nummer 1 - vom Kunden vergeben
+          description: |
+            # de
+            Berufscode-Nummer 1 - vom Kunden vergeben
+
+            # en
+            Occupation code number 1 - assigned by the customer.
         occupationCodeNr2:
           type: string
-          description: Berufscode-Nummer 2 - vom Kunden vergeben
+          description: |
+            # de
+            Berufscode-Nummer 2 - vom Kunden vergeben
+
+            # en
+            Occupation code number 2 - assigned by the customer.
         suvaOccupationCodeId:
           type: string
           format: uuid
-          description: Eindeutige ID des Suva-Berufscodes.
+          description: |
+            # de
+            Eindeutige ID des Suva-Berufscodes.
+
+            # en
+            Unique ID of the Suva occupation code.
         active:
           type: boolean
-          description: Gibt an, ob der Berufscode aktiv ist.
+          description: |
+            # de
+            Gibt an, ob der Berufscode aktiv ist.
+
+            # en
+            Indicates if the occupation code is active.
         descriptions:
           type: array
-          description: Mehrsprachige Beschreibung des Berufscodes.
+          description: |
+            # de
+            Mehrsprachige Beschreibung des Berufscodes.
+
+            # en
+            Multilingual description of the occupation code.
           items:
             $ref: "#/components/schemas/LocalizedValue"
-        betriebsTeilBuchstabe:
+        betriebsTeilLetter:
           type: string
-          description: Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
+          description: |
+            # de
+            Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
+
+            # en
+            Letter of the associated business part for accident reporting.
           example: "A"
           pattern: "^[A-Z]$"
 
     LocalizedValue:
-      description: Ein sprachbezogener Wert.
+      description: |
+        # de
+        Ein sprachbezogener Wert.
+
+        # en
+        A language-specific value.
       type: object
       properties:
         language:
           type: string
-          description: Sprache des Wertes.
+          description: |
+            # de
+            Sprache des Wertes.
+
+            # en
+            Language of the value.
           enum: [de, fr, it, en]
         value:
           type: string
-          description: Text in der entsprechenden Sprache.
+          description: |
+            # de
+            Text in der entsprechenden Sprache.
+
+            # en
+            Text in the corresponding language.
 
     Error:
-      description: Fehlermeldung
+      description: |
+        # de
+        Fehlermeldung
+
+        # en
+        Error message.
       properties:
         message:
-          description: "Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'."
+          description: |
+            # de
+            Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
+
+            # en
+            Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.'
           type: string
         id:
-          description: "Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's."
+          description: |
+            # de
+            Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
+
+            # en
+            Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
           type: string
         key:
-          description: "Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key."
+          description: |
+            # de
+            Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
+
+            # en
+            Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
           type: string
         args:
-          description: "Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'"
+          description: |
+            # de
+            Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
+
+            # en
+            Arguments for formatting an error message. For example: '9999999999'
           type: array
           items:
             type: string
@@ -203,9 +382,13 @@ components:
 
   responses:
     NotAuthenticatedError:
-      description: Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+      description: |
+        # de
+        Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+
+        # en
+        No valid authentication data available for the requested resource.
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
-
