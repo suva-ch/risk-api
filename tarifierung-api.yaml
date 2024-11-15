@@ -373,14 +373,11 @@ components:
             $ref: "#/components/schemas/OccupationDescription"
         suvaOccupationCode:
           $ref: "#/components/schemas/SuvaOccupationCode"
-        status:
-          $ref: "#/components/schemas/OccupationCodeStatus"
         active:
           $ref: "#/components/schemas/OccupationCodeActive"
       required:
         - id
-        - status
-    
+
     OccupationCodeId:
       description: Identifikator für ein Berfuscode.
       type: string
@@ -531,14 +528,6 @@ components:
       required:
         - language
         - value
-
-    OccupationCodeStatus:
-      description: >-
-        eingereicht: vom Kunden erfasst und an die Suva gesendet.
-        zugeordnet: wenn Standard-Berufscode wird dies automatisch gesetzt, sonst erst nach Zuordnung auf Seite Suva.
-        abgebrochen: im Status eingereicht wurde Prozess abgebrochen.
-      type: string
-      enum: [ submitted, assigned, canceled ]
 
     OccupationCodeActive:
       description: >-
