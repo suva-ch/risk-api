@@ -245,12 +245,12 @@ paths:
       - $ref: "#/components/parameters/EventId"
 
     delete:
-      summary: Einen offenen Event quittierten.
+      summary: Einen offenen Event quittieren.
       description: >-
         Wird ein offener Event quittiert, wird dieser nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt.
       tags:
         - Events
-      operationId: aknowledgeEvent
+      operationId: acknowledgeEvent
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
