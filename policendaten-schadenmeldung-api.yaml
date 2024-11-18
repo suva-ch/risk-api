@@ -34,7 +34,7 @@ paths:
           required: true
           description: |
             # de
-            Das Datum des Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
+            Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
             später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
             um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
 
@@ -79,7 +79,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/SubnummerData"
+                  $ref: "#/components/schemas/Subnummer"
         401:
           description: |
             # de
@@ -129,6 +129,7 @@ components:
       required: false
       schema:
         type: string
+      example: "Acme Corporation"
     X-Client-Name:
       name: X-Client-Name
       in: header
@@ -141,6 +142,7 @@ components:
       required: false
       schema:
         type: string
+      example: "PayrollPro"
     X-Client-Version:
       name: X-Client-Version
       in: header
@@ -153,9 +155,10 @@ components:
       required: false
       schema:
         type: string
+      example: "2.5"
       
   schemas:
-    SubnummerData:
+    Subnummer:
       description: |
         # de          
         Datenstruktur einer Subnummer.
@@ -164,7 +167,7 @@ components:
         Data structure of a subnumber.
       type: object
       properties:
-        subnummer:
+        subnumberCode:
           type: string
           description: |
             # de
@@ -173,26 +176,30 @@ components:
             Subnumber as a 2-digit code.
           example: "01"
           pattern: "^\\d{2}$"
-        subnummerText:
+        description:
           type: string
           description: |
             # de
-            Beschreibung der Subnummer in der Sprache des Kunden.
+            Beschreibung der Subnummer in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
             Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
             # en
-            Description of the subnumber in the customer's language.
+            Description of the subnumber in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
         premiumModel:
           type: string
           enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
           description: |
             # de
-            Modell der Police.
+            Premien-Modell der Subnummer.
+            UVG_CLASSIC: klassisch UVG mit Risiko-Ermittlung auf Basis von Betriebsbeschreibung
+            UVG_OCCUPATION_CODES: UVG mit Risiko-Ermittlung auf Basis von Berufscodes
 
             # en
-            Policy model.
-        betriebsTeile:
+            Premium Model of subnumber.
+            UVG_CLASSIC: classic UVG with risk identification based on description of operation
+            UVG_OCCUPATION_CODES: UVG with risk identification based on occupation codes
+        businessUnits:
           type: array
           description: |
             # de
@@ -201,7 +208,7 @@ components:
             # en
             Contains business parts if the premium model is `UVG_CLASSIC`.
           items:
-            $ref: "#/components/schemas/BetriebsTeil"
+            $ref: "#/components/schemas/BusinessUnit"
         occupationCodes:
           type: array
           description: |
@@ -213,7 +220,7 @@ components:
           items:
             $ref: "#/components/schemas/OccupationCode"
 
-    BetriebsTeil:
+    BusinessUnit:
       description: |
         # de
         Ein Betriebsteil innerhalb einer Subnummer.
@@ -222,7 +229,7 @@ components:
         A business part within a subnumber.
       type: object
       properties:
-        betriebsTeilLetter:
+        businessUnitCode:
           type: string
           description: |
             # de
@@ -232,15 +239,15 @@ components:
             Letter identifier for the business part.
           example: "A"
           pattern: "^[A-Z]$"
-        betriebsTeilText:
+        description:
           type: string
           description: |
             # de
-            Textbeschreibung des Betriebsteils in der Sprache des Kunden.
+            Textbeschreibung des Betriebsteils in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
             Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
             # en
-            Text description of the business part in the customer's language.
+            Text description of the business part in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
 
     OccupationCode:
