@@ -312,7 +312,7 @@ components:
 
     UnprocessableContentError:
       description: >-
-        Der Event konnte nicht quittiert werden.
+        Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
       content:
         application/json:
           schema:
