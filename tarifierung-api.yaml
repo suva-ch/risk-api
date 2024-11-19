@@ -256,6 +256,8 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         404:
           $ref: "#/components/responses/NotFoundError"
+        422:
+          $ref: "#/components/responses/UnprocessableContentError"
         204:
           description: Der Event ist quittiert.
 
@@ -303,6 +305,14 @@ components:
     NotFoundError:
       description: >-
         Die angeforderte Resource konnte nicht gefunden werden.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    UnprocessableContentError:
+      description: >-
+        Der Event konnte nicht quittiert werden.
       content:
         application/json:
           schema:
