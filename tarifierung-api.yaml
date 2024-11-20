@@ -244,6 +244,27 @@ paths:
     parameters:
       - $ref: "#/components/parameters/EventId"
 
+    get:
+      summary: Einen Event abholen.
+      description: >-
+        Abfrage eines spezifischen Events.
+      tags:
+        - Events
+      operationId: getEvent
+      security:
+        - ApiKeyAuth: [ ]
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        200:
+          description: Der angefragte Event.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+
     delete:
       summary: Einen offenen Event quittieren.
       description: >-
@@ -251,6 +272,8 @@ paths:
       tags:
         - Events
       operationId: acknowledgeEvent
+      security:
+        - ApiKeyAuth: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -456,6 +479,8 @@ components:
           description: Ereigniszeitpunkt
           type: string
           format: date-time
+        status:
+          $ref: '#/components/schemas/EventStatus'
         detail:
           oneOf:
             - $ref: "#/components/schemas/EventOccupationCodeSubmitted"
@@ -466,7 +491,12 @@ components:
       description: Identifikator für einen Event.
       type: string
       format: uuid
-    
+
+    EventStatus:
+      description: Status des Event.
+      type: string
+      enum: [ CREATED, PROCESSED, ACKNOWLEDGED ]
+
     EventOccupationCodeSubmitted:
       description: >-
         Ergebnis zu "Einreichen eines Berufscodes".
