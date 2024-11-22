@@ -17,6 +17,10 @@ servers:
 
 paths:
   /v1/suva-occupation-codes:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
     get:
       summary: Abfrage Suva Berufscodes
       description: >-
@@ -35,6 +39,10 @@ paths:
                   $ref: "#/components/schemas/SuvaOccupationCode"
 
   /v1/isco-occupation-types:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
     get:
       summary: Abfrage ISCO-Berufsart und zugeordnete Risiko-Klassen.
       description: >-
@@ -57,6 +65,10 @@ paths:
                   $ref: "#/components/schemas/IscoOccupationType"
 
   /v1/business-units:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
     get:
       summary: Abfrage der Betribsteil-Situation.
       description: >-
@@ -79,6 +91,10 @@ paths:
                   $ref: "#/components/schemas/OperatingUnitProfile"
 
   /v1/occupation-codes:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
     get:
       summary: Abfrage aktuelle Berufscodes.
       description: >-
@@ -200,6 +216,9 @@ paths:
   /v1/occupation-codes/{occupationCodeId}:
     parameters:
       - $ref: "#/components/parameters/OccupationCodeId"
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
 
     delete:
       summary: Ein Berufscode deaktivieren.
@@ -219,6 +238,10 @@ paths:
           description: Berufscode deaktiviert.
 
   /v1/events:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
     get:
       summary: Offene Events abholen.
       description: >-
@@ -243,6 +266,9 @@ paths:
   /v1/events/{eventId}:
     parameters:
       - $ref: "#/components/parameters/EventId"
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
 
     get:
       summary: Einen Event abholen.
@@ -307,6 +333,48 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/EventId"
+
+    X-Client-Vendor:
+      name: X-Client-Vendor
+      in: header
+      description: |
+        # de
+        Name des Herstellers der Client-Anwendung.
+
+        # en
+        Name of the vendor responsible for the client application.
+      required: false
+      schema:
+        type: string
+      example: "Acme Corporation"
+
+    X-Client-Name:
+      name: X-Client-Name
+      in: header
+      description: |
+        # de
+        Produkt-Name der Client-Anwendung.
+
+        # en
+        Product name of the client application.
+      required: false
+      schema:
+        type: string
+      example: "PayrollPro"
+
+    X-Client-Version:
+      name: X-Client-Version
+      in: header
+      description: |
+        # de
+        Version der Anwendung.
+
+        # en
+        Version of the application.
+      required: false
+      schema:
+        type: string
+      example: "2.5"
 
   responses:
     BadRequestError:
