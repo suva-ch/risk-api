@@ -554,7 +554,9 @@ components:
             - $ref: "#/components/schemas/EventOccupationCodeSubmitted"
             - $ref: "#/components/schemas/EventIscoOccupationTypeChanged"
             - $ref: "#/components/schemas/EventGrossPremiumChanged"
-    
+          discriminator:
+            propertyName: eventType
+
     EventId:
       description: Identifikator für einen Event.
       type: string
@@ -570,8 +572,12 @@ components:
         Ergebnis zu "Einreichen eines Berufscodes".
       type: object
       properties:
+        eventType:
+          type: string
         occupation:
           $ref: "#/components/schemas/OccupationCode"
+      required:
+        - eventType
     
     EventIscoOccupationTypeChanged:
       description: >-
@@ -579,20 +585,28 @@ components:
         Tätigkeiten mit dem geänderten Risiko erhalten potentiell anderen Prämiensätze.
       type: object
       properties:
+        eventType:
+          type: string
         premiumYear:
           $ref: "#/components/schemas/PremiumYear"
         iscoOccupationType:
           $ref: "#/components/schemas/IscoOccupationType"
+      required:
+        - eventType
     
     EventGrossPremiumChanged:
       description: >-
         Von der Suva wurden für einen Betriebsteil neue Prämiensätze verfügt.
       type: object
       properties:
+        eventType:
+          type: string
         premiumYear:
           $ref: "#/components/schemas/PremiumYear"
         businessUnitCode:
           $ref: "#/components/schemas/BusinessUnitCode"
+      required:
+        - eventType
 
     # commons
 
