@@ -37,11 +37,13 @@ paths:
             Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
             später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
             um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
+            **Einschränkung:** Datum muss <= Tagesdatum sein und nicht weiter zurück als das vorhergehende Kalenderjahr.
 
             # en
             The event date. If the current date is used, the API should later be called again
             with the accident event date, particularly if a year change occurs in between,
             to ensure objects referenced in the accident report are valid at the event date.
+            **Restriction:** The date must be <= today's date and no earlier than the previous calendar year.
           schema:
             type: string
             format: date
