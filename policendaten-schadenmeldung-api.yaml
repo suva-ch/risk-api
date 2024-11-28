@@ -286,6 +286,19 @@ components:
 
             # en
             Unique ID of the Suva occupation code.
+
+        IscoOccupationTypeId:
+          description: |
+            # de
+            5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
+            z.B. "71140" für "Eisenleger"
+
+            # en
+            5-digit code for occupations from the Swiss occupational nomenclature.
+            e.G. "71140" for "Reinforcing iron and rebar worker"
+          type: integer
+          example: 71140
+
         active:
           type: boolean
           description: |
