@@ -11,7 +11,10 @@ info:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: fixme
+  - url: https://apitest.suva.ch/occupation-codes
+    description: Staging server
+  - url: https://api.suva.ch/occupation-codes
+    description: production server
 
 paths:
   /v1/suva-occupation-codes:
@@ -27,6 +30,9 @@ paths:
         **en**: Provides all industry standard occupation codes provided by Suva, with the assignment to the ISCO type of profession.
       tags:
         - Suva Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: getSuvaOccupationCodes
       responses:
         200:
@@ -54,6 +60,9 @@ paths:
         **en**: Provides all ISCO occupation types supported by the Suva.
       tags:
         - ISCO Occupation Types
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: getIscoOccupationTypes
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
@@ -85,6 +94,9 @@ paths:
         **en**: Provides the profiles for all operating units (possibly also operating units that do not carry out personnel leasing activities).
       tags:
         - Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: getOperatingUnitProfiles
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
@@ -116,6 +128,9 @@ paths:
         **en**: Provides all occupation codes (individual and Suva) for the registered personnel provider.
       tags:
         - Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: getOccupationCodes
       responses:
         401:
@@ -139,6 +154,9 @@ paths:
         **en**: Add a occupation code from the Suva occupation codes.
       tags:
         - Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: activateOccupationCode
       requestBody:
         description: |
@@ -181,6 +199,9 @@ paths:
         **en**: Submit an individual occupation code.
       tags:
         - Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: submitOccupationCode
       requestBody:
         description: |
@@ -243,6 +264,9 @@ paths:
         **en**: The occupation code will be deactivated at Suva on the current date. Activation is not possible afterwards.
       tags:
         - Occupation Codes
+      security:
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       operationId: deactivateOccupationCode
       responses:
         401:
@@ -267,7 +291,8 @@ paths:
         - Events
       operationId: getEvents
       security:
-        - ApiKeyAuth: [ ]
+        - StagingOAuth2: [ ]
+        - OAuth2: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -829,8 +854,16 @@ components:
         - key
 
   securitySchemes:
-    ApiKeyAuth:
-      description: fixme
-      type: apiKey
-      in: header
-      name: X-suva-api-key
+    StagingOAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          authorizationUrl: https://apitest.suva.ch/kundenportal/authorize
+          tokenUrl: https://apitest.suva.ch/kundenportal/token
+
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          authorizationUrl: https://api.suva.ch/kundenportal/authorize
+          tokenUrl: https://api.suva.ch/kundenportal/token
