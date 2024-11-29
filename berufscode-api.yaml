@@ -860,6 +860,7 @@ components:
         clientCredentials:
           authorizationUrl: https://apitest.suva.ch/kundenportal/authorize
           tokenUrl: https://apitest.suva.ch/kundenportal/token
+          scopes: {}
 
     OAuth2:
       type: oauth2
@@ -867,3 +868,4 @@ components:
         clientCredentials:
           authorizationUrl: https://api.suva.ch/kundenportal/authorize
           tokenUrl: https://api.suva.ch/kundenportal/token
+          scopes: {}
