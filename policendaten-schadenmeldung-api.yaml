@@ -1,12 +1,12 @@
 openapi: 3.0.0
 info:
-  version: 1.0.0-FIXME
+  version: 0.9.0
   title: Policendaten Schadenmeldung API
   description: |
-    # de
+    🇩🇪
     Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
 
-    # en
+    🇬🇧
     This API provides policy data based on the event date for an accident report.
   license:
     name: Apache License 2.0
@@ -18,12 +18,10 @@ paths:
   /policy:
     get:
       description: |
-        # de
-        Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der Suva KundenNr. 
+        🇩🇪 Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der Suva KundenNr. 
         Falls keine KundenNr angegeben wird, wird die Authentifizierung zur Identifikation des Kunden verwendet.
 
-        # en
-        Provides a list of subnumbers based on the event date and optionally the Suva customer ID. 
+        🇬🇧 Provides a list of subnumbers based on the event date and optionally the Suva customer ID. 
         If no customer ID is specified, authentication will identify the customer.
       tags:
         - Policendaten
@@ -33,14 +31,12 @@ paths:
           in: query
           required: true
           description: |
-            # de
-            Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
+            🇩🇪 Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
             später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
             um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
             **Einschränkung:** Datum muss <= Tagesdatum sein und nicht weiter zurück als das vorhergehende Kalenderjahr.
 
-            # en
-            The event date. If the current date is used, the API should later be called again
+            🇬🇧 The event date. If the current date is used, the API should later be called again
             with the accident event date, particularly if a year change occurs in between,
             to ensure objects referenced in the accident report are valid at the event date.
             **Restriction:** The date must be <= today's date and no earlier than the previous calendar year.
@@ -51,30 +47,28 @@ paths:
           in: query
           required: false
           description: |
-            # de
-            Die Suva-Kundennummer (z.B. 8-01747-90000).
+            🇩🇪 Die Suva-Kundennummer (z.B. 8-01747-90000).
 
-            # en
-            Suva customer ID (e.g., 8-01747-90000).
+            🇬🇧 Suva customer ID (e.g., 8-01747-90000).
           schema:
             type: string
         - $ref: "#/components/parameters/X-Client-Vendor"
         - $ref: "#/components/parameters/X-Client-Name"
         - $ref: "#/components/parameters/X-Client-Version"
       security:
-        # de
-        # Entweder mit API-Key oder anonym - im Fall von anonymem Zugriff werden nicht alle Daten geliefert.
-        # 
-        # en
-        # Access can be anonymous, but API-key usage is recommended as anonymous access may limit data retrieval.
+        # 🇩🇪 entweder mit API-Key oder anonym - im Fall von anonymem Zugriff werden nicht alle Daten geliefert.
+        #       
+        # 🇬🇧 Access can be anonymous, but API-key usage is recommended as anonymous access may limit data retrieval.
+        #
+        - [] # anonymous
         - ApiKeyAuth: [] 
       responses:
         200:
           description: |
-            # de
+            🇩🇪
             Liste von Subnummern der Police.
 
-            # en
+            🇬🇧
             List of policy subnumbers.
           content:
             application/json:
@@ -84,22 +78,18 @@ paths:
                   $ref: "#/components/schemas/Subnummer"
         401:
           description: |
-            # de
-            Ungültige Authentifizierung oder Daten mit der Authentifizierung nicht zugänglich.
+            🇩🇪 Ungültige Authentifizierung oder Daten mit der Authentifizierung nicht zugänglich.
 
-            # en
-            Invalid authentication or inaccessible data for the provided authentication.
+            🇬🇧 Invalid authentication or inaccessible data for the provided authentication.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
         400:
           description: |
-            # de
-            Anfrage konnte nicht verarbeitet werden.
+            🇩🇪 Anfrage konnte nicht verarbeitet werden.
 
-            # en
-            The request could not be processed due to an error.
+            🇬🇧 The request could not be processed due to an error.
           content:
             application/json:
               schema:
@@ -109,25 +99,20 @@ components:
   securitySchemes:
     ApiKeyAuth:
       description: |
-        # de
-        Kunden-spezifischer API-Key aus dem mySuva-Kundenportal
+        🇩🇪 Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
 
-        # en
-        Customer-specific API key provided through the mySuva customer portal.
-      type: apiKey
-      in: header
-      name: X-suva-api-key
+        🇬🇧 Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
+      type: http
+      scheme: bearer
 
   parameters:
     X-Client-Vendor:
       name: X-Client-Vendor
       in: header
       description: |
-        # de
-        Name des Herstellers der Client-Anwendung.
+        🇩🇪 Name des Herstellers der Client-Anwendung.
 
-        # en
-        Name of the vendor responsible for the client application.
+        🇬🇧 Name of the vendor responsible for the client application.
       required: false
       schema:
         type: string
@@ -136,11 +121,9 @@ components:
       name: X-Client-Name
       in: header
       description: |
-        # de
-        Produkt-Name der Client-Anwendung.
+        🇩🇪 Produkt-Name der Client-Anwendung.
 
-        # en
-        Product name of the client application.
+        🇬🇧 Product name of the client application.
       required: false
       schema:
         type: string
@@ -149,11 +132,9 @@ components:
       name: X-Client-Version
       in: header
       description: |
-        # de
-        Version der Anwendung.
+        🇩🇪 Version der Anwendung.
 
-        # en
-        Version of the application.
+        🇬🇧 Version of the application.
       required: false
       schema:
         type: string
@@ -162,139 +143,112 @@ components:
   schemas:
     Subnummer:
       description: |
-        # de          
-        Datenstruktur einer Subnummer.
+        🇩🇪 Datenstruktur einer Subnummer.
 
-        # en
-        Data structure of a subnumber.
+        🇬🇧 Data structure of a subnumber.
       type: object
       properties:
         subnumberCode:
           type: string
           description: |
-            # de
-            Subnummer als 2-stellige Zahl.
-            # en
-            Subnumber as a 2-digit code.
+            🇩🇪 Subnummer als 2-stellige Zahl.
+
+            🇬🇧 Subnumber as a 2-digit code.
           example: "01"
           pattern: "^\\d{2}$"
         description:
           type: string
           description: |
-            # de
-            Beschreibung der Subnummer in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
+            🇩🇪 Beschreibung der Subnummer in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
             Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
-            # en
-            Description of the subnumber in the customer's language (multilingualism not available).
+            🇬🇧 Description of the subnumber in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
         premiumModel:
           type: string
           enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
           description: |
-            # de
-            Premien-Modell der Subnummer.
+            🇩🇪 Premien-Modell der Subnummer.
             UVG_CLASSIC: klassisch UVG mit Risiko-Ermittlung auf Basis von Betriebsbeschreibung
             UVG_OCCUPATION_CODES: UVG mit Risiko-Ermittlung auf Basis von Berufscodes
 
-            # en
-            Premium Model of subnumber.
+            🇬🇧 Premium Model of subnumber.
             UVG_CLASSIC: classic UVG with risk identification based on description of operation
             UVG_OCCUPATION_CODES: UVG with risk identification based on occupation codes
         businessUnits:
           type: array
           description: |
-            # de
-            Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
+            🇩🇪 Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
 
-            # en
-            Contains business parts if the premium model is `UVG_CLASSIC`.
+            🇬🇧 Contains business parts if the premium model is `UVG_CLASSIC`.
           items:
             $ref: "#/components/schemas/BusinessUnit"
         occupationCodes:
           type: array
           description: |
-            # de
-            Enthält Berufscodes, wenn das Prämienmodell `UVG_OCCUPATION_CODES` ist.
+            🇩🇪 Enthält Berufscodes, wenn das Prämienmodell `UVG_OCCUPATION_CODES` ist.
 
-            # en
-            Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
+            🇬🇧 Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
           items:
             $ref: "#/components/schemas/OccupationCode"
 
     BusinessUnit:
       description: |
-        # de
-        Ein Betriebsteil innerhalb einer Subnummer.
+        🇩🇪 Ein Betriebsteil innerhalb einer Subnummer.
 
-        # en
-        A business part within a subnumber.
+        🇬🇧 A business part within a subnumber.
       type: object
       properties:
         businessUnitCode:
           type: string
           description: |
-            # de
-            Buchstabe zur Identifikation des Betriebsteils.
+            🇩🇪 Buchstabe zur Identifikation des Betriebsteils.
 
-            # en
-            Letter identifier for the business part.
+            🇬🇧 Letter identifier for the business part.
           example: "A"
           pattern: "^[A-Z]$"
         description:
           type: string
           description: |
-            # de
-            Textbeschreibung des Betriebsteils in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
+            🇩🇪 Textbeschreibung des Betriebsteils in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
             Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
-            # en
-            Text description of the business part in the customer's language (multilingualism not available).
+            🇬🇧 Text description of the business part in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
 
     OccupationCode:
       description: |
-        # de
-        Details zu einem Berufscode.
+        🇩🇪 Details zu einem Berufscode.
 
-        # en
-        Details of an occupation code.
+        🇬🇧 Details of an occupation code.
       type: object
       properties:
         occupationCodeNr1:
           type: string
           description: |
-            # de
-            Berufscode-Nummer 1 - vom Kunden vergeben
+            🇩🇪 Berufscode-Nummer 1 - vom Kunden vergeben
 
-            # en
-            Occupation code number 1 - assigned by the customer.
+            🇬🇧 Occupation code number 1 - assigned by the customer.
         occupationCodeNr2:
           type: string
           description: |
-            # de
-            Berufscode-Nummer 2 - vom Kunden vergeben
+            🇩🇪 Berufscode-Nummer 2 - vom Kunden vergeben
 
-            # en
-            Occupation code number 2 - assigned by the customer.
+            🇬🇧 Occupation code number 2 - assigned by the customer.
         suvaOccupationCodeId:
           type: string
           format: uuid
           description: |
-            # de
-            Eindeutige ID des Suva-Berufscodes.
+            🇩🇪 Eindeutige ID des Suva-Berufscodes.
 
-            # en
-            Unique ID of the Suva occupation code.
+            🇬🇧 Unique ID of the Suva occupation code.
 
         IscoOccupationTypeId:
           description: |
-            # de
-            5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
+            🇩🇪 5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
             z.B. "71140" für "Eisenleger"
 
-            # en
-            5-digit code for occupations from the Swiss occupational nomenclature.
+            🇬🇧 5-digit code for occupations from the Swiss occupational nomenclature.
             e.G. "71140" for "Reinforcing iron and rebar worker"
           type: integer
           example: 71140
@@ -302,98 +256,76 @@ components:
         active:
           type: boolean
           description: |
-            # de
-            Gibt an, ob der Berufscode aktiv ist.
+            🇩🇪 Gibt an, ob der Berufscode aktiv ist.
 
-            # en
-            Indicates if the occupation code is active.
+            🇬🇧 Indicates if the occupation code is active.
         descriptions:
           type: array
           description: |
-            # de
-            Mehrsprachige Beschreibung des Berufscodes.
+            🇩🇪 Mehrsprachige Beschreibung des Berufscodes.
 
-            # en
-            Multilingual description of the occupation code.
+            🇬🇧 Multilingual description of the occupation code.
           items:
             $ref: "#/components/schemas/LocalizedValue"
-        betriebsTeilLetter:
+        businessUnitCode:
           type: string
           description: |
-            # de
-            Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
+            🇩🇪 Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
 
-            # en
-            Letter of the associated business part for accident reporting.
+            🇬🇧 Letter of the associated business part for accident reporting.
           example: "A"
           pattern: "^[A-Z]$"
 
     LocalizedValue:
       description: |
-        # de
-        Ein sprachbezogener Wert.
+        🇩🇪 Ein sprachbezogener Wert.
 
-        # en
-        A language-specific value.
+        🇬🇧 A language-specific value.
       type: object
       properties:
         language:
           type: string
           description: |
-            # de
-            Sprache des Wertes.
+            🇩🇪 Sprache des Wertes.
 
-            # en
-            Language of the value.
+            🇬🇧 Language of the value.
           enum: [de, fr, it, en]
         value:
           type: string
           description: |
-            # de
-            Text in der entsprechenden Sprache.
+            🇩🇪 Text in der entsprechenden Sprache.
 
-            # en
-            Text in the corresponding language.
+            🇬🇧 Text in the corresponding language.
 
     Error:
       description: |
-        # de
-        Fehlermeldung
+        🇩🇪 Fehlermeldung
 
-        # en
-        Error message.
+        🇬🇧 Error message.
       properties:
         message:
           description: |
-            # de
-            Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
+            🇩🇪 Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
 
-            # en
-            Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.'
+            🇬🇧 Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.'
           type: string
         id:
           description: |
-            # de
-            Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
+            🇩🇪 Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
 
-            # en
-            Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
+            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
           type: string
         key:
           description: |
-            # de
-            Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
+            🇩🇪 Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
 
-            # en
-            Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
+            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
           type: string
         args:
           description: |
-            # de
-            Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
+            🇩🇪 Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
 
-            # en
-            Arguments for formatting an error message. For example: '9999999999'
+            🇬🇧 Arguments for formatting an error message. For example: '9999999999'
           type: array
           items:
             type: string
@@ -405,11 +337,9 @@ components:
   responses:
     NotAuthenticatedError:
       description: |
-        # de
-        Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+        🇩🇪 Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
 
-        # en
-        No valid authentication data available for the requested resource.
+        🇬🇧 No valid authentication data available for the requested resource.
       content:
         application/json:
           schema:
