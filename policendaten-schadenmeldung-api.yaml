@@ -3,11 +3,9 @@ info:
   version: 0.9.0
   title: Policendaten Schadenmeldung API
   description: |
-    🇩🇪
-    Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
+    🇩🇪 Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
 
-    🇬🇧
-    This API provides policy data based on the event date for an accident report.
+    🇬🇧 This API provides policy data based on the event date for an accident report.
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -65,11 +63,9 @@ paths:
       responses:
         200:
           description: |
-            🇩🇪
-            Liste von Subnummern der Police.
+            🇩🇪 Liste von Subnummern der Police.
 
-            🇬🇧
-            List of policy subnumbers.
+            🇬🇧 List of policy subnumbers.
           content:
             application/json:
               schema:
