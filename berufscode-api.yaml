@@ -1,12 +1,11 @@
 openapi: 3.0.0
 info:
-  version: 0.1.0
-  title: Tariff classification REST API
-  x-audience: partner
+  version: 0.9.0
+  title: Berufscode API
   description: |
-    **de**: Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der Berufscodes.
+    🇩🇪  Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der Berufscodes.
     
-    **en**: Describes the interfaces offered to an ERP system by Suva for maintaining occupational codes.
+    🇬🇧 Describes the interfaces offered to an ERP system by Suva for maintaining occupational codes.
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -25,21 +24,20 @@ paths:
 
     get:
       description: |
-        **de**: Liefert alle von der Suva bereitgestellten branchenüblichen Berufscodes mit der Zuordnung zu der ISCO-Berufsart.
+        🇩🇪  Liefert alle von der Suva bereitgestellten branchenüblichen Berufscodes mit der Zuordnung zu der ISCO-Berufsart.
 
-        **en**: Provides all industry standard occupation codes provided by Suva, with the assignment to the ISCO type of profession.
+        🇬🇧 Provides all industry standard occupation codes provided by Suva, with the assignment to the ISCO type of profession.
       tags:
         - Suva Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: getSuvaOccupationCodes
       responses:
         200:
           description: |
-            **de**: Liste von Suva-Berufscodes.
-            
-            **en**: List of Suva occupation codes.
+            🇩🇪  Liste von Suva-Berufscodes.
+
+            🇬🇧 List of Suva occupation codes.
           content:
             application/json:
               schema:
@@ -55,14 +53,13 @@ paths:
 
     get:
       description: |
-        **de**: Liefert alle in der Suva unterstützen ISCO-Berufsarten.
+        🇩🇪  Liefert alle in der Suva unterstützen ISCO-Berufsarten.
         
-        **en**: Provides all ISCO occupation types supported by the Suva.
+        🇬🇧 Provides all ISCO occupation types supported by the Suva.
       tags:
         - ISCO Occupation Types
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: getIscoOccupationTypes
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
@@ -71,9 +68,9 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         200:
           description: |
-            **de**: Liste von ISCO-Berufsarten und zugeordnete Risiko-Klassen.
+            🇩🇪  Liste von ISCO-Berufsarten und zugeordnete Risiko-Klassen.
             
-            **en**: List of ISCO occupation types and associated risk classes.
+            🇬🇧 List of ISCO occupation types and associated risk classes.
           content:
             application/json:
               schema:
@@ -89,14 +86,13 @@ paths:
 
     get:
       description: |
-        **de**: Liefert die Betriebsteil-Situation für alle Betriebsteile (ggf. auch Betriebsteile die keine Personalverleih-Tätigkeiten durchführen).
+        🇩🇪  Liefert die Betriebsteil-Situation für alle Betriebsteile (ggf. auch Betriebsteile die keine Personalverleih-Tätigkeiten durchführen).
         
-        **en**: Provides the profiles for all operating units (possibly also operating units that do not carry out personnel leasing activities).
+        🇬🇧 Provides the profiles for all operating units (possibly also operating units that do not carry out personnel leasing activities).
       tags:
         - Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: getOperatingUnitProfiles
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
@@ -105,9 +101,9 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         200:
           description: |
-            **de**: Liste von Betriebsteil-Situationen.
+            🇩🇪  Liste von Betriebsteil-Situationen.
             
-            **en**: List of operation unit profiles.
+            🇬🇧 List of operation unit profiles.
           content:
             application/json:
               schema:
@@ -123,23 +119,22 @@ paths:
 
     get:
       description: |
-        **de**: Liefert alle Berufscodes (Individuell und Suva) zu dem angemeldeten Personalverleiher.
+        🇩🇪  Liefert alle Berufscodes (Individuell und Suva) zu dem angemeldeten Personalverleiher.
         
-        **en**: Provides all occupation codes (individual and Suva) for the registered personnel provider.
+        🇬🇧 Provides all occupation codes (individual and Suva) for the registered personnel provider.
       tags:
         - Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: getOccupationCodes
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
         200:
           description: |
-            **de**: Liste von Berufscodes.
+            🇩🇪  Liste von Berufscodes.
             
-            **en**: List of occupation codes.
+            🇬🇧 List of occupation codes.
           content:
             application/json:
               schema:
@@ -149,20 +144,19 @@ paths:
 
     put:
       description: |
-        **de**: Einen Berufscode aus den Suva-Berufscodes hinzufügen.
+        🇩🇪  Einen Berufscode aus den Suva-Berufscodes hinzufügen.
         
-        **en**: Add a occupation code from the Suva occupation codes.
+        🇬🇧 Add a occupation code from the Suva occupation codes.
       tags:
         - Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: activateOccupationCode
       requestBody:
         description: |
-          **de**: Der hinzuzufügende Suva-Berufscode.
+          🇩🇪  Der hinzuzufügende Suva-Berufscode.
           
-          **en**: The Suva occupation code to be added.
+          🇬🇧 The Suva occupation code to be added.
         required: true
         content:
           application/json:
@@ -194,20 +188,19 @@ paths:
 
     post:
       description: |
-        **de**: Einen individuellen Berufscode einreichen.
+        🇩🇪  Einen individuellen Berufscode einreichen.
         
-        **en**: Submit an individual occupation code.
+        🇬🇧 Submit an individual occupation code.
       tags:
         - Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: submitOccupationCode
       requestBody:
         description: |
-          **de**: Der individuelle Berufscode inklusive führender Sprache.
+          🇩🇪  Der individuelle Berufscode inklusive führender Sprache.
           
-          **en**: The individual occupation code including leading language.
+          🇬🇧 The individual occupation code including leading language.
         required: true
         content:
           application/json:
@@ -259,14 +252,13 @@ paths:
 
     delete:
       description: |
-        **de**: Der Berufscode wird bei Suva auf das aktuelle Datum deaktiviert. Eine Aktivierung ist danach nicht mehr möglich.
+        🇩🇪  Der Berufscode wird bei Suva auf das aktuelle Datum deaktiviert. Eine Aktivierung ist danach nicht mehr möglich.
         
-        **en**: The occupation code will be deactivated at Suva on the current date. Activation is not possible afterwards.
+        🇬🇧 The occupation code will be deactivated at Suva on the current date. Activation is not possible afterwards.
       tags:
         - Occupation Codes
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       operationId: deactivateOccupationCode
       responses:
         401:
@@ -284,23 +276,22 @@ paths:
 
     get:
       description: >-
-        **de**: Abfrage aller nicht quittierten Events.
+        🇩🇪  Abfrage aller nicht quittierten Events.
         
-        **en**: Query of all unacknowledged events.
+        🇬🇧 Query of all unacknowledged events.
       tags:
         - Events
       operationId: getEvents
       security:
-        - StagingOAuth2: [ ]
-        - OAuth2: [ ]
+        - ApiKeyAuth: [ ]
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
         200:
           description: |
-            **de**: Liste von Events.
+            🇩🇪  Liste von Events.
             
-            **en**: List of events.
+            🇬🇧 List of events.
           content:
             application/json:
               schema:
@@ -317,9 +308,9 @@ paths:
 
     get:
       description: |
-        **de**: Abfrage eines spezifischen Events.
+        🇩🇪  Abfrage eines spezifischen Events.
         
-        **en**: Query of a specific event.
+        🇬🇧 Query of a specific event.
       tags:
         - Events
       operationId: getEvent
@@ -339,9 +330,9 @@ paths:
 
     delete:
       description: |
-        **de**: Wird ein offener Event quittiert, wird dieser nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt.
+        🇩🇪  Wird ein offener Event quittiert, wird dieser nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt.
         
-        **en**: Once an open event is acknowledged, it will no longer be listed in [/v1/events](#/Event/getEvents).
+        🇬🇧 Once an open event is acknowledged, it will no longer be listed in [/v1/events](#/Event/getEvents).
       tags:
         - Events
       operationId: acknowledgeEvent
@@ -356,18 +347,18 @@ paths:
           $ref: "#/components/responses/UnprocessableContentError"
         204:
           description: |
-            **de**: Der Event ist quittiert.
+            🇩🇪  Der Event ist quittiert.
             
-            **en**: The event is acknowledged.
+            🇬🇧 The event is acknowledged.
 
 components:
   parameters:
     PremiumYear:
       name: year
       description: |
-        **de**: Prämienjahr, muss zwischen 2024 und dem aktuellen Kalenderjahr liegen (Default: Kalenderjahr)
+        🇩🇪  Prämienjahr, muss zwischen 2024 und dem aktuellen Kalenderjahr liegen (Default: Kalenderjahr)
         
-        **en**: Premium year, must be between 2024 and the current calendar year (default: calendar year).
+        🇬🇧 Premium year, must be between 2024 and the current calendar year (default: calendar year).
       in: query
       schema:
         $ref: "#/components/schemas/PremiumYear"
@@ -391,9 +382,9 @@ components:
       name: X-Client-Vendor
       in: header
       description: |
-        **de**: Name des Herstellers der Client-Anwendung.
+        🇩🇪  Name des Herstellers der Client-Anwendung.
 
-        **en**: Name of the vendor responsible for the client application.
+        🇬🇧 Name of the vendor responsible for the client application.
       required: false
       schema:
         type: string
@@ -403,9 +394,9 @@ components:
       name: X-Client-Name
       in: header
       description: |
-        **de**: Produkt-Name der Client-Anwendung.
+        🇩🇪  Produkt-Name der Client-Anwendung.
 
-        **en**: Product name of the client application.
+        🇬🇧 Product name of the client application.
       required: false
       schema:
         type: string
@@ -415,9 +406,9 @@ components:
       name: X-Client-Version
       in: header
       description: |
-        **de**: Version der Anwendung.
+        🇩🇪  Version der Anwendung.
 
-        **en**: Version of the application.
+        🇬🇧 Version of the application.
       required: false
       schema:
         type: string
@@ -426,9 +417,9 @@ components:
   responses:
     BadRequestError:
       description: |
-        **de**: Anfrage kann nicht verarbeitet werden.
+        🇩🇪  Anfrage kann nicht verarbeitet werden.
         
-        **en**: Request cannot be processed.
+        🇬🇧 Request cannot be processed.
       content:
         application/json:
           schema:
@@ -436,9 +427,9 @@ components:
 
     NotAuthenticatedError:
       description: |
-        **de**: Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+        🇩🇪  Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
         
-        **en**: No valid authentication data available for the requested resource.
+        🇬🇧 No valid authentication data available for the requested resource.
       content:
         application/json:
           schema:
@@ -446,9 +437,9 @@ components:
 
     NotFoundError:
       description: |
-        **de**: Die angeforderte Resource konnte nicht gefunden werden.
+        🇩🇪  Die angeforderte Resource konnte nicht gefunden werden.
         
-        **en**: The requested resource could not be found.
+        🇬🇧 The requested resource could not be found.
       content:
         application/json:
           schema:
@@ -456,9 +447,9 @@ components:
 
     UnprocessableContentError:
       description: |
-        **de**: Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
+        🇩🇪  Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
         
-        **en**: The request could not be processed because it contains invalid data.
+        🇬🇧 The request could not be processed because it contains invalid data.
       content:
         application/json:
           schema:
@@ -469,9 +460,9 @@ components:
 
     SuvaOccupationCode:
       description: |
-        **de**: Suva-Berufscode
+        🇩🇪  Suva-Berufscode
         
-        **en**: Suva occupation code
+        🇬🇧 Suva occupation code
       type: object
       properties:
         id:
@@ -490,18 +481,18 @@ components:
     
     SuvaOccupationCodeId:
       description: |
-        **de**: ID für einen Suva-Berufscode.
+        🇩🇪  ID für einen Suva-Berufscode.
         
-        **en**: ID for a Suva occupation code.
+        🇬🇧 ID for a Suva occupation code.
       type: string
 
     # isco occupation type
 
     IscoOccupationType:
       description: |
-        **de**: ISCO-Berufsart
+        🇩🇪  ISCO-Berufsart
         
-        **en**: ISCO occupation type
+        🇬🇧 ISCO occupation type
       type: object
       properties:
         id:
@@ -517,18 +508,18 @@ components:
     
     IscoOccupationTypeId:
       description: |
-        **de**: 5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
+        🇩🇪  5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
         
-        **en**: 5-digit number for occupation type from the Swiss professional nomenclature.
+        🇬🇧 5-digit number for occupation type from the Swiss professional nomenclature.
       type: integer
 
     # occupation code
 
     OccupationCode:
       description: |
-        **de**: Berufscode (Individuell oder Suva)
+        🇩🇪  Berufscode (Individuell oder Suva)
         
-        **en**: Occupation code (individual or Suva)
+        🇬🇧 Occupation code (individual or Suva)
       type: object
       properties:
         id:
@@ -551,9 +542,9 @@ components:
 
     OccupationCodeId:
       description: |
-        **de**: ID für ein Berfuscode.
+        🇩🇪  ID für ein Berfuscode.
         
-        **en**: ID of a occupation code.
+        🇬🇧 ID of a occupation code.
       type: string
       format: uuid
 
@@ -561,9 +552,9 @@ components:
 
     OperatingUnitProfile:
       description: |
-        **de**: Betriebsteil-Situation
+        🇩🇪  Betriebsteil-Situation
         
-        **en**: Profiles for an operating unit
+        🇬🇧 Profiles for an operating unit
       type: object
       properties:
         businessUnitCode:
@@ -577,9 +568,9 @@ components:
     
     BusinessUnitCode:
       description: |
-        **de**: Betriebsteil-Code (BT-Code)
+        🇩🇪  Betriebsteil-Code (BT-Code)
         
-        **en**: Operating unit code
+        🇬🇧 Operating unit code
       type: string
       minLength: 1
       maxLength: 1
@@ -597,9 +588,9 @@ components:
           $ref: "#/components/schemas/SubclassSection"
         descriptions:
           description: |
-            **de**: Betriebsteil-Bezeichnungen.
+            🇩🇪  Betriebsteil-Bezeichnungen.
             
-            **en**: Operating unit description.
+            🇬🇧 Operating unit description.
           type: array
           minItems: 1
           items:
@@ -608,9 +599,9 @@ components:
           $ref: "#/components/schemas/GrossPremium"
         iscoOccupationTypeIds:
           description: |
-            **de**: Liste von ISCO-Berufsarten.
+            🇩🇪  Liste von ISCO-Berufsarten.
             
-            **en**: List of ISCO occupation types.
+            🇬🇧 List of ISCO occupation types.
           type: array
           items:
             $ref: "#/components/schemas/IscoOccupationTypeId"
@@ -625,18 +616,18 @@ components:
 
     Event:
       description: |
-        **de**: Ein Event
+        🇩🇪  Ein Event
         
-        **en**: An event
+        🇬🇧 An event
       type: object
       properties:
         id:
           $ref: "#/components/schemas/EventId"
         timestamp:
           description: |
-            **de**: Ereigniszeitpunkt
+            🇩🇪  Ereigniszeitpunkt
             
-            **en**: Event occurrence time
+            🇬🇧 Event occurrence time
           type: string
           format: date-time
         status:
@@ -651,25 +642,25 @@ components:
 
     EventId:
       description: |
-        **de**: ID für einen Event.
+        🇩🇪  ID für einen Event.
         
-        **en**: ID of an event.
+        🇬🇧 ID of an event.
       type: string
       format: uuid
 
     EventStatus:
       description: |
-        **de**: Status des Event.
+        🇩🇪  Status des Event.
         
-        **en**: Status of an event.
+        🇬🇧 Status of an event.
       type: string
       enum: [ CREATED, PROCESSED, ACKNOWLEDGED ]
 
     EventOccupationCodeSubmitted:
       description: |
-        **de**: Ergebnis zu "Einreichen eines Berufscodes".
+        🇩🇪  Ergebnis zu "Einreichen eines Berufscodes".
         
-        **en**: Result for "Submitting an occupation code".
+        🇬🇧 Result for "Submitting an occupation code".
       type: object
       properties:
         eventType:
@@ -681,9 +672,9 @@ components:
     
     EventIscoOccupationTypeChanged:
       description: |
-        **de**: Ein für den Kunden aktiver ISCO-Berufsart wurde von der Suva einem neuen Risiko (UKT) zugeordnet. Tätigkeiten mit dem geänderten Risiko erhalten potentiell anderen Prämiensätze.
+        🇩🇪  Ein für den Kunden aktiver ISCO-Berufsart wurde von der Suva einem neuen Risiko (UKT) zugeordnet. Tätigkeiten mit dem geänderten Risiko erhalten potentiell anderen Prämiensätze.
         
-        **en**: An ISCO occupation type active for the customer has been assigned a new risk (UKT) by the Suva. Activities with the changed risk may potentially receive different premium rates.
+        🇬🇧 An ISCO occupation type active for the customer has been assigned a new risk (UKT) by the Suva. Activities with the changed risk may potentially receive different premium rates.
       type: object
       properties:
         eventType:
@@ -697,9 +688,9 @@ components:
     
     EventGrossPremiumChanged:
       description: |
-        **de**: Von der Suva wurden für einen Betriebsteil neue Prämiensätze verfügt.
+        🇩🇪  Von der Suva wurden für einen Betriebsteil neue Prämiensätze verfügt.
         
-        **en**: Suva has ordered new premium rates for an operation unit.
+        🇬🇧 Suva has ordered new premium rates for an operation unit.
       type: object
       properties:
         eventType:
@@ -715,9 +706,9 @@ components:
 
     OccupationDescription:
       description: |
-        **de**: Sprach- und geschlechtsspezifische Berufsbezeichnung.
+        🇩🇪  Sprach- und geschlechtsspezifische Berufsbezeichnung.
         
-        **en**: Language- and gender-specific occupation description.
+        🇬🇧 Language- and gender-specific occupation description.
       allOf:
         - $ref: "#/components/schemas/LocalizedValue"
         - type: object
@@ -731,23 +722,23 @@ components:
 
     GrossPremium:
       description: |
-        **de**: Bruttoprämiensätze (BPS)
+        🇩🇪  Bruttoprämiensätze (BPS)
         
-        **en**: Gross premium rates (BPS)
+        🇬🇧 Gross premium rates (BPS)
       type: object
       properties:
         occupationalAccidentInsurance:
           description: |
-            **de**: Berufsunfallversicherung (BUV)
+            🇩🇪  Berufsunfallversicherung (BUV)
             
-            **en**: Occupational accident insurance (BUV)
+            🇬🇧 Occupational accident insurance (BUV)
           type: number
           format: float
         nonOccupationalAccidentInsurance:
           description: |
-            **de**: Nichtberufsunfallversicherung (NBUV)
+            🇩🇪  Nichtberufsunfallversicherung (NBUV)
             
-            **en**: Non occupational accident insurance (NBUV)
+            🇬🇧 Non occupational accident insurance (NBUV)
           type: number
           format: float
       required:
@@ -756,9 +747,9 @@ components:
 
     LocalizedValue:
       description: |
-        **de**: Ein sprachbezogener Wert.
+        🇩🇪  Ein sprachbezogener Wert.
         
-        **en**: A language-specific value.
+        🇬🇧 A language-specific value.
       type: object
       properties:
         language:
@@ -771,80 +762,80 @@ components:
 
     OccupationCodeActive:
       description: |
-        **de**: Gibt an, ob ein Berufscode aktiv ist oder nicht.
+        🇩🇪  Gibt an, ob ein Berufscode aktiv ist oder nicht.
 
-        **en**: Indicates whether an occupation code is active or not.
+        🇬🇧 Indicates whether an occupation code is active or not.
       type: boolean
 
     SubclassSection:
       description: |
-        **de**: Unterklassenteil (UKT)
+        🇩🇪  Unterklassenteil (UKT)
         
-        **en**: Subclass section (UKT)
+        🇬🇧 Subclass section (UKT)
       type: string
 
     PremiumYear:
       description: |
-        **de**: Prämienjahr (Standard: Kalenderjahr)
+        🇩🇪  Prämienjahr (Standard: Kalenderjahr)
         
-        **en**: Premium year (default: calendar year)
+        🇬🇧 Premium year (default: calendar year)
       type: integer
       minimum: 2000
       maximum: 3000
 
     Gender:
       description: |
-        **de**: Geschlecht
+        🇩🇪  Geschlecht
         
-        **en**: Gender
+        🇬🇧 Gender
       type: string
       enum: [ female, genderless, male ]
 
     Language:
       description: |
-        **de**: Sprache
+        🇩🇪  Sprache
         
-        **en**: Language
+        🇬🇧 Language
       type: string
       enum: [ de, fr, it, en ]
 
     OccupationCodeNr:
       description: |
-        **de**: Individueller Schlüssel zur Kennzeichnung des Berufscodes.
+        🇩🇪  Individueller Schlüssel zur Kennzeichnung des Berufscodes.
         
-        **en**: Individual key for identifying the occupation code.
+        🇬🇧 Individual key for identifying the occupation code.
       maxLength: 40
       type: string
 
     Error:
       description: |
-        **de**: Fehlermeldung
+        🇩🇪  Fehlermeldung
         
-        **en**: Error message
+        🇬🇧 Error message
       properties:
         message:
           description: |
-            **de**: Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
+            🇩🇪  Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
             
-            **en**: Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.
+            🇬🇧 Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.
           type: string
         id:
           description: |
-            **de**: Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
+            🇩🇪  Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
             
-            **en**: Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
+            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
           type: string
         key:
           description: |
-            **de**: Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
+            🇩🇪  Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
             
-            **en**: Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
+            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
           type: string
         args:
           description: |
-            **de**: Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
+            🇩🇪  Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
             
-            **en**: Arguments for formatting an error message. For example: '9999999999'
+            🇬🇧 Arguments for formatting an error message. For example: '9999999999'
           type: array
           items:
             type: string
@@ -854,18 +845,10 @@ components:
         - key
 
   securitySchemes:
-    StagingOAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          authorizationUrl: https://apitest.suva.ch/kundenportal/authorize
-          tokenUrl: https://apitest.suva.ch/kundenportal/token
-          scopes: {}
+    ApiKeyAuth:
+      description: |
+        🇩🇪 Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
 
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          authorizationUrl: https://api.suva.ch/kundenportal/authorize
-          tokenUrl: https://api.suva.ch/kundenportal/token
-          scopes: {}
+        🇬🇧 Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
+      type: http
+      scheme: bearer
