@@ -239,9 +239,6 @@ paths:
                     $ref: "#/components/schemas/OccupationCodeId"
                   eventId:
                     $ref: "#/components/schemas/EventId"
-                required:
-                  - occupationCodeId
-                  - eventId
 
   /v1/occupation-codes/{occupationCodeId}:
     parameters:
