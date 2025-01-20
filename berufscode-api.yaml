@@ -235,8 +235,6 @@ paths:
                 title: OccupationCodeSubmitted
                 type: object
                 properties:
-                  occupationCodeId:
-                    $ref: "#/components/schemas/OccupationCodeId"
                   eventId:
                     $ref: "#/components/schemas/EventId"
 
