@@ -187,6 +187,9 @@ components:
             🇬🇧 Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
           items:
             $ref: "#/components/schemas/OccupationCode"
+      required:
+        - subnumberCode
+        - premiumModel
 
     BusinessUnit:
       description: |
@@ -211,6 +214,9 @@ components:
 
             🇬🇧 Text description of the business part in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
+      required:
+        - businessUnitCode
+
 
     OccupationCode:
       description: |
@@ -258,11 +264,11 @@ components:
         descriptions:
           type: array
           description: |
-            🇩🇪 Mehrsprachige Beschreibung des Berufscodes.
+            🇩🇪 Sprach- und geschlechtsspezifische Berufsbezeichnung.
 
-            🇬🇧 Multilingual description of the occupation code.
+            🇬🇧 Language- and gender-specific occupation description.
           items:
-            $ref: "#/components/schemas/LocalizedValue"
+            $ref: "#/components/schemas/OccupationDescription"
         businessUnitCode:
           type: string
           description: |
@@ -271,12 +277,18 @@ components:
             🇬🇧 Letter of the associated business part for accident reporting.
           example: "A"
           pattern: "^[A-Z]$"
+      required:
+        - suvaOccupationCodeId
+        - IscoOccupationTypeId
+        - active
+        - businessUnitCode
 
-    LocalizedValue:
+
+    OccupationDescription:
       description: |
-        🇩🇪 Ein sprachbezogener Wert.
+        🇩🇪 Sprach- und geschlechtsspezifische Berufsbezeichnung.
 
-        🇬🇧 A language-specific value.
+        🇬🇧 Language- and gender-specific occupation description.
       type: object
       properties:
         language:
@@ -286,12 +298,30 @@ components:
 
             🇬🇧 Language of the value.
           enum: [de, fr, it, en]
+
+        gender:
+              $ref: "#/components/schemas/Gender"
+
         value:
           type: string
           description: |
             🇩🇪 Text in der entsprechenden Sprache.
 
             🇬🇧 Text in the corresponding language.
+      required:
+      - language
+      - gender
+      - value
+
+
+    Gender:
+      description: |
+        🇩🇪  Geschlecht
+        
+        🇬🇧 Gender
+      type: string
+      enum: [ female, genderless, male ]
+
 
     Error:
       description: |
