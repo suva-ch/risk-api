@@ -247,9 +247,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪  Der Berufscode wird bei Suva auf das aktuelle Datum deaktiviert. Eine Aktivierung ist danach nicht mehr möglich.
+        🇩🇪  Der Berufscode wird bei Suva auf das aktuelle Datum deaktiviert. Eine erneute Aktivierung ist jederzeit wieder möglich.
         
-        🇬🇧 The occupation code will be deactivated at Suva on the current date. Activation is not possible afterwards.
+        🇬🇧 The occupation code will be deactivated at Suva on the current date. Reactivation is possible at any time.
       tags:
         - Occupation Codes
       security:
@@ -262,6 +262,47 @@ paths:
           $ref: "#/components/responses/NotFoundError"
         204:
           description: Berufscode deaktiviert.
+
+    put:
+      description: |
+        🇩🇪  Einen Suva-Berufscode oder individuellen Berufscode aktualisieren.
+        
+        🇬🇧 Updates a Suva occupation code or an individual occupation code.
+      tags:
+        - Occupation Codes
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: updateOccupationCode
+      requestBody:
+        description: |
+          🇩🇪  Der individuelle Berufscode inklusive führender Sprache.
+
+          🇬🇧 The individual occupation code including leading language.
+        required: true
+        content:
+          application/json:
+            schema:
+              title: UpdateOccupationCode
+              type: object
+              properties:
+                occupationCodeNr1:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNr2:
+                  $ref: "#/components/schemas/OccupationCodeNr"
+              required:
+                - occupationCodeNr1
+                - occupationCodeNr2
+      responses:
+        401:
+          $ref: "#/components/responses/NotAuthenticatedError"
+        404:
+          $ref: "#/components/responses/NotFoundError"
+        200:
+          description: Berufscode aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationCode"
 
   /v1/events:
     parameters:
