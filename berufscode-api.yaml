@@ -529,7 +529,6 @@ components:
           $ref: "#/components/schemas/OccupationCodeNr"
         descriptions:
           type: array
-          minItems: 1
           items:
             $ref: "#/components/schemas/OccupationDescription"
         suvaOccupationCode:
