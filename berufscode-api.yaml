@@ -136,7 +136,7 @@ paths:
     put:
       description: |
         🇩🇪 Einen Berufscode aus den Suva-Berufscodes hinzufügen.
-        🇬🇧 Add a occupation code from the Suva occupation codes.
+        🇬🇧 Add an occupation code from the list of Suva occupation codes.
       tags:
         - Occupation Codes
       security:
@@ -252,7 +252,7 @@ paths:
     put:
       description: |
         🇩🇪 Einen Suva-Berufscode oder individuellen Berufscode aktualisieren.
-        🇬🇧 Updates a Suva occupation code or an individual occupation code.
+        🇬🇧 Update a Suva occupation code or an individual occupation code.
       tags:
         - Occupation Codes
       security:
@@ -261,7 +261,7 @@ paths:
       requestBody:
         description: |
           🇩🇪 Der Suva-Berufscode oder individuelle Berufscode.
-          🇬🇧 The Svua occupation code or the individual occupation code.
+          🇬🇧 The Suva occupation code or the individual occupation code.
         required: true
         content:
           application/json:
@@ -463,7 +463,7 @@ components:
             $ref: "#/components/schemas/Error"
 
   schemas:
-    # suva occuption code
+    # suva occupation code
     SuvaOccupationCode:
       description: |
         🇩🇪 Suva-Berufscode
@@ -540,8 +540,8 @@ components:
 
     OccupationCodeId:
       description: |
-        🇩🇪 ID für ein Berfuscode.
-        🇬🇧 ID of a occupation code.
+        🇩🇪 ID für einen Berufscode.
+        🇬🇧 ID of an occupation code.
       type: string
       format: uuid
 
@@ -786,23 +786,23 @@ components:
       properties:
         message:
           description: |
-            🇩🇪 Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Berufscode-Liste for Partner-Nr. '9999999999' not found'.
-            🇬🇧 Error message provided in English. Example: 'Occupation code list for partner number '9999999999' not found.
+            🇩🇪 Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
+            🇬🇧 Error message provided in English. Example: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
           type: string
         id:
           description: |
-            🇩🇪 Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben unterschiedliche ID's.
-            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have different IDs.
+            🇩🇪 Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben unterschiedliche ID's.
+            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have different IDs.
           type: string
         key:
           description: |
-            🇩🇪 Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Berufscode-Liste for Partner-Nr. '9999999999' not found' haben denselben Key.
-            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code list for partner number '9999999999' not found' have the same key.
+            🇩🇪 Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben denselben Key.
+            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have the same key.
           type: string
         args:
           description: |
-            🇩🇪 Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '9999999999'
-            🇬🇧 Arguments for formatting an error message. For example: '9999999999'
+            🇩🇪 Argumente für die Aufbereitung einer Fehlermeldung. Zum Beispiel: '00000000-0000-0000-0000-000000000000'
+            🇬🇧 Arguments for formatting an error message. For example: '00000000-0000-0000-0000-000000000000'
           type: array
           items:
             type: string
