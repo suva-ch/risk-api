@@ -554,7 +554,17 @@ components:
       properties:
         businessUnitCode:
           $ref: "#/components/schemas/BusinessUnitCode"
+        iscoOccupationTypeIds:
+          description: |
+            🇩🇪 Liste von ISCO-Berufsarten.
+            🇬🇧 List of ISCO occupation types.
+          type: array
+          items:
+            $ref: "#/components/schemas/IscoOccupationTypeId"
         temporalProfiles:
+          description: |
+            🇩🇪 Liste von Betriebsteil-Zuständen.
+            🇬🇧 List of operating unit states.
           type: array
           items:
             $ref: "#/components/schemas/OperatingUnitTemporalProfile"
@@ -570,6 +580,9 @@ components:
       maxLength: 1
     
     OperatingUnitTemporalProfile:
+      description: |
+        🇩🇪 Betriebsteil-Zustand
+        🇬🇧 Operating unit state
       type: object
       properties:
         from:
@@ -590,19 +603,11 @@ components:
             $ref: "#/components/schemas/LocalizedValue"
         premiums:
           $ref: "#/components/schemas/GrossPremium"
-        iscoOccupationTypeIds:
-          description: |
-            🇩🇪 Liste von ISCO-Berufsarten.
-            🇬🇧 List of ISCO occupation types.
-          type: array
-          items:
-            $ref: "#/components/schemas/IscoOccupationTypeId"
       required:
         - from
         - upto
         - subclassSection
         - descriptions
-        - iscoOccupationTypeIds
 
     # events
     Event:
