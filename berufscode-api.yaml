@@ -554,7 +554,17 @@ components:
       properties:
         businessUnitCode:
           $ref: "#/components/schemas/BusinessUnitCode"
+        iscoOccupationTypeIds:
+          description: |
+            🇩🇪 Liste von ISCO-Berufsarten.
+            🇬🇧 List of ISCO occupation types.
+          type: array
+          items:
+            $ref: "#/components/schemas/IscoOccupationTypeId"
         temporalProfiles:
+          description: |
+            🇩🇪 Liste von Betriebsteil-Zuständen.
+            🇬🇧 List of operating unit states.
           type: array
           items:
             $ref: "#/components/schemas/OperatingUnitTemporalProfile"
@@ -570,6 +580,9 @@ components:
       maxLength: 1
     
     OperatingUnitTemporalProfile:
+      description: |
+        🇩🇪 Betriebsteil-Zustand
+        🇬🇧 Operating unit state
       type: object
       properties:
         from:
@@ -590,19 +603,11 @@ components:
             $ref: "#/components/schemas/LocalizedValue"
         premiums:
           $ref: "#/components/schemas/GrossPremium"
-        iscoOccupationTypeIds:
-          description: |
-            🇩🇪 Liste von ISCO-Berufsarten.
-            🇬🇧 List of ISCO occupation types.
-          type: array
-          items:
-            $ref: "#/components/schemas/IscoOccupationTypeId"
       required:
         - from
         - upto
         - subclassSection
         - descriptions
-        - iscoOccupationTypeIds
 
     # events
     Event:
@@ -641,7 +646,7 @@ components:
         🇩🇪 Status des Event.
         🇬🇧 Status of an event.
       type: string
-      enum: [ CREATED, PROCESSED, ACKNOWLEDGED ]
+      enum: [ created, processed, acknowledged ]
 
     EventOccupationCodeSubmitted:
       description: |
@@ -673,8 +678,8 @@ components:
     
     EventGrossPremiumChanged:
       description: |
-        🇩🇪 Von der Suva wurden für einen Betriebsteil neue Prämiensätze verfügt.
-        🇬🇧 Suva has ordered new premium rates for an operation unit.
+        🇩🇪 Von der Suva wurde für ein Produkt ein neuer Prämiensatz verfügt.
+        🇬🇧 Suva has ordered a new premium rate for a product.
       type: object
       properties:
         eventType:
@@ -683,6 +688,8 @@ components:
           $ref: "#/components/schemas/PremiumYear"
         businessUnitCode:
           $ref: "#/components/schemas/BusinessUnitCode"
+        product:
+          $ref: "#/components/schemas/Product"
       required:
         - eventType
 
@@ -771,6 +778,13 @@ components:
         🇬🇧 Language
       type: string
       enum: [ de, fr, it, en ]
+
+    Product:
+      description: |
+        🇩🇪 Produkt: Berufsunfallversicherung (BUV), Nichtberufsunfallversicherung (NBUV)
+        🇬🇧 Product: Occupational accident insurance (BUV), Non occupational accident insurance (NBUV)
+      type: string
+      enum: [ buv, nbuv ]
 
     OccupationCodeNr:
       description: |
