@@ -12,7 +12,11 @@ servers:
   - url: https://apitest.suva.ch/occupation-codes
     description: Staging server
   - url: https://api.suva.ch/occupation-codes
-    description: production server
+    description: Production server
+  - url: https://apitest.suva.ch/mock/occupation-codes
+    description: Staging mock server
+  - url: https://api.suva.ch/mock/occupation-codes
+    description: Production mock server
 
 paths:
   /v1/suva-occupation-codes:
