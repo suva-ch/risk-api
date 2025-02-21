@@ -375,8 +375,8 @@ components:
     PremiumYear:
       name: year
       description: |
-        🇩🇪 Prämienjahr, muss zwischen 2024 und dem aktuellen Kalenderjahr liegen (Default: Kalenderjahr)
-        🇬🇧 Premium year, must be between 2024 and the current calendar year (default: calendar year).
+        🇩🇪 Prämienjahr, muss zwischen 2025 und dem nächsten Kalenderjahr liegen (Default: Kalenderjahr)
+        🇬🇧 Premium year, must be between 2025 and the next calendar year (default: calendar year).
       in: query
       schema:
         $ref: "#/components/schemas/PremiumYear"
