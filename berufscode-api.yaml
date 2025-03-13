@@ -648,7 +648,15 @@ components:
     EventStatus:
       description: |
         🇩🇪 Status des Event.
+        - `created`:  Event wurde erstellt, Prozess für Verarbeitung wurde angestossen.
+        - `processed`: Event wurde verarbeitet, es liegen Ergebnisse vor. Event ist in der Auflistung unter [/v1/events](#/Event/getEvents).
+        - `acknowledged`: Event wurde quittiert. Quittierte Events werden nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt. Quittierte Events werden nach 30 Tagen aus dem System gelöscht.
+
         🇬🇧 Status of an event.
+        - `created`: Event has been created, and the processing has been initiated.
+        - `processed`: Event has been processed and results are available. Event is listed under [/v1/events](#/Event/getEvents).
+        - `acknowledged`: Event has been acknowledged. Acknowledged events are no longer listed in [/v1/events](#/Event/getEvents). Acknowledged events are deleted from the system after 30 days.
+
       type: string
       enum: [ created, processed, acknowledged ]
 
