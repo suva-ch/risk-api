@@ -765,8 +765,13 @@ components:
 
     SubclassSection:
       description: |
-        🇩🇪 Unterklassenteil (UKT)
-        🇬🇧 Subclass section (UKT)
+        🇩🇪 Schlüssel für den Unterklassenteil (UKT)
+        Unterklassenteile sind Risikogemeinschaften mit gleichartigem Unfallrisiko.
+        siehe [Prämientarif der Suva](https://www.suva.ch/2925-25.D) und [Basissätze](https://www.suva.ch/335-24.D)
+
+        🇬🇧 Key for subclass section (UKT)
+        Subclass sections are risk communities with similar accident risks.
+        See [Prämientarif der Suva](https://www.suva.ch/2925-25.D) and [Basissätze](https://www.suva.ch/335-24.D)
       type: string
 
     PremiumYear:
