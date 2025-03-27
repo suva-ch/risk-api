@@ -351,8 +351,8 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Wird ein offener Event quittiert, wird dieser nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt.
-        🇬🇧 Once an open event is acknowledged, it will no longer be listed in [/v1/events](#/Event/getEvents).
+        🇩🇪 Wird ein offener Event quittiert, wird dieser nicht mehr in <a href="#operations-Events-getEvents">/v1/events</a> aufgeführt.
+        🇬🇧 Once an open event is acknowledged, it will no longer be listed in <a href="#operations-Events-getEvents">/v1/events</a>.
       tags:
         - Events
       operationId: acknowledgeEvent
@@ -649,13 +649,13 @@ components:
       description: |
         🇩🇪 Status des Event.
         - `created`:  Event wurde erstellt, Prozess für Verarbeitung wurde angestossen.
-        - `processed`: Event wurde verarbeitet, es liegen Ergebnisse vor. Event ist in der Auflistung unter [/v1/events](#/Event/getEvents).
-        - `acknowledged`: Event wurde quittiert. Quittierte Events werden nicht mehr in [/v1/events](#/Event/getEvents) aufgeführt. Quittierte Events werden nach 30 Tagen aus dem System gelöscht.
+        - `processed`: Event wurde verarbeitet, es liegen Ergebnisse vor. Event ist in der Auflistung unter <a href="#operations-Events-getEvents">/v1/events</a>.
+        - `acknowledged`: Event wurde quittiert. Quittierte Events werden nicht mehr in <a href="#operations-Events-getEvents">/v1/events</a> aufgeführt. Quittierte Events werden nach 30 Tagen aus dem System gelöscht.
 
         🇬🇧 Status of an event.
         - `created`: Event has been created, and the processing has been initiated.
-        - `processed`: Event has been processed and results are available. Event is listed under [/v1/events](#/Event/getEvents).
-        - `acknowledged`: Event has been acknowledged. Acknowledged events are no longer listed in [/v1/events](#/Event/getEvents). Acknowledged events are deleted from the system after 30 days.
+        - `processed`: Event has been processed and results are available. Event is listed under <a href="#operations-Events-getEvents">/v1/events</a>.
+        - `acknowledged`: Event has been acknowledged. Acknowledged events are no longer listed in <a href="#operations-Events-getEvents">/v1/events</a>. Acknowledged events are deleted from the system after 30 days.
 
       type: string
       enum: [ created, processed, acknowledged ]
@@ -675,8 +675,11 @@ components:
     
     EventIscoOccupationTypeChanged:
       description: |
-        🇩🇪 Ein für den Kunden aktiver ISCO-Berufsart wurde von der Suva einem neuen Risiko (UKT) zugeordnet. Tätigkeiten mit dem geänderten Risiko erhalten potentiell anderen Prämiensätze.
+        🇩🇪 Ein für den Kunden aktiver ISCO-Berufsart wurde von der Suva einem neuen Risiko (UKT) zugeordnet. Tätigkeiten mit dem geänderten Risiko erhalten potentiell dabei anderen Prämiensätze.
+        Der Wechsel vom einer ISCO-Berufsart zu einem neuen Risiko erfolgt immer für ein ganzes Prämienjahr in der Zukunft.
+
         🇬🇧 An ISCO occupation type active for the customer has been assigned a new risk (UKT) by the Suva. Activities with the changed risk may potentially receive different premium rates.
+        The change from one ISCO occupational occupation type to a new risk always takes effect for a full premium year in the future.
       type: object
       properties:
         eventType:
