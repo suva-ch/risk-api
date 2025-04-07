@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Suva Kundenportal API
+  version: 1.0.0
+  description: |
+    API for obtaining access tokens using client credentials
+    see https://github.com/suva-ch/risk-api-docs/wiki/Authentication-with-Access-Token for details
+    
+    This contract does not contain JWT-Based Access Token Retrieval
+servers:
+  - url: https://api.suva.ch
+    description: Production server
+  - url: https://apitest.suva.ch
+    description: Staging server
+paths:
+  /kundenportal/token:
+    post:
+      tags:
+        - Authentication
+      summary: Obtain an access token using client credentials
+      description: Returns an access token for API authentication
+      operationId: getAccessToken
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum: [client_credentials]
+                  default: client_credentials
+                client_id:
+                  type: string
+                  example: apikey-xxx
+                client_secret:
+                  type: string
+                  example: yyy
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+      responses:
+        '200':
+          description: Successfully obtained access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: eyJhbGc…
+                    description: |
+                      The access token issued by the authorization server.
+                      Must be send to all other suva APIs within the Authorization-Header as "Bearer <token>"
+                  expires_in:
+                    type: integer
+                    example: 28800
+                    description: |
+                      Lifetime of the access token in seconds
+                  refresh_expires_in:
+                    type: integer
+                    example: 0
+                    description: |
+                      Value 0 indicates refresh tokens are not issued/supported.
+                  token_type:
+                    type: string
+                    example: Bearer
+                    description: |
+                      Always 'Bearer'
+                  not-before-policy:
+                    type: integer
+                    example: 1588752664
+                    description: |
+                      [Custom extension] Epoch timestamp indicating when token becomes valid.
+                  scope:
+                    type: string
+                    example: profile apikey openid email
+                    description: |
+                      Space-separated list of granted scopes (RFC 6749 Section 3.3).
+                required:
+                  - access_token
+                  - expires_in
+                  - token_type
