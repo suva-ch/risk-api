@@ -1,6 +1,7 @@
 openapi: 3.0.0
+
 info:
-  version: 0.9.0
+  version: 0.10.0
   title: Policendaten Schadenmeldung API
   description: |
     🇩🇪 Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
@@ -13,7 +14,13 @@ servers:
   - url: FIXME
 
 paths:
-  /policy:
+  /v1/policies/{customerId}:
+    parameters:
+      - $ref: '#/components/parameters/X-Client-Vendor'
+      - $ref: '#/components/parameters/X-Client-Name'
+      - $ref: '#/components/parameters/X-Client-Version'
+      - $ref: '#/components/parameters/CustomerIdParam'
+
     get:
       description: |
         🇩🇪 Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der Suva KundenNr. 
@@ -25,41 +32,7 @@ paths:
         - Policendaten
       operationId: getPolicy
       parameters:
-        - name: eventDate
-          in: query
-          required: true
-          description: |
-            🇩🇪 Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
-            später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
-            um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
-            **Einschränkung:** Datum muss <= Tagesdatum sein und nicht weiter zurück als das vorhergehende Kalenderjahr.
-
-            🇬🇧 The event date. If the current date is used, the API should later be called again
-            with the accident event date, particularly if a year change occurs in between,
-            to ensure objects referenced in the accident report are valid at the event date.
-            **Restriction:** The date must be <= today's date and no earlier than the previous calendar year.
-          schema:
-            type: string
-            format: date
-        - name: customerID
-          in: query
-          required: false
-          description: |
-            🇩🇪 Die Suva-Kundennummer (z.B. 8-01747-90000).
-
-            🇬🇧 Suva customer ID (e.g., 8-01747-90000).
-          schema:
-            type: string
-        - $ref: "#/components/parameters/X-Client-Vendor"
-        - $ref: "#/components/parameters/X-Client-Name"
-        - $ref: "#/components/parameters/X-Client-Version"
-      security:
-        # 🇩🇪 entweder mit API-Key oder anonym - im Fall von anonymem Zugriff werden nicht alle Daten geliefert.
-        #       
-        # 🇬🇧 Access can be anonymous, but API-key usage is recommended as anonymous access may limit data retrieval.
-        #
-        - [] # anonymous
-        - ApiKeyAuth: [] 
+        - $ref: '#/components/parameters/EventDateParam'
       responses:
         200:
           description: |
@@ -71,27 +44,21 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Subnummer"
-        401:
-          description: |
-            🇩🇪 Ungültige Authentifizierung oder Daten mit der Authentifizierung nicht zugänglich.
-
-            🇬🇧 Invalid authentication or inaccessible data for the provided authentication.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                  $ref: '#/components/schemas/Subnummer'
         400:
-          description: |
-            🇩🇪 Anfrage konnte nicht verarbeitet werden.
+          $ref: '#/components/responses/BadRequestError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
 
-            🇬🇧 The request could not be processed due to an error.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+  /v1/policies/{customerId}/{language}/{gender}:
+    parameters:
+      - $ref: '#/components/parameters/X-Client-Vendor'
+      - $ref: '#/components/parameters/X-Client-Name'
+      - $ref: '#/components/parameters/X-Client-Version'
+      - $ref: '#/components/parameters/CustomerIdParam'
+      - $ref: '#/components/parameters/LanguageParam'
+      - $ref: '#/components/parameters/GenderParam'
 
-  /policy/{language}/{gender}:
     get:
       description: |
         🇩🇪 Liefert eine gefilterte Liste von Subnummern basierend auf Sprache und Geschlecht.
@@ -101,53 +68,7 @@ paths:
         - Policendaten
       operationId: getPolicyFiltered
       parameters:
-        - name: language
-          in: path
-          required: true
-          schema:
-            type: string
-            enum: [de, fr, it, en]
-          description: |
-            🇩🇪 Gewünschte Sprache für die Berufsbezeichnungen.
-
-            🇬🇧 Desired language for occupation descriptions.
-        - name: gender
-          in: path
-          required: true
-          schema:
-            $ref: "#/components/schemas/Gender"
-          description: |
-            🇩🇪 Gewünschtes Geschlecht für die Berufsbezeichnungen.
-
-            🇬🇧 Desired gender for occupation descriptions.
-        - name: eventDate
-          in: query
-          required: true
-          description: |
-            🇩🇪 Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
-            später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
-            um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
-            **Einschränkung:** Datum muss <= Tagesdatum sein und nicht weiter zurück als das vorhergehende Kalenderjahr.
-
-            🇬🇧 The event date. If the current date is used, the API should later be called again
-            with the accident event date, particularly if a year change occurs in between,
-            to ensure objects referenced in the accident report are valid at the event date.
-            **Restriction:** The date must be <= today's date and no earlier than the previous calendar year.
-          schema:
-            type: string
-            format: date
-        - name: customerID
-          in: query
-          required: false
-          description: |
-            🇩🇪 Die Suva-Kundennummer (z.B. 8-01747-90000).
-
-            🇬🇧 Suva customer ID (e.g., 8-01747-90000).
-          schema:
-            type: string
-        - $ref: "#/components/parameters/X-Client-Vendor"
-        - $ref: "#/components/parameters/X-Client-Name"
-        - $ref: "#/components/parameters/X-Client-Version"
+        - $ref: '#/components/parameters/EventDateParam'
       responses:
         200:
           description: |
@@ -159,20 +80,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/SubnummerFiltered"
+                  $ref: '#/components/schemas/SubnummerFiltered'
         400:
-          $ref: "#/components/responses/NotAuthenticatedError"
+          $ref: '#/components/responses/BadRequestError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
 
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      description: |
-        🇩🇪 Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
-
-        🇬🇧 Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
-      type: http
-      scheme: bearer
-
   parameters:
     X-Client-Vendor:
       name: X-Client-Vendor
@@ -184,7 +98,8 @@ components:
       required: false
       schema:
         type: string
-      example: "Acme Corporation"
+      example: 'Acme Corporation'
+
     X-Client-Name:
       name: X-Client-Name
       in: header
@@ -195,7 +110,8 @@ components:
       required: false
       schema:
         type: string
-      example: "PayrollPro"
+      example: 'PayrollPro'
+
     X-Client-Version:
       name: X-Client-Version
       in: header
@@ -206,8 +122,59 @@ components:
       required: false
       schema:
         type: string
-      example: "2.5"
-      
+      example: '2.5'
+
+    CustomerIdParam:
+      name: customerId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: |
+        🇩🇪 Die Suva-Kundennummer (z.B. 8-01747-90000).
+
+        🇬🇧 Suva customer ID (e.g., 8-01747-90000).
+
+    EventDateParam:
+      name: eventDate
+      in: query
+      required: true
+      description: |
+        🇩🇪 Das Datum des Unfall-Ereignisses. Wenn das aktuelle Tagesdatum verwendet wird, muss die Schnittstelle
+        später erneut mit dem Ereignis-Datum des Schadens aufgerufen werden, insbesondere bei einem Jahreswechsel,
+        um sicherzustellen, dass die in der Schadenmeldung referenzierten Objekte zum Ereignis-Datum gültig sind.
+        **Einschränkung:** Datum muss <= Tagesdatum sein und nicht weiter zurück als das vorhergehende Kalenderjahr.
+
+        🇬🇧 The event date. If the current date is used, the API should later be called again
+        with the accident event date, particularly if a year change occurs in between,
+        to ensure objects referenced in the accident report are valid at the event date.
+        **Restriction:** The date must be <= today's date and no earlier than the previous calendar year.
+      schema:
+        type: string
+        format: date
+
+    GenderParam:
+      name: gender
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Gender'
+      description: |
+        🇩🇪 Gewünschtes Geschlecht für die Berufsbezeichnungen.
+
+        🇬🇧 Desired gender for occupation descriptions.
+
+    LanguageParam:
+      name: language
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Language'
+      description: |
+        🇩🇪 Gewünschte Sprache für die Berufsbezeichnungen.
+
+        🇬🇧 Desired language for occupation descriptions.
+
   schemas:
     Subnummer:
       description: |
@@ -222,8 +189,8 @@ components:
             🇩🇪 Subnummer als 2-stellige Zahl.
 
             🇬🇧 Subnumber as a 2-digit code.
-          example: "01"
-          pattern: "^\\d{2}$"
+          example: '01'
+          pattern: '^\\d{2}$'
         description:
           type: string
           description: |
@@ -250,7 +217,7 @@ components:
 
             🇬🇧 Contains business parts if the premium model is `UVG_CLASSIC`.
           items:
-            $ref: "#/components/schemas/BusinessUnit"
+            $ref: '#/components/schemas/BusinessUnit'
         occupationCodes:
           type: array
           description: |
@@ -258,7 +225,7 @@ components:
 
             🇬🇧 Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
           items:
-            $ref: "#/components/schemas/OccupationCode"
+            $ref: '#/components/schemas/OccupationCode'
       required:
         - subnumberCode
         - premiumModel
@@ -276,8 +243,8 @@ components:
             🇩🇪 Subnummer als 2-stellige Zahl.
 
             🇬🇧 Subnumber as a 2-digit code.
-          example: "01"
-          pattern: "^\\d{2}$"
+          example: '01'
+          pattern: '^\\d{2}$'
         description:
           type: string
         premiumModel:
@@ -286,11 +253,11 @@ components:
         businessUnits:
           type: array
           items:
-            $ref: "#/components/schemas/BusinessUnitFiltered"
+            $ref: '#/components/schemas/BusinessUnitFiltered'
         occupationCodes:
           type: array
           items:
-            $ref: "#/components/schemas/OccupationCodeFiltered"
+            $ref: '#/components/schemas/OccupationCodeFiltered'
       required:
         - subnumberCode
         - premiumModel
@@ -308,8 +275,8 @@ components:
             🇩🇪 Buchstabe zur Identifikation des Betriebsteils.
 
             🇬🇧 Letter identifier for the business part.
-          example: "A"
-          pattern: "^[A-Z]$"
+          example: 'A'
+          pattern: '^[A-Z]$'
         description:
           type: string
           description: |
@@ -326,8 +293,8 @@ components:
       properties:
         businessUnitCode:
           type: string
-          example: "A"
-          pattern: "^[A-Z]$"
+          example: 'A'
+          pattern: '^[A-Z]$'
         description:
           type: string
       required:
@@ -363,10 +330,10 @@ components:
         IscoOccupationTypeId:
           description: |
             🇩🇪 5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
-            z.B. "71140" für "Eisenleger"
+            z.B. '71140' für 'Eisenleger'
 
             🇬🇧 5-digit code for occupations from the Swiss occupational nomenclature.
-            e.G. "71140" for "Reinforcing iron and rebar worker"
+            e.G. '71140' for 'Reinforcing iron and rebar worker'
           type: integer
           example: 71140
 
@@ -383,15 +350,15 @@ components:
 
             🇬🇧 Language- and gender-specific occupation description.
           items:
-            $ref: "#/components/schemas/OccupationDescription"
+            $ref: '#/components/schemas/OccupationDescription'
         businessUnitCode:
           type: string
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
 
             🇬🇧 Letter of the associated business part for accident reporting.
-          example: "A"
-          pattern: "^[A-Z]$"
+          example: 'A'
+          pattern: '^[A-Z]$'
       required:
         - suvaOccupationCodeId
         - IscoOccupationTypeId
@@ -416,8 +383,8 @@ components:
           type: string
         businessUnitCode:
           type: string
-          example: "A"
-          pattern: "^[A-Z]$"
+          example: 'A'
+          pattern: '^[A-Z]$'
       required:
         - suvaOccupationCodeId
         - IscoOccupationTypeId
@@ -432,16 +399,9 @@ components:
       type: object
       properties:
         language:
-          type: string
-          description: |
-            🇩🇪 Sprache des Wertes.
-
-            🇬🇧 Language of the value.
-          enum: [de, fr, it, en]
-
+          $ref: '#/components/schemas/Language'
         gender:
-              $ref: "#/components/schemas/Gender"
-
+          $ref: '#/components/schemas/Gender'
         value:
           type: string
           description: |
@@ -449,10 +409,9 @@ components:
 
             🇬🇧 Text in the corresponding language.
       required:
-      - language
-      - gender
-      - value
-
+        - language
+        - gender
+        - value
 
     Gender:
       description: |
@@ -462,6 +421,13 @@ components:
       type: string
       enum: [ female, genderless, male ]
 
+    Language:
+      description: |
+        🇩🇪  Sprache
+
+        🇬🇧 Language
+      type: string
+      enum: [ de, fr, it, en ]
 
     Error:
       description: |
@@ -501,12 +467,20 @@ components:
         - key
 
   responses:
-    NotAuthenticatedError:
+    BadRequestError:
       description: |
-        🇩🇪 Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
-
-        🇬🇧 No valid authentication data available for the requested resource.
+        🇩🇪 Anfrage kann nicht verarbeitet werden.
+        🇬🇧 Request cannot be processed.
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'
+
+    NotFoundError:
+      description: |
+        🇩🇪 Die angeforderte Resource konnte nicht gefunden werden.
+        🇬🇧 The requested resource could not be found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
