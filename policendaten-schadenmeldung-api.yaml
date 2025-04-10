@@ -190,7 +190,7 @@ components:
 
             🇬🇧 Subnumber as a 2-digit code.
           example: '01'
-          pattern: '^\\d{2}$'
+          pattern: '^\d{2}$'
         description:
           type: string
           description: |
@@ -244,7 +244,7 @@ components:
 
             🇬🇧 Subnumber as a 2-digit code.
           example: '01'
-          pattern: '^\\d{2}$'
+          pattern: '^\d{2}$'
         description:
           type: string
         premiumModel:
