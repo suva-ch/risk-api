@@ -1,0 +1,2131 @@
+openapi: 3.1.0
+info:
+  version: 0.1.0
+  title: Lohnmeldung API
+  description: |
+    🇩🇪 Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Lohn- und Einsatzmeldung.
+    🇬🇧 Describes the interfaces offered to an ERP system by Suva for salary and mission declaration.
+  license:
+    name: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://apitest.suva.ch/salary-declaration
+    description: Staging server
+tags:
+  - name: Employees
+  - name: Messages
+  - name: Mission Companies
+  - name: Missions
+  - name: Permanent Employees
+  - name: Salary Declarations
+  - name: Temporary Work Agency Branches
+  - name: Temporary Work Agency Regions
+  - name: Temporary Work Agency Teams
+  - name: Temporary Work Consultants
+  - name: UVG ISCO Salaries
+
+paths:
+  /v1/salary-declarations:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Lohnmeldungen zurück.
+
+        🇬🇧 Returns a list of salary declarations.
+      tags:
+        - Salary Declarations
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getSalaryDeclarations
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Lohnmeldungen.
+            
+            🇬🇧 A list of salary declarations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SalaryDeclaration"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    post:
+      description: |
+        🇩🇪 Erstellt eine Lohnmeldung.
+
+        🇬🇧 Creates a salary declaration.
+      tags:
+        - Salary Declarations
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveSalaryDeclaration
+      requestBody:
+        $ref: "#/components/requestBodies/SaveSalaryDeclaration"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Lohnmeldung erstellt.
+
+            🇬🇧 Salary declaration created.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SalaryDeclaration"
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details einer bestehenden Lohnmeldung zurück.
+
+        🇬🇧 Returns the details of an existing salary declaration.
+      tags:
+        - Salary Declarations
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getSalaryDeclaration
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details einer Lohnmeldung.
+
+            🇬🇧 Details of a salary declaration.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SalaryDeclaration"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    patch:
+      description: |
+        🇩🇪 Aktualisiert den Status einer Lohnmeldung.
+        
+        🇬🇧 Update the state of a salary declaration.
+      tags:
+        - Salary Declarations
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: patchSalaryDeclaration
+      requestBody:
+        $ref: "#/components/requestBodies/PatchSalaryDeclaration"
+      responses:
+        '204':
+          description: |
+            🇩🇪 Lohnemeldung aktualisiert.
+            
+            🇬🇧 Salary declaration updated.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SalaryDeclaration"
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/employees:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Leihangestellten zurück.
+
+        🇬🇧 Returns a list of employees.
+      tags:
+        - Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getEmployees
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Leihangestellten.
+            
+            🇬🇧 A list of employees.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employee"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert Leihangstellte.
+
+        🇬🇧 Create or update employees.
+      tags:
+        - Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveEmployees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employees:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Employee"
+              required:
+                - employees
+      responses:
+        '201':
+          description: |
+            🇩🇪 Leihangstellte erstellt oder aktualisiert.
+
+            🇬🇧 Employees created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/employees/{employeeNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/EmployeeNr"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Leihangestellten zurück.
+
+        🇬🇧 Returns the details of an existing employee.
+      tags:
+        - Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getEmployee
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Leihangestellen.
+
+            🇬🇧 Details of an employee.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Employee"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden Leihangestellen.
+
+        🇬🇧 Deletes an existing employee.
+      tags:
+        - Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteEmployee
+      responses:
+        '204':
+          description: |
+            🇩🇪 Leihangesteller gelöscht.
+            
+            🇬🇧 Employee deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/messages:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Rückmeldungen zurück.
+
+        🇬🇧 Returns a list of messages.
+      tags:
+        - Messages
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getMessages
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Rückmeldungen.
+
+            🇬🇧 A list of messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/mission-companies:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Einsatzbetrieben zurück.
+
+        🇬🇧 Returns a list of mission companies.
+      tags:
+        - Mission Companies
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getMissionCompanies
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Einsatzbetrieben.
+
+            🇬🇧 A list of mission companies.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/MissionCompany"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert ein Einsatzbetrieb.
+
+        🇬🇧 Create or update a mission company.
+      tags:
+        - Mission Companies
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveMissionCompany
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/MissionCompany"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Einsatzbetrieb erstellt oder aktualisiert.
+
+            🇬🇧 Mission company created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/mission-companies/{missionCompanyNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/MissionCompanyNr"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Einsatzbetriebes zurück.
+
+        🇬🇧 Returns the details of an existing employee.
+      tags:
+        - Mission Companies
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getMissionCompany
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Einsatzbetriebes.
+
+            🇬🇧 Details of a mission company.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MissionCompany"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden Einsatzbetrieb.
+
+        🇬🇧 Deletes an existing mission company.
+      tags:
+        - Mission Companies
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteMissionCompany
+      responses:
+        '204':
+          description: |
+            🇩🇪 Einsatzbetrieb gelöscht.
+            
+            🇬🇧 Mission company deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/missions:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Einsätzen zurück.
+
+        🇬🇧 Returns a list of missions.
+      tags:
+        - Missions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getMissions
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Einsätzen.
+
+            🇬🇧 A list of missions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Mission"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert Einsätze.
+
+        🇬🇧 Create or update missions.
+      tags:
+        - Missions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveMissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                missions:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/Mission"
+              required:
+                - missions
+      responses:
+        '201':
+          description: |
+            🇩🇪 Einsätze erstellt oder aktualisiert.
+
+            🇬🇧 Missions created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/missions/{missionNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/MissionNr"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Einsatzes zurück.
+
+        🇬🇧 Returns the details of an existing mission.
+      tags:
+        - Missions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getMission
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Einsatzes.
+
+            🇬🇧 Details of a mission.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Mission"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden Einsatz.
+
+        🇬🇧 Deletes an existing mission.
+      tags:
+        - Missions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteMission
+      responses:
+        '204':
+          description: |
+            🇩🇪 Einsatz gelöscht.
+            
+            🇬🇧 Mission deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/permanent-employees:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert Festangestelle.
+
+        🇬🇧 Create or update permanent employees.
+      tags:
+        - Permanent Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: savePermanentEmployees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permanentEmployees:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/PermanentEmployee"
+              required:
+                - permanentEmployees
+      responses:
+        '201':
+          description: |
+            🇩🇪 Festangestelle erstellt oder aktualisiert.
+
+            🇬🇧 Permanent employees created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/permanent-employees/{employeeNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/EmployeeNr"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Festangestellen zurück.
+
+        🇬🇧 Returns the details of an existing permanent employee.
+      tags:
+        - Permanent Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getPermanentEmployee
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Festangestellten.
+
+            🇬🇧 Details of a permanent employee.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PermanentEmployee"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden Festangestellten.
+
+        🇬🇧 Deletes an existing permanent employee.
+      tags:
+        - Permanent Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deletePermanentEmployee
+      responses:
+        '204':
+          description: |
+            🇩🇪 Festangestellter gelöscht.
+            
+            🇬🇧 Permanent employee deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+    
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Personalverleiher-Filialien zurück.
+
+        🇬🇧 Returns a list of temporary work agency branches.
+      tags:
+        - Temporary Work Agency Branches
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyBranches
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Personalverleiher-Filialien.
+
+            🇬🇧 A list of temporary work agency branches.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert eine Personalverleiher-Filialie.
+
+        🇬🇧 Create or update a temporary work agency branch.
+      tags:
+        - Temporary Work Agency Branches
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveTemporaryWorkAgencyBranch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Personalverleiher-Filialie erstellt oder aktualisiert.
+
+            🇬🇧 Temporary work agency branch created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches/{temporaryWorkAgencyBranchNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyBranchNr"
+    
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Filialie zurück.
+
+        🇬🇧 Returns the details of an existing temporary work agency branch.
+      tags:
+        - Temporary Work Agency Branches
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyBranch
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details einer Personalverleiher-Filialie.
+
+            🇬🇧 Details of a temporary work agency branch.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht eine bestehende Personalverleiher-Filialie.
+
+        🇬🇧 Deletes an existing temporary work agency branch.
+      tags:
+        - Temporary Work Agency Branches
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteTemporaryWorkAgencyBranch
+      responses:
+        '204':
+          description: |
+            🇩🇪 Personalverleiher-Filialie gelöscht.
+            
+            🇬🇧 temporary work agency branch deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+  
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+    
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Personalverleiher-Regionen zurück.
+
+        🇬🇧 Returns a list of temporary work agency regions.
+      tags:
+        - Temporary Work Agency Regions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyRegions
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Personalverleiher-Regionen.
+
+            🇬🇧 A list of temporary work agency regions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert eine Personalverleiher-Region.
+
+        🇬🇧 Create or update a temporary work agency region.
+      tags:
+        - Temporary Work Agency Regions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveTemporaryWorkAgencyRegion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Personalverleiher-Region erstellt oder aktualisiert.
+
+            🇬🇧 Temporary work agency region created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions/{temporaryWorkAgencyRegionNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyRegionNr"
+    
+    get:
+      description: |
+        🇩🇪 Gibt die Details einer bestehenden Personalverleiher-Region zurück.
+
+        🇬🇧 Returns the details of an existing temporary work agency region.
+      tags:
+        - Temporary Work Agency Regions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyRegion
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details einer Personalverleiher-Region.
+
+            🇬🇧 Details of a temporary work agency region.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht eine bestehende Personalverleiher-Region.
+
+        🇬🇧 Deletes an existing temporary work agency region.
+      tags:
+        - Temporary Work Agency Regions
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteTemporaryWorkAgencyRegion
+      responses:
+        '204':
+          description: |
+            🇩🇪 Personalverleiher-Region gelöscht.
+            
+            🇬🇧 Temporary work agency region deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+    
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Personalverleiher-Teams zurück.
+
+        🇬🇧 Returns a list of temporary work agency teams.
+      tags:
+        - Temporary Work Agency Teams
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyTeams
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Personalverleiher-Teams.
+
+            🇬🇧 A list of temporary work agency teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert ein Personalverleiher-Team.
+
+        🇬🇧 Create or update a temporary work agency team.
+      tags:
+        - Temporary Work Agency Teams
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveTemporaryWorkAgencyTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Personalverleiher-Team erstellt oder aktualisiert.
+
+            🇬🇧 Temporary work agency team created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams/{temporaryWorkAgencyTeamNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyTeamNr"
+    
+    get:
+      description: |
+        🇩🇪 Gibt die Details ein bestehende Personalverleiher-Team zurück.
+
+        🇬🇧 Returns the details of an existing temporary work agency team.
+      tags:
+        - Temporary Work Agency Teams
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkAgencyTeam
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Personalverleiher-Teams.
+
+            🇬🇧 Details of a temporary work agency team.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht ein bestehendes Personalverleiher-Team.
+
+        🇬🇧 Deletes an existing temporary work agency team.
+      tags:
+        - Temporary Work Agency Teams
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteTemporaryWorkAgencyTeam
+      responses:
+        '204':
+          description: |
+            🇩🇪 Personalverleiher-Team gelöscht.
+            
+            🇬🇧 Temporary work agency team deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+    
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Personalverleiher-Berater zurück.
+
+        🇬🇧 Returns a list of temporary work consultants.
+      tags:
+        - Temporary Work Consultants
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkConsultants
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit Personalverleiher-Berater.
+
+            🇬🇧 A list of temporary work consultants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TemporaryWorkConsultant"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert ein Personalverleiher-Berater.
+
+        🇬🇧 Create or update a temporary work consultant.
+      tags:
+        - Temporary Work Consultants
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveTemporaryWorkConsultant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TemporaryWorkConsultant"
+      responses:
+        '201':
+          description: |
+            🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
+
+            🇬🇧 Temporary work consultant created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants/{temporaryWorkConsultantNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/TemporaryWorkConsultantNr"
+    
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
+
+        🇬🇧 Returns the details of an existing temporary work consultant.
+      tags:
+        - Temporary Work Consultants
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getTemporaryWorkConsultant
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines Personalverleiher-Beraters.
+
+            🇬🇧 Details of a temporary work consultant.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TemporaryWorkConsultant"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden Personalverleiher-Berater.
+
+        🇬🇧 Deletes an existing temporary work consultant.
+      tags:
+        - Temporary Work Consultants
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteTemporaryWorkConsultant
+      responses:
+        '204':
+          description: |
+            🇩🇪 Personalverleiher-Berater gelöscht.
+            
+            🇬🇧 Temporary work consultant deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von UVG-ISCO-Löhnen zurück.
+
+        🇬🇧 Returns a list of UVG ISCO salaries.
+      tags:
+        - UVG ISCO Salaries
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getUvgIscoSalaries
+      responses:
+        '200':
+          description: |
+            🇩🇪 Eine Liste mit UVG-ISCO-Löhnen.
+
+            🇬🇧 A list of UVG ISCO salaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UvgIscoSalary"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+    
+    put:
+      description: |
+        🇩🇪 Erstellt oder aktualisiert UVG-ISCO-Löhne.
+
+        🇬🇧 Create or update UVG ISCO salaries.
+      tags:
+        - UVG ISCO Salaries
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveUvgIscoSalaries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uvgIscoSalaries:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/UvgIscoSalary"
+              required:
+                - uvgIscoSalaries
+      responses:
+        '201':
+          description: |
+            🇩🇪 UVG-ISCO-Löhne erstellt oder aktualisiert.
+
+            🇬🇧 UVG ISCO salaries created or updated.
+        '400':
+          $ref: "#/components/responses/BadRequestError"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+        '422':
+          $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries/{iscoSalaryNr}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/IscoSalaryNr"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden UVG-ISCO-Lohnes zurück.
+
+        🇬🇧 Returns the details of an existing UVG ISCO salary.
+      tags:
+        - UVG ISCO Salaries
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getUvgIscoSalary
+      responses:
+        '200':
+          description: |
+            🇩🇪 Details eines UVG-ISCO-Lohnes.
+
+            🇬🇧 Details of an UVG ISCO salary.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UvgIscoSalary"
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+    delete:
+      description: |
+        🇩🇪 Löscht einen bestehenden UVG-ISCO-Lohn.
+
+        🇬🇧 Deletes an existing UVG ISCO salary.
+      tags:
+        - UVG ISCO Salaries
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: deleteUvgIscoSalary
+      responses:
+        '204':
+          description: |
+            🇩🇪 UVG-ISCO-Lohn gelöscht.
+            
+            🇬🇧 UVG ISCO salary deleted.
+        '401':
+          $ref: "#/components/responses/NotAuthenticatedError"
+        '404':
+          $ref: "#/components/responses/NotFoundError"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      description: |
+        🇩🇪 Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
+        🇬🇧 Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
+      type: http
+      scheme: bearer
+
+  parameters:
+    EmployeeNr:
+      name: employeeNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/EmployeeNr"
+
+    IscoSalaryNr:
+      name: iscoSalaryNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/IscoSalaryNr"
+
+    MissionCompanyNr:
+      name: missionCompanyNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/MissionCompanyNr"
+    
+    MissionNr:
+      name: missionNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/MissionNr"
+    
+    SalaryDeclarationId:
+      name: salaryDeclarationId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/SalaryDeclarationId"
+
+    TemporaryWorkAgencyBranchNr:
+      name: temporaryWorkAgencyBranchNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+
+    TemporaryWorkAgencyRegionNr:
+      name: temporaryWorkAgencyRegionNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+
+    TemporaryWorkAgencyTeamNr:
+      name: temporaryWorkAgencyTeamNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+
+    TemporaryWorkConsultantNr:
+      name: temporaryWorkConsultantNr
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+
+    # headers
+
+    X-Client-Vendor:
+      name: X-Client-Vendor
+      in: header
+      description: |
+        🇩🇪 Name des Herstellers der Client-Anwendung.
+        🇬🇧 Name of the vendor responsible for the client application.
+      required: false
+      schema:
+        type: string
+
+    X-Client-Name:
+      name: X-Client-Name
+      in: header
+      description: |
+        🇩🇪 Produkt-Name der Client-Anwendung.
+        🇬🇧 Product name of the client application.
+      required: false
+      schema:
+        type: string
+
+    X-Client-Version:
+      name: X-Client-Version
+      in: header
+      description: |
+        🇩🇪 Version der Anwendung.
+        🇬🇧 Version of the application.
+      required: false
+      schema:
+        type: string
+
+  requestBodies:
+    SaveSalaryDeclaration:
+      description: |
+        🇩🇪 FIXME
+        🇬🇧 FIXME
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+              messageType:
+                $ref: "#/components/schemas/SalaryDeclarationType"
+              accountingPeriodFrom:
+                type: string
+                format: date
+              accountingPeriodUntil:
+                type: string
+                format: date
+              customerNr:
+                description: |
+                  🇩🇪 Die Suva-Kundennummer
+                  🇬🇧 Suva customer ID
+                type: string
+                example: '8-01747-90000'
+                pattern: '^\d{1}-\d{5}-\d{5}$'
+              subNr:
+                description: |
+                  🇩🇪 Subnummer als 2-stellige Zahl.
+                  🇬🇧 Subnumber as a 2-digit code.          
+                type: string
+                example: '01'
+                pattern: '^\d{2}$'
+            required:
+              - messageType
+              - accountingPeriodFrom
+              - accountingPeriodUntil
+              - customerNr
+              - subNr
+
+    PatchSalaryDeclaration:
+      description: |
+        🇩🇪 FIXME
+        🇬🇧 FIXME
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              operation:
+                type: string
+                enum:
+                  [
+                    transmit_with_completion,
+                    transmit_without_completion,
+                    reopen,
+                  ]
+            required:
+              - operation
+
+  responses:
+    BadRequestError:
+      description: |
+        🇩🇪 Anfrage kann nicht verarbeitet werden.
+        🇬🇧 Request cannot be processed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotAuthenticatedError:
+      description: |
+        🇩🇪 Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+        🇬🇧 No valid authentication data available for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotFoundError:
+      description: |
+        🇩🇪 Die angeforderte Resource konnte nicht gefunden werden.
+        🇬🇧 The requested resource could not be found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    UnprocessableContentError:
+      description: |
+        🇩🇪 Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
+        🇬🇧 The request could not be processed because it contains invalid data.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+    # FIXME Simple
+    EmployeeNr:
+      description: |
+        🇩🇪 Nummer des Angestellten (ERP-System)
+        🇬🇧 FIXME
+      type: string
+    
+    IscoSalaryNr:
+      description: |
+        🇩🇪 Nummer des ISCO-Lohn (ERP-System)
+        🇬🇧 FIXME
+      type: string
+
+    Language:
+      description: |
+        🇩🇪 Sprache
+        🇬🇧 Language
+      type: string
+      enum: [ de, fr, it, en ]
+
+    MissionCompanyNr:
+      description: |
+        🇩🇪 Nummer des Einsatzbetrieb (ERP-System)
+        🇬🇧 FIXME
+      type: string
+    
+    MissionNr:
+      description: |
+        🇩🇪 Nummer des Einsatz (ERP-System)
+        🇬🇧 FIXME
+      type: string
+
+    SalaryDeclarationId:
+      description: |
+        🇩🇪 ID für eine Lohn- und Einsatzmeldung.
+        🇬🇧 ID of an salary and mission declaration.
+      type: string
+      format: uuid
+    
+    SalaryDeclarationType:
+      description: |
+        🇩🇪 Meldungstyp: periodisch, Jahresmeldung definitiv, oder Jahresmeldung Ersatz
+        🇬🇧
+      type: string
+      enum: [ periodic, annual_definitive, annual_replacement ]
+
+    TemporaryWorkAgencyBranchNr:
+      description: |
+        🇩🇪 Nummer des Personalverleiher Filiale (ERP-System)
+        🇬🇧 FIXME
+      type: string
+    
+    TemporaryWorkAgencyRegionNr:
+      description: |
+        🇩🇪 Nummer des Personalverleiher Region (ERP-System)
+        🇬🇧 FIXME
+      type: string
+
+    TemporaryWorkAgencyTeamNr:
+      description: |
+        🇩🇪 Nummer des Personalverleiher Team (ERP-System)
+        🇬🇧 FIXME
+      type: string
+
+    TemporaryWorkConsultantNr:
+      description: |
+        🇩🇪 Nummer des Personalverleiher Berater (ERP-System)
+        🇬🇧 FIXME
+      type: string
+
+    # FIXME Complex
+    Employee:
+      description: |
+        🇩🇪 Leihangestellter
+        🇬🇧 Temporary employee
+      type: object
+      properties:
+        employeeNr:
+          $ref: "#/components/schemas/EmployeeNr"
+        firstName:
+          description: |
+            🇩🇪 Vorname
+            🇬🇧 First name
+          type: string
+        lastName:
+          description: |
+            🇩🇪 Nachname
+            🇬🇧 Last name
+          type: string
+        sex:
+          description: |
+            🇩🇪 Geschlecht
+            🇬🇧 Gender
+          type: string
+          enum: [ f, female, m, male ]
+        dateOfBirth:
+          description: |
+            🇩🇪 Geburtsdatum
+            🇬🇧 Date of birth
+          type: string
+          format: date
+        socialInsuranceIdentification:
+          description: |
+            🇩🇪 AHV-Nummer
+            🇬🇧 Social insurance identification
+          type: string
+          pattern: '^\d{3}.\d{4}.\d{4}.\d{2}$'
+          example: '756.1234.5678.90'
+        socialInsuranceIdentificationUnknown:
+          description: |
+            🇩🇪 Wenn `true` ist die AHV-Nummer unbekannt.
+            🇬🇧 If `true` social insurance identification is unknown.
+          type: boolean
+      required:
+        - employeeNr
+        - lastName
+        - firstName
+        - sex
+        - dateOfBirth
+        - socialInsuranceIdentificationUnknown
+
+    Error:
+      description: |
+        🇩🇪 Fehlermeldung
+        🇬🇧 Error message
+      properties:
+        message:
+          description: |
+            🇩🇪 Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
+            🇬🇧 Error message provided in English. Example: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
+          type: string
+        id:
+          description: |
+            🇩🇪 Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben unterschiedliche ID's.
+            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have different IDs.
+          type: string
+        key:
+          description: |
+            🇩🇪 Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben denselben Key.
+            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have the same key.
+          type: string
+        args:
+          description: |
+            🇩🇪 Argumente für die Aufbereitung einer Fehlermeldung.
+            🇬🇧 Arguments for formatting an error message.
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - message
+        - id
+        - key
+
+    LocalizedValue:
+      description: |
+        🇩🇪 Ein sprachbezogener Wert.
+        🇬🇧 A language-specific value.
+      type: object
+      properties:
+        language:
+          $ref: "#/components/schemas/Language"
+        value:
+          type: string
+      required:
+        - language
+        - value
+
+    Message:
+      description: |
+        🇩🇪 Rückmeldung der Suva-Validierungen zu den übermittelten Lohn- und Einsatzdaten. Ermöglicht iterative Korrekturen bis zur vollständigen Validierung
+        🇬🇧 FIXME
+      type: object
+      properties:
+        id:
+          description: |
+            🇩🇪 Eindeutige ID der Rückmeldung
+            🇬🇧 FIXME.
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        salaryDeclarationId:
+          $ref: "#/components/schemas/SalaryDeclarationId"
+        key:
+          description: |
+            🇩🇪 Eindeutige ID der Validierung Rückmeldung (ID pro Art der Validierung)
+            🇬🇧 FIXME.
+          type: string
+        messageType:
+          description: |
+            🇩🇪 Art der Rückmeldung
+            🇬🇧 FIXME.
+          type: string
+          enum: [ info, warning, error ]
+        messages:
+          description: |
+            🇩🇪 Die Rückmeldung in verschienden Sprachen
+            🇬🇧 FIXME.
+          type: array
+          items:
+            $ref: "#/components/schemas/LocalizedValue"
+        args:
+          description:
+            🇩🇪 Argumente für die Aufbereitung einer eigenen Rückmeldung.
+            🇬🇧 FIXME.
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - id
+        - salaryDeclarationId
+        - key
+        - messageType
+        - messages
+    
+    Mission:
+      description: |
+        🇩🇪 Einsatz
+        🇬🇧 Mission
+      type: object
+      properties:
+        missionNr:
+          $ref: "#/components/schemas/MissionNr"
+        employeeNr:
+          $ref: "#/components/schemas/EmployeeNr"
+        missionCompanyNr:
+          $ref: "#/components/schemas/MissionCompanyNr"
+        periodFrom:
+          description: |
+            🇩🇪 Beginndatum der Einsatzperiode
+            🇬🇧 FIXME
+          type: string
+          format: date
+        periodUntil:
+          description: |
+            🇩🇪 Endedatum der Einsatzperiode
+            🇬🇧 FIXME
+          type: string
+          format: date
+        contractIscoCode:
+          description: |
+            🇩🇪 ISCO-Berufsart
+            🇬🇧 ISCO occupation type
+          type: string
+          pattern: '^\d{5}$'
+          example: "93130"
+        contractIndividualJobTitle:
+          description: |
+            🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
+            🇬🇧 FIXME
+          type: string
+        contractContractualJobTitle:
+          description: |
+            🇩🇪 Spezifische Berufsbezeichn8ung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
+            🇬🇧 FIXME
+          type: string
+        kindOfWagePayment:
+          description: |
+            🇩🇪 Art der Lohnzahlung
+            🇬🇧 FIXME
+          type: string
+          enum: [ monthly, daily, hourly, lesson ]
+        monthlySalary:
+          description: |
+            🇩🇪 Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        activityRate:
+          description: |
+            🇩🇪 Beschäftigungsgrad. Zwingend wenn `kindOfWagePayment = monthly`
+            🇬🇧 FIXME
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        labourDays:
+          description: |
+            🇩🇪 Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        dailyRate:
+          description: |
+            🇩🇪 Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        labourHours:
+          description: |
+            🇩🇪 Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        hourlyRate:
+          description: |
+            🇩🇪 Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        labourLessons:
+          description: |
+            🇩🇪 Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        lessonRate:
+          description: |
+            🇩🇪 Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
+            🇬🇧 FIXME
+          type: number
+          format: float
+        missionplace:
+          description: |
+            🇩🇪 Einsatzort
+            🇬🇧 Mission place
+          type: object
+          properties:
+            description:
+              description: |
+                🇩🇪 Beschreibung des Einsatzortes
+                🇬🇧 FIXME
+              type: string
+            zip:
+              description: |
+                🇩🇪 Postleitzahl des Einsatzortes
+                🇬🇧 FIXME
+              type: string
+            contact:
+              description: |
+                🇩🇪 Kontaktperson am Einsatzort
+                🇬🇧 FIXME
+              type: object
+              properties:
+                firstName:
+                  description: |
+                    🇩🇪 Vorname
+                    🇬🇧 First name
+                  type: string
+                lastName:
+                  description: |
+                    🇩🇪 Nachname
+                    🇬🇧 Last name
+                  type: string
+                email:
+                  description: |
+                    🇩🇪 E-Mail
+                    🇬🇧 E-Mail
+                  type: string
+                phoneNr:
+                  description: |
+                    🇩🇪 Telefon-Nummer
+                    🇬🇧 Phone number
+                  type: string
+                mobileNr:
+                  description: |
+                    🇩🇪 Mobiltelefon-Nummer
+                    🇬🇧 Mobilephone number
+                  type: string
+      required:
+        - missionNr
+        - employeeNr
+        - missionCompanyNr
+        - periodFrom
+        - periodUntil
+        - contractIscoCode
+        - kindOfWagePayment
+
+    MissionCompany:
+      description: |
+        🇩🇪 Die Einsatzfirma, bei welchen die Einsätze stattgefunden haben.
+        🇬🇧 FIXME
+      type: object
+      properties:
+        missionCompanyNr:
+          $ref: "#/components/schemas/MissionCompanyNr"
+        uidNr:
+          description:
+            🇩🇪 Die Unternehmens-Identifikationsnummer (UID)
+            🇬🇧 FIXME
+          type: string
+          example: 'CHE-123.456.789'
+        uidNrUnknown:
+          description: |
+            🇩🇪 Wenn `true` ist die UID unbekannt.
+            🇬🇧 If `true` UID is unknown.
+          type: boolean
+        name:
+          description: |
+            🇩🇪 Name des Einsatzbetriebes
+            🇬🇧 Name of the mission company
+          type: string
+        address:
+          description: |
+            🇩🇪 Adresse des Einsatzbetriebes
+            🇬🇧 FIXME
+          type: object
+          properties:
+            complementaryLine:
+              description: |
+                🇩🇪 Adresszusatz
+                🇬🇧 FIXME
+              type: string
+            street:
+              description: |
+                🇩🇪 Strasse
+                🇬🇧 Street
+              type: string
+            postbox:
+              description: |
+                🇩🇪 Postfach
+                🇬🇧 Postbox
+              type: string
+            locality:
+              description: |
+                🇩🇪 Lokalität wie Region / Provinz
+                🇬🇧 FIXME
+              type: string
+            zipCode:
+              description: |
+                🇩🇪 Postleitzahl
+                🇬🇧 Zip code
+              type: string
+            city:
+              description: |
+                🇩🇪 Ort
+                🇬🇧 City
+              type: string
+            country:
+              description: |
+                🇩🇪 Land
+                🇬🇧 Country
+              type: string
+              example: CH
+          required:
+            - zipCode
+            - city
+      required:
+        - missionCompanyNr
+        - name
+        - uidNrUnknown
+    
+    PermanentEmployee:
+      description: |
+        🇩🇪 Festangestellter
+        🇬🇧 Permanent employee
+      allOf:
+        - $ref: "#/components/schemas/Employee"
+        - type: object
+          properties:
+            employmentPeriodFrom:
+              description: |
+                🇩🇪 Beginndatum der Anstellung (innerhalb der accountingPeriod). Bei Anstellung vor dem Abrechnungsjahr: 1.1. des Abrechnungsjahrs
+                🇬🇧 FIXME
+              type: string
+              format: date
+            employmentPeriodUntil:
+              description: |
+                🇩🇪 Endedatum der Anstellung (innerhalb der accountingPeriod). Bei Weiterbeschäftigung nach dem Abrechnungsjahr: 31.12. des Abrechnungsjahrs
+                🇬🇧 FIXME
+              type: string
+              format: date
+            activityRate:
+              description: |
+                🇩🇪 Beschäftigungsgrad in Prozent
+                🇬🇧 FIXME
+              type: number
+              format: float
+              minimum: 0
+              maximum: 100
+              example: 80
+            unsteadyEmployed:
+              description: |
+                🇩🇪 Wenn `true` ist der Festangestellte unregelmässig angestellt.
+                🇬🇧 FIXME
+              type: boolean
+      required:
+        - employeeNr
+        - lastName
+        - firstName
+        - sex
+        - dateOfBirth
+        - employmentPeriodFrom
+        - employmentPeriodUntil
+        - unsteadyEmployed
+    
+    SalaryDeclaration:
+      description: |
+        🇩🇪 Lohn- und Einsatzdeklaration
+        🇬🇧 Salary and mission declaration
+      type: object
+      properties:
+        declarationId:
+          $ref: "#/components/schemas/SalaryDeclarationId"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        status:
+          description: |
+            🇩🇪 Status der Lohn- und Einsatzdeklaration
+            🇬🇧 Status of the salary and mission declaration
+          type: string
+          enum: [ open, transmitted, processing, completion_pending, transmitted_with_completion, accepted, refused, deleted ]
+        transmittedOn:
+          description: |
+            🇩🇪 Zeitpunkt der Übermittlung
+            🇬🇧 Timestamp of transmission
+          type: string
+          format: date-time
+        messageType:
+          $ref: "#/components/schemas/SalaryDeclarationType"
+        accountingPeriodFrom:
+          type: string
+          format: date
+        accountingPeriodUntil:
+          type: string
+          format: date
+        customerNr:
+          description: |
+            🇩🇪 Die Suva-Kundennummer
+            🇬🇧 Suva customer ID
+          type: string
+          example: '8-01747-90000'
+          pattern: '^\d{1}-\d{5}-\d{5}$'
+        subNr:
+          description: |
+            🇩🇪 Subnummer als 2-stellige Zahl.
+            🇬🇧 Subnumber as a 2-digit code.          
+          type: string
+          example: '01'
+          pattern: '^\d{2}$'
+
+    TemporaryWorkAgencyBranch:
+      description: |
+        🇩🇪 Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        🇬🇧 FIXME.
+      type: object
+      properties:
+        branchNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+        description:
+          description: |
+            🇩🇪 Bezeichnung der Filiale.
+            🇬🇧 Description of the branch.
+          type: string
+        regionNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+      required:
+        - branchNr
+
+    TemporaryWorkAgencyRegion:
+      description: |
+        🇩🇪 Die zuständige Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        🇬🇧 FIXME.
+      type: object
+      properties:
+        regionNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+        description:
+          description: |
+            🇩🇪 Bezeichnung der Region.
+            🇬🇧 Description of the region.
+          type: string
+      required:
+        - regionNr
+
+    TemporaryWorkAgencyTeam:
+      description: |
+        🇩🇪 Das zuständige Team beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        🇬🇧 FIXME.
+      type: object
+      properties:
+        teamNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+        description:
+          description: |
+            🇩🇪 Bezeichnung des Teams.
+            🇬🇧 Description of the team.
+          type: string
+        branchNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+      required:
+        - teamNr
+
+    TemporaryWorkConsultant:
+      description: |
+        🇩🇪 Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        🇬🇧 FIXME.
+      type: object
+      properties:
+        consultantNr:
+          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+        firstName:
+          description: |
+            🇩🇪 Vorname
+            🇬🇧 First name
+          type: string
+        lastName:
+          description: |
+            🇩🇪 Nachname
+            🇬🇧 Last name
+          type: string
+        teamNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+      required:
+        - consultantNr
+
+    UvgIscoSalary:
+      description: |
+        🇩🇪 UVG-ISCO-Löhne: Lohnsummen pro Betriebsteil, ISCO-Berufsart und BU/NBU-Code für jeden Angestellten.
+        🇬🇧 FIXME
+      type: object
+      properties:
+        iscoSalaryNr:
+          $ref: "#/components/schemas/IscoSalaryNr"
+        businessUnitCode:
+          description: |
+            🇩🇪 Buchstabe des zugehörigen Betriebsteils.
+            🇬🇧 Letter of the associated business unit.
+          type: string
+          example: 'A'
+          pattern: '^[A-Z]$'
+        iscoCode:
+          description: |
+            🇩🇪 ISCO-Berufsart
+            🇬🇧 ISCO occupation type
+          type: string
+          pattern: '^\d{5}$'
+          example: "93130"
+        buNbuApAnpCode:
+          description: |
+            🇩🇪 BU/NBU Bereich: 
+               * `0` - nicht UVG-versichert
+               * `1` - BUV- und NBUV-versichert mit NBUV-Abzug
+               * `2` - BUV- und NBUV-versichert ohne NBUV-Abzug
+               * `3` - nur BUV-versichert
+            🇬🇧 FIXME
+          type: number
+          enum: [ 0, 1, 2, 3 ]
+        uvgLaaGrossSalary:
+          description: |
+            🇩🇪 UVG-Bruttolohn: Summe aller aufbauenden Lohnarten.
+            🇬🇧 FIXME
+          type: number
+          format: float
+        uvgLaaBaseSalary:
+          description: |
+            🇩🇪 UVG-Basis: Summe aller UVG-pflichtigen Lohnarten, ohne Rücksicht auf den versicherten Höchstlohn und den UVG-Code.
+            🇬🇧 FIXME
+          type: number
+          format: float
+        uvgLaaContributorySalary:
+          description: |
+            🇩🇪 UVG-Lohn: Beitragspflichtiger Lohn, berechnet aufgrund der UVG-Basis für die versicherten Personen unter Berücksichtigung des Höchstlohnes.
+            🇬🇧 FIXME
+          type: number
+          format: float
+        employeeNr:
+          description: |
+            🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangstellten.
+            🇬🇧 FIXME
+          $ref: "#/components/schemas/EmployeeNr"
+        permanentEmployeeNr:
+          description: |
+            🇩🇪 Referenz auf den Festangestellen. Zwingend bei Festangestellten.
+            🇬🇧 FIXME
+          $ref: "#/components/schemas/EmployeeNr"
+      required:
+        - iscoSalaryNr
+        - businessUnitCode
+        - iscoCode
+        - buNbuApAnpCode
+        - uvgLaaGrossSalary
+        - uvgLaaBaseSalary
+        - uvgLaaContributorySalary
