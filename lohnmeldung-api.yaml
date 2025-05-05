@@ -188,7 +188,7 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Leihangstellte.
+        🇩🇪 Erstellt oder aktualisiert Leihangestellte.
 
         🇬🇧 Create or update employees.
       tags:
@@ -210,9 +210,9 @@ paths:
               required:
                 - employees
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Leihangstellte erstellt oder aktualisiert.
+            🇩🇪 Leihangestellte erstellt oder aktualisiert.
 
             🇬🇧 Employees created or updated.
         '400':
@@ -221,6 +221,8 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
@@ -245,7 +247,7 @@ paths:
       responses:
         '200':
           description: |
-            🇩🇪 Details eines Leihangestellen.
+            🇩🇪 Details eines Leihangestellten.
 
             🇬🇧 Details of an employee.
           content:
@@ -259,7 +261,7 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Leihangestellen.
+        🇩🇪 Löscht einen bestehenden Leihangestellten.
 
         🇬🇧 Deletes an existing employee.
       tags:
@@ -270,7 +272,7 @@ paths:
       responses:
         '204':
           description: |
-            🇩🇪 Leihangesteller gelöscht.
+            🇩🇪 Leihangestellter gelöscht.
             
             🇬🇧 Employee deleted.
         '401':
@@ -348,31 +350,41 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert ein Einsatzbetrieb.
+        🇩🇪 Erstellt oder aktualisiert Einsatzbetriebe.
 
-        🇬🇧 Create or update a mission company.
+        🇬🇧 Create or update mission companies
       tags:
         - Mission Companies
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveMissionCompany
+      operationId: saveMissionCompanies
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/MissionCompany"
+              type: object
+              properties:
+                missionCompanies:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/MissionCompany"
+              required:
+                - missionCompanies
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Einsatzbetrieb erstellt oder aktualisiert.
+            🇩🇪 Einsatzbetriebe erstellt oder aktualisiert.
 
-            🇬🇧 Mission company created or updated.
+            🇬🇧 Mission companies created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
 
   /v1/salary-declarations/{salaryDeclarationId}/mission-companies/{missionCompanyNr}:
     parameters:
@@ -486,7 +498,7 @@ paths:
               required:
                 - missions
       responses:
-        '201':
+        '204':
           description: |
             🇩🇪 Einsätze erstellt oder aktualisiert.
 
@@ -497,6 +509,8 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
@@ -563,7 +577,7 @@ paths:
     
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Festangestelle.
+        🇩🇪 Erstellt oder aktualisiert Festangestellte.
 
         🇬🇧 Create or update permanent employees.
       tags:
@@ -585,9 +599,9 @@ paths:
               required:
                 - permanentEmployees
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Festangestelle erstellt oder aktualisiert.
+            🇩🇪 Festangestellte erstellt oder aktualisiert.
 
             🇬🇧 Permanent employees created or updated.
         '400':
@@ -596,6 +610,8 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
@@ -609,7 +625,7 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Festangestellen zurück.
+        🇩🇪 Gibt die Details eines bestehenden Festangestellten zurück.
 
         🇬🇧 Returns the details of an existing permanent employee.
       tags:
@@ -662,7 +678,7 @@ paths:
     
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Personalverleiher-Filialien zurück.
+        🇩🇪 Gibt eine Liste von Personalverleiher-Filialen zurück.
 
         🇬🇧 Returns a list of temporary work agency branches.
       tags:
@@ -673,7 +689,7 @@ paths:
       responses:
         '200':
           description: |
-            🇩🇪 Eine Liste mit Personalverleiher-Filialien.
+            🇩🇪 Eine Liste mit Personalverleiher-Filialen.
 
             🇬🇧 A list of temporary work agency branches.
           content:
@@ -689,31 +705,43 @@ paths:
     
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert eine Personalverleiher-Filialie.
+        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Filialen.
 
-        🇬🇧 Create or update a temporary work agency branch.
+        🇬🇧 Create or update temporary work agency branches.
       tags:
         - Temporary Work Agency Branches
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkAgencyBranch
+      operationId: saveTemporaryWorkAgencyBranches
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
+              type: object
+              properties:
+                temporaryWorkAgencyBranches:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
+              required:
+                - temporaryWorkAgencyBranches
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Personalverleiher-Filialie erstellt oder aktualisiert.
+            🇩🇪 Personalverleiher-Filialen erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency branch created or updated.
+            🇬🇧 Temporary work agency branches created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches/{temporaryWorkAgencyBranchNr}:
     parameters:
@@ -725,7 +753,7 @@ paths:
     
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Filialie zurück.
+        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Filiale zurück.
 
         🇬🇧 Returns the details of an existing temporary work agency branch.
       tags:
@@ -736,7 +764,7 @@ paths:
       responses:
         '200':
           description: |
-            🇩🇪 Details einer Personalverleiher-Filialie.
+            🇩🇪 Details einer Personalverleiher-Filiale.
 
             🇬🇧 Details of a temporary work agency branch.
           content:
@@ -750,7 +778,7 @@ paths:
     
     delete:
       description: |
-        🇩🇪 Löscht eine bestehende Personalverleiher-Filialie.
+        🇩🇪 Löscht eine bestehende Personalverleiher-Filiale.
 
         🇬🇧 Deletes an existing temporary work agency branch.
       tags:
@@ -761,7 +789,7 @@ paths:
       responses:
         '204':
           description: |
-            🇩🇪 Personalverleiher-Filialie gelöscht.
+            🇩🇪 Personalverleiher-Filiale gelöscht.
             
             🇬🇧 temporary work agency branch deleted.
         '401':
@@ -805,31 +833,43 @@ paths:
     
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert eine Personalverleiher-Region.
+        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Regionen.
 
-        🇬🇧 Create or update a temporary work agency region.
+        🇬🇧 Create or update temporary work agency regions.
       tags:
         - Temporary Work Agency Regions
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkAgencyRegion
+      operationId: saveTemporaryWorkAgencyRegions
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
+              type: object
+              properties:
+                temporaryWorkAgencyRegions:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
+              required:
+                - temporaryWorkAgencyRegions
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Personalverleiher-Region erstellt oder aktualisiert.
+            🇩🇪 Personalverleiher-Regionen erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency region created or updated.
+            🇬🇧 Temporary work agency regions created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions/{temporaryWorkAgencyRegionNr}:
     parameters:
@@ -921,31 +961,43 @@ paths:
     
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert ein Personalverleiher-Team.
+        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Teams.
 
-        🇬🇧 Create or update a temporary work agency team.
+        🇬🇧 Create or update temporary work agency teams.
       tags:
         - Temporary Work Agency Teams
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkAgencyTeam
+      operationId: saveTemporaryWorkAgencyTeams
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
+              type: object
+              properties:
+                temporaryWorkAgencyTeams:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
+              required:
+                - temporaryWorkAgencyTeams
       responses:
-        '201':
+        '204':
           description: |
-            🇩🇪 Personalverleiher-Team erstellt oder aktualisiert.
+            🇩🇪 Personalverleiher-Teams erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency team created or updated.
+            🇬🇧 Temporary work agency teams created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams/{temporaryWorkAgencyTeamNr}:
     parameters:
@@ -1037,31 +1089,43 @@ paths:
     
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert ein Personalverleiher-Berater.
+        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Berater.
 
-        🇬🇧 Create or update a temporary work consultant.
+        🇬🇧 Create or update temporary work consultants.
       tags:
         - Temporary Work Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkConsultant
+      operationId: saveTemporaryWorkConsultants
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/TemporaryWorkConsultant"
+              type: object
+              properties:
+                temporaryWorkConsultants:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/TemporaryWorkConsultant"
+              required:
+                - temporaryWorkConsultants
       responses:
-        '201':
+        '204':
           description: |
             🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work consultant created or updated.
+            🇬🇧 Temporary work consultants created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
+        '422':
+          $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants/{temporaryWorkConsultantNr}:
     parameters:
@@ -1174,7 +1238,7 @@ paths:
               required:
                 - uvgIscoSalaries
       responses:
-        '201':
+        '204':
           description: |
             🇩🇪 UVG-ISCO-Löhne erstellt oder aktualisiert.
 
@@ -1185,6 +1249,8 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
           $ref: "#/components/responses/NotFoundError"
+        '409':
+          $ref: "#/components/responses/ConflictError"
         '422':
           $ref: "#/components/responses/NotFoundError"
 
@@ -1438,6 +1504,15 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
 
+    ConflictError:
+      description: |
+        🇩🇪 Die Anfrage konnte nicht verarbeitet werden, da es einen Konflikt mit dem aktuellen Zustand der Resource gibt.
+        🇬🇧 The request could not be processed due to a conflict with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
     UnprocessableContentError:
       description: |
         🇩🇪 Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
@@ -1647,7 +1722,7 @@ components:
           enum: [ info, warning, error ]
         messages:
           description: |
-            🇩🇪 Die Rückmeldung in verschienden Sprachen
+            🇩🇪 Die Rückmeldung in verschiedenen Sprachen
             🇬🇧 FIXME.
           type: array
           items:
@@ -1704,7 +1779,7 @@ components:
           type: string
         contractContractualJobTitle:
           description: |
-            🇩🇪 Spezifische Berufsbezeichn8ung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
+            🇩🇪 Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
             🇬🇧 FIXME
           type: string
         kindOfWagePayment:
@@ -2113,12 +2188,12 @@ components:
           format: float
         employeeNr:
           description: |
-            🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangstellten.
+            🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
             🇬🇧 FIXME
           $ref: "#/components/schemas/EmployeeNr"
         permanentEmployeeNr:
           description: |
-            🇩🇪 Referenz auf den Festangestellen. Zwingend bei Festangestellten.
+            🇩🇪 Referenz auf den Festangestellten. Zwingend bei Festangestellten.
             🇬🇧 FIXME
           $ref: "#/components/schemas/EmployeeNr"
       required:
