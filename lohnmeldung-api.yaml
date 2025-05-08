@@ -2158,7 +2158,7 @@ components:
     UvgIscoSalary:
       description: |
         🇩🇪 UVG-ISCO-Löhne: Lohnsummen pro Betriebsteil, ISCO-Berufsart und BU/NBU-Code für jeden Angestellten.
-        🇬🇧 FIXME
+        🇬🇧 LAA isco salary: Sum of salaries per company part, ISCO occupation type and AP/ANP-Code for each employee.
       type: object
       properties:
         iscoSalaryNr:
@@ -2166,7 +2166,7 @@ components:
         businessUnitCode:
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils.
-            🇬🇧 Letter of the associated business unit.
+            🇬🇧 Letter of the associated company part.
           type: string
           example: 'A'
           pattern: '^[A-Z]$'
@@ -2179,41 +2179,45 @@ components:
           example: "93130"
         buNbuApAnpCode:
           description: |
-            🇩🇪 BU/NBU Bereich: 
+            🇩🇪 BU/NBU-Code: 
                * `0` - nicht UVG-versichert
                * `1` - BUV- und NBUV-versichert mit NBUV-Abzug
                * `2` - BUV- und NBUV-versichert ohne NBUV-Abzug
                * `3` - nur BUV-versichert
-            🇬🇧 FIXME
-          type: number
+            🇬🇧 AP/ANP-Code:
+              * `0` - not LAA insured
+              * `1` - AP- and ANP-insured with ANP deduction
+              * `2` - AP- and ANP-insured without ANP deduction
+              * `3` - only AP-insured
+          type: integer
           enum: [ 0, 1, 2, 3 ]
         uvgLaaGrossSalary:
           description: |
             🇩🇪 UVG-Bruttolohn: Summe aller aufbauenden Lohnarten.
-            🇬🇧 FIXME
+            🇬🇧 LAA gross salary: Sum of all constituting salary types.
           type: number
-          format: float
+          multipleOf: 0.01
         uvgLaaBaseSalary:
           description: |
-            🇩🇪 UVG-Basis: Summe aller UVG-pflichtigen Lohnarten, ohne Rücksicht auf den versicherten Höchstlohn und den UVG-Code.
-            🇬🇧 FIXME
+            🇩🇪 UVG-Basislohn: Summe aller UVG-pflichtigen Lohnarten, ohne Rücksicht auf den versicherten Höchstlohn und den BU/NBU-Code.
+            🇬🇧 LAA base salary: Sum of all LAA liable salary types, regardless of the insured maximum salary and the AP/ANP code.
           type: number
-          format: float
+          multipleOf: 0.01
         uvgLaaContributorySalary:
           description: |
-            🇩🇪 UVG-Lohn: Beitragspflichtiger Lohn, berechnet aufgrund der UVG-Basis für die versicherten Personen unter Berücksichtigung des Höchstlohnes.
-            🇬🇧 FIXME
+            🇩🇪 UVG-Lohn: Beitragspflichtiger Lohn, berechnet aufgrund der UVG-Basislohn für die versicherten Personen unter Berücksichtigung des Höchstlohnes.
+            🇬🇧 LAA salary: Contribution-liable salary, calculated based on the LAA base salary for the insured persons taking into account the maximum salary.
           type: number
-          format: float
+          multipleOf: 0.01
         employeeNr:
           description: |
             🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
-            🇬🇧 FIXME
+            🇬🇧 Reference to the temporary employee. Mandatory for temporary employees.
           $ref: "#/components/schemas/EmployeeNr"
         permanentEmployeeNr:
           description: |
             🇩🇪 Referenz auf den Festangestellten. Zwingend bei Festangestellten.
-            🇬🇧 FIXME
+            🇬🇧 Reference to the permanent employee. Mandatory for permanent employees.
           $ref: "#/components/schemas/EmployeeNr"
       required:
         - iscoSalaryNr
