@@ -1884,6 +1884,27 @@ components:
                     🇩🇪 Mobiltelefon-Nummer
                     🇬🇧 Mobilephone number
                   type: string
+        temporaryWorkAgencyRegionNr:
+          description: |
+            🇩🇪 Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            🇬🇧 FIXME.
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+        temporaryWorkAgencyBranchNr:
+          description: |
+            🇩🇪 Nummer der zuständigen Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            🇬🇧 FIXME.
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+        temporaryWorkAgencyTeamNr:
+          description: |
+            🇩🇪 Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
+            🇬🇧 FIXME.
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+        temporaryWorkConsultantNr:
+          description: |
+            🇩🇪 Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            🇬🇧 FIXME.
+          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+
       required:
         - missionNr
         - employeeNr
