@@ -1642,7 +1642,6 @@ components:
         - firstName
         - sex
         - dateOfBirth
-        - socialInsuranceIdentificationUnknown
 
     Error:
       description: |
@@ -1966,7 +1965,6 @@ components:
       required:
         - missionCompanyNr
         - name
-        - uidNrUnknown
     
     PermanentEmployee:
       description: |
