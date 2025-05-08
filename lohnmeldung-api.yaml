@@ -134,9 +134,9 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/PatchSalaryDeclaration"
       responses:
-        '204':
+        '200':
           description: |
-            🇩🇪 Lohnemeldung aktualisiert.
+            🇩🇪 Lohnmeldung aktualisiert.
             
             🇬🇧 Salary declaration updated.
           content:
