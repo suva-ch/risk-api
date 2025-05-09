@@ -1792,13 +1792,13 @@ components:
             🇩🇪 Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         activityRate:
           description: |
             🇩🇪 Beschäftigungsgrad. Zwingend wenn `kindOfWagePayment = monthly`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
           minimum: 0
           maximum: 100
         labourDays:
@@ -1806,37 +1806,37 @@ components:
             🇩🇪 Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         dailyRate:
           description: |
             🇩🇪 Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         labourHours:
           description: |
             🇩🇪 Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         hourlyRate:
           description: |
             🇩🇪 Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         labourLessons:
           description: |
             🇩🇪 Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         lessonRate:
           description: |
             🇩🇪 Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
             🇬🇧 FIXME
           type: number
-          format: float
+          multipleOf: 0.01
         missionplace:
           description: |
             🇩🇪 Einsatzort
