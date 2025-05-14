@@ -55,8 +55,6 @@ paths:
                   "$ref": "#/components/schemas/SalaryDeclaration"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
 
     post:
       description: |
@@ -84,8 +82,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
@@ -183,8 +179,6 @@ paths:
                   $ref: "#/components/schemas/LeasedEmployee"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
 
     put:
       description: |
@@ -219,8 +213,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -311,8 +303,6 @@ paths:
                   $ref: "#/components/schemas/Message"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/mission-companies:
     parameters:
@@ -345,8 +335,6 @@ paths:
                   "$ref": "#/components/schemas/MissionCompany"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
 
     put:
       description: |
@@ -381,8 +369,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
 
@@ -471,8 +457,6 @@ paths:
                   "$ref": "#/components/schemas/Mission"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -507,8 +491,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -608,8 +590,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -700,8 +680,6 @@ paths:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -736,8 +714,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -828,8 +804,6 @@ paths:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -864,8 +838,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -956,8 +928,6 @@ paths:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -992,8 +962,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -1084,8 +1052,6 @@ paths:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -1120,8 +1086,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
@@ -1212,8 +1176,6 @@ paths:
                   "$ref": "#/components/schemas/UvgIscoSalary"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
     
     put:
       description: |
@@ -1247,8 +1209,6 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
-          $ref: "#/components/responses/NotFoundError"
         '409':
           $ref: "#/components/responses/ConflictError"
         '422':
