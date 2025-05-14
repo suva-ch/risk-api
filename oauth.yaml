@@ -5,7 +5,7 @@ info:
   description: |
     API for obtaining access tokens using client credentials
     see https://github.com/suva-ch/risk-api-docs/wiki/Authentication-with-Access-Token for details
-    
+
     This contract does not contain JWT-Based Access Token Retrieval
 servers:
   - url: https://api.suva.ch
@@ -42,7 +42,7 @@ paths:
                 - client_id
                 - client_secret
       responses:
-        '200':
+        "200":
           description: Successfully obtained access token
           content:
             application/json:

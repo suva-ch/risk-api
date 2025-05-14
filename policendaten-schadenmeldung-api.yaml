@@ -16,10 +16,10 @@ servers:
 paths:
   /v1/policies/{customerId}:
     parameters:
-      - $ref: '#/components/parameters/X-Client-Vendor'
-      - $ref: '#/components/parameters/X-Client-Name'
-      - $ref: '#/components/parameters/X-Client-Version'
-      - $ref: '#/components/parameters/CustomerIdParam'
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/CustomerIdParam"
 
     get:
       description: |
@@ -32,7 +32,7 @@ paths:
         - Policendaten
       operationId: getPolicy
       parameters:
-        - $ref: '#/components/parameters/EventDateParam'
+        - $ref: "#/components/parameters/EventDateParam"
       responses:
         200:
           description: |
@@ -44,20 +44,20 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubNumber'
+                  $ref: "#/components/schemas/SubNumber"
         400:
-          $ref: '#/components/responses/BadRequestError'
+          $ref: "#/components/responses/BadRequestError"
         404:
-          $ref: '#/components/responses/NotFoundError'
+          $ref: "#/components/responses/NotFoundError"
 
   /v1/policies/{customerId}/{language}/{gender}:
     parameters:
-      - $ref: '#/components/parameters/X-Client-Vendor'
-      - $ref: '#/components/parameters/X-Client-Name'
-      - $ref: '#/components/parameters/X-Client-Version'
-      - $ref: '#/components/parameters/CustomerIdParam'
-      - $ref: '#/components/parameters/LanguageParam'
-      - $ref: '#/components/parameters/GenderParam'
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/CustomerIdParam"
+      - $ref: "#/components/parameters/LanguageParam"
+      - $ref: "#/components/parameters/GenderParam"
 
     get:
       description: |
@@ -68,7 +68,7 @@ paths:
         - Policendaten
       operationId: getPolicyFiltered
       parameters:
-        - $ref: '#/components/parameters/EventDateParam'
+        - $ref: "#/components/parameters/EventDateParam"
       responses:
         200:
           description: |
@@ -80,11 +80,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubNumberFiltered'
+                  $ref: "#/components/schemas/SubNumberFiltered"
         400:
-          $ref: '#/components/responses/BadRequestError'
+          $ref: "#/components/responses/BadRequestError"
         404:
-          $ref: '#/components/responses/NotFoundError'
+          $ref: "#/components/responses/NotFoundError"
 
 components:
   parameters:
@@ -98,7 +98,7 @@ components:
       required: false
       schema:
         type: string
-      example: 'Acme Corporation'
+      example: "Acme Corporation"
 
     X-Client-Name:
       name: X-Client-Name
@@ -110,7 +110,7 @@ components:
       required: false
       schema:
         type: string
-      example: 'PayrollPro'
+      example: "PayrollPro"
 
     X-Client-Version:
       name: X-Client-Version
@@ -122,7 +122,7 @@ components:
       required: false
       schema:
         type: string
-      example: '2.5'
+      example: "2.5"
 
     CustomerIdParam:
       name: customerId
@@ -158,7 +158,7 @@ components:
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/Gender'
+        $ref: "#/components/schemas/Gender"
       description: |
         🇩🇪 Gewünschtes Geschlecht für die Berufsbezeichnungen.
 
@@ -169,7 +169,7 @@ components:
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/Language'
+        $ref: "#/components/schemas/Language"
       description: |
         🇩🇪 Gewünschte Sprache für die Berufsbezeichnungen.
 
@@ -189,7 +189,7 @@ components:
             🇩🇪 Subnummer als 2-stellige Zahl.
 
             🇬🇧 Subnumber as a 2-digit code.
-          example: '01'
+          example: "01"
           pattern: '^\d{2}$'
         description:
           type: string
@@ -217,7 +217,7 @@ components:
 
             🇬🇧 Contains company parts if the premium model is `UVG_CLASSIC`.
           items:
-            $ref: '#/components/schemas/CompanyPart'
+            $ref: "#/components/schemas/CompanyPart"
         occupationCodes:
           type: array
           description: |
@@ -225,7 +225,7 @@ components:
 
             🇬🇧 Contains occupation codes if the premium model is `UVG_OCCUPATION_CODES`.
           items:
-            $ref: '#/components/schemas/OccupationCode'
+            $ref: "#/components/schemas/OccupationCode"
       required:
         - subnumberCode
         - premiumModel
@@ -243,7 +243,7 @@ components:
             🇩🇪 Subnummer als 2-stellige Zahl.
 
             🇬🇧 Subnumber as a 2-digit code.
-          example: '01'
+          example: "01"
           pattern: '^\d{2}$'
         description:
           type: string
@@ -253,11 +253,11 @@ components:
         companyParts:
           type: array
           items:
-            $ref: '#/components/schemas/CompanyPartFiltered'
+            $ref: "#/components/schemas/CompanyPartFiltered"
         occupationCodes:
           type: array
           items:
-            $ref: '#/components/schemas/OccupationCodeFiltered'
+            $ref: "#/components/schemas/OccupationCodeFiltered"
       required:
         - subNumberCode
         - premiumModel
@@ -275,8 +275,8 @@ components:
             🇩🇪 Buchstabe zur Identifikation des Betriebsteils.
 
             🇬🇧 Letter identifier for the company part.
-          example: 'A'
-          pattern: '^[A-Z]$'
+          example: "A"
+          pattern: "^[A-Z]$"
         description:
           type: string
           description: |
@@ -293,8 +293,8 @@ components:
       properties:
         companyPartCode:
           type: string
-          example: 'A'
-          pattern: '^[A-Z]$'
+          example: "A"
+          pattern: "^[A-Z]$"
         description:
           type: string
       required:
@@ -348,15 +348,15 @@ components:
 
             🇬🇧 Language- and gender-specific occupation description.
           items:
-            $ref: '#/components/schemas/OccupationDescription'
+            $ref: "#/components/schemas/OccupationDescription"
         companyPartCode:
           type: string
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
 
             🇬🇧 Letter of the associated company part for accident reporting.
-          example: 'A'
-          pattern: '^[A-Z]$'
+          example: "A"
+          pattern: "^[A-Z]$"
       required:
         - suvaOccupationCodeId
         - iscoOccupationTypeId
@@ -381,8 +381,8 @@ components:
           type: string
         companyPartCode:
           type: string
-          example: 'A'
-          pattern: '^[A-Z]$'
+          example: "A"
+          pattern: "^[A-Z]$"
       required:
         - suvaOccupationCodeId
         - iscoOccupationTypeId
@@ -397,9 +397,9 @@ components:
       type: object
       properties:
         language:
-          $ref: '#/components/schemas/Language'
+          $ref: "#/components/schemas/Language"
         gender:
-          $ref: '#/components/schemas/Gender'
+          $ref: "#/components/schemas/Gender"
         value:
           type: string
           description: |
@@ -414,10 +414,10 @@ components:
     Gender:
       description: |
         🇩🇪  Geschlecht
-        
+
         🇬🇧 Gender
       type: string
-      enum: [ female, genderless, male ]
+      enum: [female, genderless, male]
 
     Language:
       description: |
@@ -425,7 +425,7 @@ components:
 
         🇬🇧 Language
       type: string
-      enum: [ de, fr, it, en ]
+      enum: [de, fr, it, en]
 
     Error:
       description: |
@@ -472,7 +472,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
 
     NotFoundError:
       description: |
@@ -481,4 +481,4 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"

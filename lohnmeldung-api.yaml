@@ -39,13 +39,13 @@ paths:
       tags:
         - Salary Declarations
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getSalaryDeclarations
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Lohnmeldungen.
-            
+
             🇬🇧 A list of salary declarations.
           content:
             application/json:
@@ -53,7 +53,7 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/SalaryDeclaration"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
 
     post:
@@ -64,12 +64,12 @@ paths:
       tags:
         - Salary Declarations
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveSalaryDeclaration
       requestBody:
         $ref: "#/components/requestBodies/SaveSalaryDeclaration"
       responses:
-        '201':
+        "201":
           description: |
             🇩🇪 Lohnmeldung erstellt.
 
@@ -78,11 +78,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SalaryDeclaration"
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}:
@@ -100,10 +100,10 @@ paths:
       tags:
         - Salary Declarations
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getSalaryDeclaration
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details einer Lohnmeldung.
 
@@ -112,40 +112,40 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SalaryDeclaration"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
     patch:
       description: |
         🇩🇪 Aktualisiert den Status einer Lohnmeldung.
-        
+
         🇬🇧 Update the state of a salary declaration.
       tags:
         - Salary Declarations
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: patchSalaryDeclaration
       requestBody:
         $ref: "#/components/requestBodies/PatchSalaryDeclaration"
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Lohnmeldung aktualisiert.
-            
+
             🇬🇧 Salary declaration updated.
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SalaryDeclaration"
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/leased-employees:
@@ -163,13 +163,13 @@ paths:
       tags:
         - Leased Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getLeasedEmployees
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Leihangestellten.
-            
+
             🇬🇧 A list of leased employees.
           content:
             application/json:
@@ -177,7 +177,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/LeasedEmployee"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
 
     put:
@@ -188,7 +188,7 @@ paths:
       tags:
         - Leased Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveLeasedEmployees
       requestBody:
         required: true
@@ -204,18 +204,18 @@ paths:
               required:
                 - leasedEmployees
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Leihangestellte erstellt oder aktualisiert.
 
             🇬🇧 Leased employees created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/leased-employees/{employeeNumber}:
@@ -234,10 +234,10 @@ paths:
       tags:
         - Leased Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getLeasedEmployee
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Leihangestellten.
 
@@ -246,9 +246,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/LeasedEmployee"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
     delete:
@@ -259,17 +259,17 @@ paths:
       tags:
         - Leased Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteLeasedEmployee
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Leihangestellter gelöscht.
-            
+
             🇬🇧 Leased employee deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/messages:
@@ -287,10 +287,10 @@ paths:
       tags:
         - Messages
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getMessages
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Rückmeldungen.
 
@@ -301,7 +301,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Message"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
 
   /v1/salary-declarations/{salaryDeclarationId}/mission-companies:
@@ -319,10 +319,10 @@ paths:
       tags:
         - Mission Companies
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getMissionCompanies
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Einsatzbetrieben.
 
@@ -333,7 +333,7 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/MissionCompany"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
 
     put:
@@ -344,7 +344,7 @@ paths:
       tags:
         - Mission Companies
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveMissionCompanies
       requestBody:
         required: true
@@ -360,16 +360,16 @@ paths:
               required:
                 - missionCompanies
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Einsatzbetriebe erstellt oder aktualisiert.
 
             🇬🇧 Mission companies created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
 
   /v1/salary-declarations/{salaryDeclarationId}/mission-companies/{missionCompanyNumber}:
@@ -388,10 +388,10 @@ paths:
       tags:
         - Mission Companies
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getMissionCompany
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Einsatzbetriebes.
 
@@ -400,9 +400,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/MissionCompany"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
     delete:
@@ -413,17 +413,17 @@ paths:
       tags:
         - Mission Companies
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteMissionCompany
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Einsatzbetrieb gelöscht.
-            
+
             🇬🇧 Mission company deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/missions:
@@ -441,10 +441,10 @@ paths:
       tags:
         - Missions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getMissions
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Einsätzen.
 
@@ -455,9 +455,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Mission"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Einsätze.
@@ -466,7 +466,7 @@ paths:
       tags:
         - Missions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveMissions
       requestBody:
         required: true
@@ -482,18 +482,18 @@ paths:
               required:
                 - missions
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Einsätze erstellt oder aktualisiert.
 
             🇬🇧 Missions created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/missions/{missionNumber}:
@@ -512,10 +512,10 @@ paths:
       tags:
         - Missions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getMission
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Einsatzes.
 
@@ -524,11 +524,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Mission"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht einen bestehenden Einsatz.
@@ -537,17 +537,17 @@ paths:
       tags:
         - Missions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteMission
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Einsatz gelöscht.
-            
+
             🇬🇧 Mission deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/permanent-employees:
@@ -556,7 +556,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Festangestellte.
@@ -565,7 +565,7 @@ paths:
       tags:
         - Permanent Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: savePermanentEmployees
       requestBody:
         required: true
@@ -581,18 +581,18 @@ paths:
               required:
                 - permanentEmployees
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Festangestellte erstellt oder aktualisiert.
 
             🇬🇧 Permanent employees created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/permanent-employees/{employeeNumber}:
@@ -611,10 +611,10 @@ paths:
       tags:
         - Permanent Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getPermanentEmployee
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Festangestellten.
 
@@ -623,11 +623,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/PermanentEmployee"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht einen bestehenden Festangestellten.
@@ -636,17 +636,17 @@ paths:
       tags:
         - Permanent Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deletePermanentEmployee
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Festangestellter gelöscht.
-            
+
             🇬🇧 Permanent employee deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches:
@@ -655,7 +655,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-    
+
     get:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Filialen zurück.
@@ -664,10 +664,10 @@ paths:
       tags:
         - Temporary Work Agency Branches
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyBranches
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Filialen.
 
@@ -678,9 +678,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Filialen.
@@ -689,7 +689,7 @@ paths:
       tags:
         - Temporary Work Agency Branches
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveTemporaryWorkAgencyBranches
       requestBody:
         required: true
@@ -705,18 +705,18 @@ paths:
               required:
                 - temporaryWorkAgencyBranches
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Filialen erstellt oder aktualisiert.
 
             🇬🇧 Temporary work agency branches created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches/{temporaryWorkAgencyBranchNumber}:
@@ -726,7 +726,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
       - $ref: "#/components/parameters/TemporaryWorkAgencyBranchNumber"
-    
+
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Filiale zurück.
@@ -735,10 +735,10 @@ paths:
       tags:
         - Temporary Work Agency Branches
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyBranch
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details einer Personalverleiher-Filiale.
 
@@ -747,11 +747,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TemporaryWorkAgencyBranch"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht eine bestehende Personalverleiher-Filiale.
@@ -760,26 +760,26 @@ paths:
       tags:
         - Temporary Work Agency Branches
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteTemporaryWorkAgencyBranch
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Filiale gelöscht.
-            
+
             🇬🇧 temporary work agency branch deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-  
+
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-    
+
     get:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Regionen zurück.
@@ -788,10 +788,10 @@ paths:
       tags:
         - Temporary Work Agency Regions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyRegions
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Regionen.
 
@@ -802,9 +802,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Regionen.
@@ -813,7 +813,7 @@ paths:
       tags:
         - Temporary Work Agency Regions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveTemporaryWorkAgencyRegions
       requestBody:
         required: true
@@ -829,18 +829,18 @@ paths:
               required:
                 - temporaryWorkAgencyRegions
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Regionen erstellt oder aktualisiert.
 
             🇬🇧 Temporary work agency regions created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions/{temporaryWorkAgencyRegionNumber}:
@@ -850,7 +850,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
       - $ref: "#/components/parameters/TemporaryWorkAgencyRegionNumber"
-    
+
     get:
       description: |
         🇩🇪 Gibt die Details einer bestehenden Personalverleiher-Region zurück.
@@ -859,10 +859,10 @@ paths:
       tags:
         - Temporary Work Agency Regions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyRegion
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details einer Personalverleiher-Region.
 
@@ -871,11 +871,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TemporaryWorkAgencyRegion"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht eine bestehende Personalverleiher-Region.
@@ -884,17 +884,17 @@ paths:
       tags:
         - Temporary Work Agency Regions
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteTemporaryWorkAgencyRegion
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Region gelöscht.
-            
+
             🇬🇧 Temporary work agency region deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams:
@@ -903,7 +903,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-    
+
     get:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Teams zurück.
@@ -912,10 +912,10 @@ paths:
       tags:
         - Temporary Work Agency Teams
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyTeams
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Teams.
 
@@ -926,9 +926,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Teams.
@@ -937,7 +937,7 @@ paths:
       tags:
         - Temporary Work Agency Teams
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveTemporaryWorkAgencyTeams
       requestBody:
         required: true
@@ -953,18 +953,18 @@ paths:
               required:
                 - temporaryWorkAgencyTeams
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Teams erstellt oder aktualisiert.
 
             🇬🇧 Temporary work agency teams created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams/{temporaryWorkAgencyTeamNumber}:
@@ -974,7 +974,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
       - $ref: "#/components/parameters/TemporaryWorkAgencyTeamNumber"
-    
+
     get:
       description: |
         🇩🇪 Gibt die Details ein bestehende Personalverleiher-Team zurück.
@@ -983,10 +983,10 @@ paths:
       tags:
         - Temporary Work Agency Teams
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyTeam
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Personalverleiher-Teams.
 
@@ -995,11 +995,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TemporaryWorkAgencyTeam"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht ein bestehendes Personalverleiher-Team.
@@ -1008,17 +1008,17 @@ paths:
       tags:
         - Temporary Work Agency Teams
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteTemporaryWorkAgencyTeam
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Team gelöscht.
-            
+
             🇬🇧 Temporary work agency team deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants:
@@ -1027,7 +1027,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-    
+
     get:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Berater zurück.
@@ -1036,10 +1036,10 @@ paths:
       tags:
         - Temporary Work Agency Consultants
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyConsultants
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Berater.
 
@@ -1050,9 +1050,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Berater.
@@ -1061,7 +1061,7 @@ paths:
       tags:
         - Temporary Work Agency Consultants
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveTemporaryWorkAgencyConsultants
       requestBody:
         required: true
@@ -1077,18 +1077,18 @@ paths:
               required:
                 - temporaryWorkAgencyConsultants
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
 
             🇬🇧 Temporary work agency consultants created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants/{temporaryWorkAgencyConsultantNumber}:
@@ -1098,7 +1098,7 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
       - $ref: "#/components/parameters/TemporaryWorkAgencyConsultantNumber"
-    
+
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
@@ -1107,10 +1107,10 @@ paths:
       tags:
         - Temporary Work Agency Consultants
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getTemporaryWorkAgencyConsultant
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines Personalverleiher-Beraters.
 
@@ -1119,11 +1119,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
-    
+
     delete:
       description: |
         🇩🇪 Löscht einen bestehenden Personalverleiher-Berater.
@@ -1132,17 +1132,17 @@ paths:
       tags:
         - Temporary Work Agency Consultants
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteTemporaryWorkAgencyConsultant
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 Personalverleiher-Berater gelöscht.
-            
+
             🇬🇧 Temporary work agency consultant deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries:
@@ -1160,10 +1160,10 @@ paths:
       tags:
         - UVG ISCO Salaries
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getUvgIscoSalaries
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Eine Liste mit UVG-ISCO-Löhnen.
 
@@ -1174,9 +1174,9 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/UvgIscoSalary"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-    
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert UVG-ISCO-Löhne.
@@ -1185,7 +1185,7 @@ paths:
       tags:
         - UVG ISCO Salaries
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveUvgIscoSalaries
       requestBody:
         content:
@@ -1200,18 +1200,18 @@ paths:
               required:
                 - uvgIscoSalaries
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 UVG-ISCO-Löhne erstellt oder aktualisiert.
 
             🇬🇧 UVG ISCO salaries created or updated.
-        '400':
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '409':
+        "409":
           $ref: "#/components/responses/ConflictError"
-        '422':
+        "422":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries/{iscoSalaryNumber}:
@@ -1230,10 +1230,10 @@ paths:
       tags:
         - UVG ISCO Salaries
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getUvgIscoSalary
       responses:
-        '200':
+        "200":
           description: |
             🇩🇪 Details eines UVG-ISCO-Lohnes.
 
@@ -1242,9 +1242,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/UvgIscoSalary"
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
     delete:
@@ -1255,17 +1255,17 @@ paths:
       tags:
         - UVG ISCO Salaries
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: deleteUvgIscoSalary
       responses:
-        '204':
+        "204":
           description: |
             🇩🇪 UVG-ISCO-Lohn gelöscht.
-            
+
             🇬🇧 UVG ISCO salary deleted.
-        '401':
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        '404':
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
 components:
@@ -1298,14 +1298,14 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/MissionCompanyNumber"
-    
+
     MissionNumber:
       name: missionNumber
       in: path
       required: true
       schema:
         $ref: "#/components/schemas/MissionNumber"
-    
+
     SalaryDeclarationId:
       name: salaryDeclarationId
       in: path
@@ -1399,14 +1399,14 @@ components:
                   🇩🇪 Die Suva-Kundennummer
                   🇬🇧 Suva customer ID
                 type: string
-                example: '8-01747-90000'
+                example: "8-01747-90000"
                 pattern: '^\d{1}-\d{5}-\d{5}$'
               subNumber:
                 description: |
                   🇩🇪 Subnummer als 2-stellige Zahl.
-                  🇬🇧 Subnumber as a 2-digit code.          
+                  🇬🇧 Subnumber as a 2-digit code.
                 type: string
-                example: '01'
+                example: "01"
                 pattern: '^\d{2}$'
             required:
               - messageType
@@ -1489,7 +1489,7 @@ components:
         🇩🇪 Nummer des Angestellten (ERP-System)
         🇬🇧 FIXME
       type: string
-    
+
     IscoSalaryNumber:
       description: |
         🇩🇪 Nummer des ISCO-Lohn (ERP-System)
@@ -1501,14 +1501,14 @@ components:
         🇩🇪 Sprache
         🇬🇧 Language
       type: string
-      enum: [ de, fr, it, en ]
+      enum: [de, fr, it, en]
 
     MissionCompanyNumber:
       description: |
         🇩🇪 Nummer des Einsatzbetrieb (ERP-System)
         🇬🇧 FIXME
       type: string
-    
+
     MissionNumber:
       description: |
         🇩🇪 Nummer des Einsatz (ERP-System)
@@ -1521,20 +1521,20 @@ components:
         🇬🇧 ID of an salary and mission declaration.
       type: string
       format: uuid
-    
+
     SalaryDeclarationType:
       description: |
         🇩🇪 Meldungstyp: periodisch, Jahresmeldung definitiv, oder Jahresmeldung Ersatz
         🇬🇧
       type: string
-      enum: [ periodic, annual_definitive, annual_replacement ]
+      enum: [periodic, annual_definitive, annual_replacement]
 
     TemporaryWorkAgencyBranchNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Filiale (ERP-System)
         🇬🇧 FIXME
       type: string
-    
+
     TemporaryWorkAgencyRegionNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Region (ERP-System)
@@ -1584,7 +1584,7 @@ components:
             🇩🇪 Geschlecht
             🇬🇧 Gender
           type: string
-          enum: [ f, female, m, male ]
+          enum: [f, female, m, male]
         dateOfBirth:
           description: |
             🇩🇪 Geburtsdatum
@@ -1597,7 +1597,7 @@ components:
             🇬🇧 Social insurance identification
           type: string
           pattern: '^\d{3}.\d{4}.\d{4}.\d{2}$'
-          example: '756.1234.5678.90'
+          example: "756.1234.5678.90"
         socialInsuranceIdentificationUnknown:
           description: |
             🇩🇪 Wenn `true` ist die AHV-Nummer unbekannt.
@@ -1685,7 +1685,7 @@ components:
             🇩🇪 Art der Rückmeldung
             🇬🇧 FIXME.
           type: string
-          enum: [ info, warning, error ]
+          enum: [info, warning, error]
         messages:
           description: |
             🇩🇪 Die Rückmeldung in verschiedenen Sprachen
@@ -1706,7 +1706,7 @@ components:
         - key
         - messageType
         - messages
-    
+
     Mission:
       description: |
         🇩🇪 Einsatz
@@ -1753,7 +1753,7 @@ components:
             🇩🇪 Art der Lohnzahlung
             🇬🇧 FIXME
           type: string
-          enum: [ monthly, daily, hourly, lesson ]
+          enum: [monthly, daily, hourly, lesson]
         monthlySalary:
           description: |
             🇩🇪 Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
@@ -1890,11 +1890,10 @@ components:
         missionCompanyNumber:
           $ref: "#/components/schemas/MissionCompanyNumber"
         uidNumber:
-          description:
-            🇩🇪 Die Unternehmens-Identifikationsnummer (UID)
+          description: 🇩🇪 Die Unternehmens-Identifikationsnummer (UID)
             🇬🇧 FIXME
           type: string
-          example: 'CHE-123.456.789'
+          example: "CHE-123.456.789"
         uidNumberUnknown:
           description: |
             🇩🇪 Wenn `true` ist die UID unbekannt.
@@ -1953,7 +1952,7 @@ components:
       required:
         - missionCompanyNumber
         - name
-    
+
     PermanentEmployee:
       description: |
         🇩🇪 Festangestellter
@@ -1997,7 +1996,7 @@ components:
         - employmentPeriodFrom
         - employmentPeriodUntil
         - unsteadyEmployed
-    
+
     SalaryDeclaration:
       description: |
         🇩🇪 Lohn- und Einsatzdeklaration
@@ -2017,7 +2016,17 @@ components:
             🇩🇪 Status der Lohn- und Einsatzdeklaration
             🇬🇧 Status of the salary and mission declaration
           type: string
-          enum: [ open, transmitted, processing, completion_pending, transmitted_with_completion, accepted, refused, deleted ]
+          enum:
+            [
+              open,
+              transmitted,
+              processing,
+              completion_pending,
+              transmitted_with_completion,
+              accepted,
+              refused,
+              deleted,
+            ]
         transmittedOn:
           description: |
             🇩🇪 Zeitpunkt der Übermittlung
@@ -2037,14 +2046,14 @@ components:
             🇩🇪 Die Suva-Kundennummer
             🇬🇧 Suva customer ID
           type: string
-          example: '8-01747-90000'
+          example: "8-01747-90000"
           pattern: '^\d{1}-\d{5}-\d{5}$'
         subNumber:
           description: |
             🇩🇪 Subnummer als 2-stellige Zahl.
-            🇬🇧 Subnumber as a 2-digit code.          
+            🇬🇧 Subnumber as a 2-digit code.
           type: string
-          example: '01'
+          example: "01"
           pattern: '^\d{2}$'
 
     TemporaryWorkAgencyBranch:
@@ -2135,8 +2144,8 @@ components:
             🇩🇪 Buchstabe des zugehörigen Betriebsteils.
             🇬🇧 Letter of the associated company part.
           type: string
-          example: 'A'
-          pattern: '^[A-Z]$'
+          example: "A"
+          pattern: "^[A-Z]$"
         iscoCode:
           description: |
             🇩🇪 ISCO-Berufsart
@@ -2157,7 +2166,7 @@ components:
               * `2` - AP- and ANP-insured without ANP deduction
               * `3` - only AP-insured
           type: integer
-          enum: [ 0, 1, 2, 3 ]
+          enum: [0, 1, 2, 3]
         uvgLaaGrossSalary:
           description: |
             🇩🇪 UVG-Bruttolohn: Summe aller aufbauenden Lohnarten.
