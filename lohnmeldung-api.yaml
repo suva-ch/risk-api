@@ -12,16 +12,16 @@ servers:
   - url: https://apitest.suva.ch/salary-declaration
     description: Staging server
 tags:
-  - name: Employees
+  - name: Leased Employees
+  - name: Permanent Employees
   - name: Messages
   - name: Mission Companies
   - name: Missions
-  - name: Permanent Employees
   - name: Salary Declarations
   - name: Temporary Work Agency Branches
   - name: Temporary Work Agency Regions
   - name: Temporary Work Agency Teams
-  - name: Temporary Work Consultants
+  - name: Temporary Work Agency Consultants
   - name: UVG ISCO Salaries
 
 paths:
@@ -152,7 +152,7 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/employees:
+  /v1/salary-declarations/{salaryDeclarationId}/leased-employees:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
@@ -163,24 +163,24 @@ paths:
       description: |
         🇩🇪 Gibt eine Liste von Leihangestellten zurück.
 
-        🇬🇧 Returns a list of employees.
+        🇬🇧 Returns a list of leased employees.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: getEmployees
+      operationId: getLeasedEmployees
       responses:
         '200':
           description: |
             🇩🇪 Eine Liste mit Leihangestellten.
             
-            🇬🇧 A list of employees.
+            🇬🇧 A list of leased employees.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Employee"
+                  $ref: "#/components/schemas/LeasedEmployee"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -190,12 +190,12 @@ paths:
       description: |
         🇩🇪 Erstellt oder aktualisiert Leihangestellte.
 
-        🇬🇧 Create or update employees.
+        🇬🇧 Create or update leased employees.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveEmployees
+      operationId: saveLeasedEmployees
       requestBody:
         required: true
         content:
@@ -203,18 +203,18 @@ paths:
             schema:
               type: object
               properties:
-                employees:
+                leasedEmployees:
                   type: array
                   items:
-                    $ref: "#/components/schemas/Employee"
+                    $ref: "#/components/schemas/LeasedEmployee"
               required:
-                - employees
+                - leasedEmployees
       responses:
         '204':
           description: |
             🇩🇪 Leihangestellte erstellt oder aktualisiert.
 
-            🇬🇧 Employees created or updated.
+            🇬🇧 Leased employees created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
@@ -226,34 +226,34 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/employees/{employeeNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/leased-employees/{employeeNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/EmployeeNr"
+      - $ref: "#/components/parameters/EmployeeNumber"
 
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Leihangestellten zurück.
 
-        🇬🇧 Returns the details of an existing employee.
+        🇬🇧 Returns the details of an existing leased employee.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: getEmployee
+      operationId: getLeasedEmployee
       responses:
         '200':
           description: |
             🇩🇪 Details eines Leihangestellten.
 
-            🇬🇧 Details of an employee.
+            🇬🇧 Details of a leased employee.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/LeasedEmployee"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -263,18 +263,18 @@ paths:
       description: |
         🇩🇪 Löscht einen bestehenden Leihangestellten.
 
-        🇬🇧 Deletes an existing employee.
+        🇬🇧 Deletes an existing leased employee.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: deleteEmployee
+      operationId: deleteLeasedEmployee
       responses:
         '204':
           description: |
             🇩🇪 Leihangestellter gelöscht.
             
-            🇬🇧 Employee deleted.
+            🇬🇧 Leased employee deleted.
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -386,19 +386,19 @@ paths:
         '409':
           $ref: "#/components/responses/ConflictError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/mission-companies/{missionCompanyNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/mission-companies/{missionCompanyNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/MissionCompanyNr"
+      - $ref: "#/components/parameters/MissionCompanyNumber"
 
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Einsatzbetriebes zurück.
 
-        🇬🇧 Returns the details of an existing employee.
+        🇬🇧 Returns the details of an existing mission company.
       tags:
         - Mission Companies
       security:
@@ -514,13 +514,13 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/missions/{missionNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/missions/{missionNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/MissionNr"
+      - $ref: "#/components/parameters/MissionNumber"
 
     get:
       description: |
@@ -615,13 +615,13 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/permanent-employees/{employeeNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/permanent-employees/{employeeNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/EmployeeNr"
+      - $ref: "#/components/parameters/EmployeeNumber"
 
     get:
       description: |
@@ -743,13 +743,13 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches/{temporaryWorkAgencyBranchNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches/{temporaryWorkAgencyBranchNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/TemporaryWorkAgencyBranchNr"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyBranchNumber"
     
     get:
       description: |
@@ -871,13 +871,13 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions/{temporaryWorkAgencyRegionNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-regions/{temporaryWorkAgencyRegionNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/TemporaryWorkAgencyRegionNr"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyRegionNumber"
     
     get:
       description: |
@@ -999,13 +999,13 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams/{temporaryWorkAgencyTeamNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-teams/{temporaryWorkAgencyTeamNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/TemporaryWorkAgencyTeamNr"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyTeamNumber"
     
     get:
       description: |
@@ -1053,7 +1053,7 @@ paths:
         '404':
           $ref: "#/components/responses/NotFoundError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
@@ -1064,24 +1064,24 @@ paths:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns a list of temporary work consultants.
+        🇬🇧 Returns a list of temporary work agency consultants.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: getTemporaryWorkConsultants
+      operationId: getTemporaryWorkAgencyConsultants
       responses:
         '200':
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Berater.
 
-            🇬🇧 A list of temporary work consultants.
+            🇬🇧 A list of temporary work agency consultants.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                  "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1091,12 +1091,12 @@ paths:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Berater.
 
-        🇬🇧 Create or update temporary work consultants.
+        🇬🇧 Create or update temporary work agency consultants.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkConsultants
+      operationId: saveTemporaryWorkAgencyConsultants
       requestBody:
         required: true
         content:
@@ -1104,18 +1104,18 @@ paths:
             schema:
               type: object
               properties:
-                temporaryWorkConsultants:
+                temporaryWorkAgencyConsultants:
                   type: array
                   items:
-                    "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                    "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
               required:
-                - temporaryWorkConsultants
+                - temporaryWorkAgencyConsultants
       responses:
         '204':
           description: |
             🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work consultants created or updated.
+            🇬🇧 Temporary work agency consultants created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
@@ -1127,34 +1127,34 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants/{temporaryWorkConsultantNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants/{temporaryWorkAgencyConsultantNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/TemporaryWorkConsultantNr"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyConsultantNumber"
     
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns the details of an existing temporary work consultant.
+        🇬🇧 Returns the details of an existing temporary work agency consultant.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: getTemporaryWorkConsultant
+      operationId: getTemporaryWorkAgencyConsultant
       responses:
         '200':
           description: |
             🇩🇪 Details eines Personalverleiher-Beraters.
 
-            🇬🇧 Details of a temporary work consultant.
+            🇬🇧 Details of a temporary work agency consultant.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1164,18 +1164,18 @@ paths:
       description: |
         🇩🇪 Löscht einen bestehenden Personalverleiher-Berater.
 
-        🇬🇧 Deletes an existing temporary work consultant.
+        🇬🇧 Deletes an existing temporary work agency consultant.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: deleteTemporaryWorkConsultant
+      operationId: deleteTemporaryWorkAgencyConsultant
       responses:
         '204':
           description: |
             🇩🇪 Personalverleiher-Berater gelöscht.
             
-            🇬🇧 Temporary work consultant deleted.
+            🇬🇧 Temporary work agency consultant deleted.
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1254,13 +1254,13 @@ paths:
         '422':
           $ref: "#/components/responses/NotFoundError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries/{iscoSalaryNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/uvg-isco-salaries/{iscoSalaryNumber}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/IscoSalaryNr"
+      - $ref: "#/components/parameters/IscoSalaryNumber"
 
     get:
       description: |
@@ -1318,33 +1318,33 @@ components:
       scheme: bearer
 
   parameters:
-    EmployeeNr:
-      name: employeeNr
+    EmployeeNumber:
+      name: employeeNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/EmployeeNr"
+        $ref: "#/components/schemas/EmployeeNumber"
 
-    IscoSalaryNr:
-      name: iscoSalaryNr
+    IscoSalaryNumber:
+      name: iscoSalaryNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/IscoSalaryNr"
+        $ref: "#/components/schemas/IscoSalaryNumber"
 
-    MissionCompanyNr:
-      name: missionCompanyNr
+    MissionCompanyNumber:
+      name: missionCompanyNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/MissionCompanyNr"
+        $ref: "#/components/schemas/MissionCompanyNumber"
     
-    MissionNr:
-      name: missionNr
+    MissionNumber:
+      name: missionNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/MissionNr"
+        $ref: "#/components/schemas/MissionNumber"
     
     SalaryDeclarationId:
       name: salaryDeclarationId
@@ -1353,33 +1353,33 @@ components:
       schema:
         $ref: "#/components/schemas/SalaryDeclarationId"
 
-    TemporaryWorkAgencyBranchNr:
-      name: temporaryWorkAgencyBranchNr
+    TemporaryWorkAgencyBranchNumber:
+      name: temporaryWorkAgencyBranchNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+        $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
 
-    TemporaryWorkAgencyRegionNr:
-      name: temporaryWorkAgencyRegionNr
+    TemporaryWorkAgencyRegionNumber:
+      name: temporaryWorkAgencyRegionNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+        $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
 
-    TemporaryWorkAgencyTeamNr:
-      name: temporaryWorkAgencyTeamNr
+    TemporaryWorkAgencyTeamNumber:
+      name: temporaryWorkAgencyTeamNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+        $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
 
-    TemporaryWorkConsultantNr:
-      name: temporaryWorkConsultantNr
+    TemporaryWorkAgencyConsultantNumber:
+      name: temporaryWorkAgencyConsultantNumber
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+        $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
 
     # headers
 
@@ -1434,14 +1434,14 @@ components:
               accountingPeriodUntil:
                 type: string
                 format: date
-              customerNr:
+              customerNumber:
                 description: |
                   🇩🇪 Die Suva-Kundennummer
                   🇬🇧 Suva customer ID
                 type: string
                 example: '8-01747-90000'
                 pattern: '^\d{1}-\d{5}-\d{5}$'
-              subNr:
+              subNumber:
                 description: |
                   🇩🇪 Subnummer als 2-stellige Zahl.
                   🇬🇧 Subnumber as a 2-digit code.          
@@ -1452,8 +1452,8 @@ components:
               - messageType
               - accountingPeriodFrom
               - accountingPeriodUntil
-              - customerNr
-              - subNr
+              - customerNumber
+              - subNumber
 
     PatchSalaryDeclaration:
       description: |
@@ -1524,13 +1524,13 @@ components:
 
   schemas:
     # FIXME Simple
-    EmployeeNr:
+    EmployeeNumber:
       description: |
         🇩🇪 Nummer des Angestellten (ERP-System)
         🇬🇧 FIXME
       type: string
     
-    IscoSalaryNr:
+    IscoSalaryNumber:
       description: |
         🇩🇪 Nummer des ISCO-Lohn (ERP-System)
         🇬🇧 FIXME
@@ -1543,13 +1543,13 @@ components:
       type: string
       enum: [ de, fr, it, en ]
 
-    MissionCompanyNr:
+    MissionCompanyNumber:
       description: |
         🇩🇪 Nummer des Einsatzbetrieb (ERP-System)
         🇬🇧 FIXME
       type: string
     
-    MissionNr:
+    MissionNumber:
       description: |
         🇩🇪 Nummer des Einsatz (ERP-System)
         🇬🇧 FIXME
@@ -1569,39 +1569,46 @@ components:
       type: string
       enum: [ periodic, annual_definitive, annual_replacement ]
 
-    TemporaryWorkAgencyBranchNr:
+    TemporaryWorkAgencyBranchNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Filiale (ERP-System)
         🇬🇧 FIXME
       type: string
     
-    TemporaryWorkAgencyRegionNr:
+    TemporaryWorkAgencyRegionNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Region (ERP-System)
         🇬🇧 FIXME
       type: string
 
-    TemporaryWorkAgencyTeamNr:
+    TemporaryWorkAgencyTeamNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Team (ERP-System)
         🇬🇧 FIXME
       type: string
 
-    TemporaryWorkConsultantNr:
+    TemporaryWorkAgencyConsultantNumber:
       description: |
         🇩🇪 Nummer des Personalverleiher Berater (ERP-System)
         🇬🇧 FIXME
       type: string
 
+    LeasedEmployee:
+      description: |
+        🇩🇪 Leihangestellter
+        🇬🇧 Leased employee
+      allOf:
+        - $ref: "#/components/schemas/Employee"
+
     # FIXME Complex
     Employee:
       description: |
-        🇩🇪 Leihangestellter
-        🇬🇧 Temporary employee
+        🇩🇪 Angestellter
+        🇬🇧 Employee
       type: object
       properties:
-        employeeNr:
-          $ref: "#/components/schemas/EmployeeNr"
+        employeeNumber:
+          $ref: "#/components/schemas/EmployeeNumber"
         firstName:
           description: |
             🇩🇪 Vorname
@@ -1637,7 +1644,7 @@ components:
             🇬🇧 If `true` social insurance identification is unknown.
           type: boolean
       required:
-        - employeeNr
+        - employeeNumber
         - lastName
         - firstName
         - sex
@@ -1746,12 +1753,12 @@ components:
         🇬🇧 Mission
       type: object
       properties:
-        missionNr:
-          $ref: "#/components/schemas/MissionNr"
-        employeeNr:
-          $ref: "#/components/schemas/EmployeeNr"
-        missionCompanyNr:
-          $ref: "#/components/schemas/MissionCompanyNr"
+        missionNumber:
+          $ref: "#/components/schemas/MissionNumber"
+        employeeNumber:
+          $ref: "#/components/schemas/EmployeeNumber"
+        missionCompanyNumber:
+          $ref: "#/components/schemas/MissionCompanyNumber"
         periodFrom:
           description: |
             🇩🇪 Beginndatum der Einsatzperiode
@@ -1764,14 +1771,14 @@ components:
             🇬🇧 FIXME
           type: string
           format: date
-        contractIscoCode:
+        iscoOccupationTypeId:
           description: |
             🇩🇪 ISCO-Berufsart
             🇬🇧 ISCO occupation type
           type: string
           pattern: '^\d{5}$'
           example: "93130"
-        contractIndividualJobTitle:
+        occupationDescription:
           description: |
             🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
             🇬🇧 FIXME
@@ -1874,44 +1881,44 @@ components:
                     🇩🇪 E-Mail
                     🇬🇧 E-Mail
                   type: string
-                phoneNr:
+                phoneNumber:
                   description: |
                     🇩🇪 Telefon-Nummer
                     🇬🇧 Phone number
                   type: string
-                mobileNr:
+                mobileNumber:
                   description: |
                     🇩🇪 Mobiltelefon-Nummer
                     🇬🇧 Mobilephone number
                   type: string
-        temporaryWorkAgencyRegionNr:
+        temporaryWorkAgencyRegionNumber:
           description: |
             🇩🇪 Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
-          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
-        temporaryWorkAgencyBranchNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
+        temporaryWorkAgencyBranchNumber:
           description: |
             🇩🇪 Nummer der zuständigen Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
-          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
-        temporaryWorkAgencyTeamNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
+        temporaryWorkAgencyTeamNumber:
           description: |
             🇩🇪 Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
-          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
-        temporaryWorkConsultantNr:
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
+        temporaryWorkAgencyConsultantNumber:
           description: |
             🇩🇪 Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
-          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+          $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
 
       required:
-        - missionNr
-        - employeeNr
-        - missionCompanyNr
+        - missionNumber
+        - employeeNumber
+        - missionCompanyNumber
         - periodFrom
         - periodUntil
-        - contractIscoCode
+        - iscoOccupationTypeId
         - kindOfWagePayment
 
     MissionCompany:
@@ -1920,15 +1927,15 @@ components:
         🇬🇧 FIXME
       type: object
       properties:
-        missionCompanyNr:
-          $ref: "#/components/schemas/MissionCompanyNr"
-        uidNr:
+        missionCompanyNumber:
+          $ref: "#/components/schemas/MissionCompanyNumber"
+        uidNumber:
           description:
             🇩🇪 Die Unternehmens-Identifikationsnummer (UID)
             🇬🇧 FIXME
           type: string
           example: 'CHE-123.456.789'
-        uidNrUnknown:
+        uidNumberUnknown:
           description: |
             🇩🇪 Wenn `true` ist die UID unbekannt.
             🇬🇧 If `true` UID is unknown.
@@ -1984,7 +1991,7 @@ components:
             - zipCode
             - city
       required:
-        - missionCompanyNr
+        - missionCompanyNumber
         - name
     
     PermanentEmployee:
@@ -2022,7 +2029,7 @@ components:
                 🇬🇧 FIXME
               type: boolean
       required:
-        - employeeNr
+        - employeeNumber
         - lastName
         - firstName
         - sex
@@ -2065,14 +2072,14 @@ components:
         accountingPeriodUntil:
           type: string
           format: date
-        customerNr:
+        customerNumber:
           description: |
             🇩🇪 Die Suva-Kundennummer
             🇬🇧 Suva customer ID
           type: string
           example: '8-01747-90000'
           pattern: '^\d{1}-\d{5}-\d{5}$'
-        subNr:
+        subNumber:
           description: |
             🇩🇪 Subnummer als 2-stellige Zahl.
             🇬🇧 Subnumber as a 2-digit code.          
@@ -2086,17 +2093,17 @@ components:
         🇬🇧 FIXME.
       type: object
       properties:
-        branchNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+        branchNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
         description:
           description: |
             🇩🇪 Bezeichnung der Filiale.
             🇬🇧 Description of the branch.
           type: string
-        regionNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+        regionNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
       required:
-        - branchNr
+        - branchNumber
 
     TemporaryWorkAgencyRegion:
       description: |
@@ -2104,15 +2111,15 @@ components:
         🇬🇧 FIXME.
       type: object
       properties:
-        regionNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNr"
+        regionNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
         description:
           description: |
             🇩🇪 Bezeichnung der Region.
             🇬🇧 Description of the region.
           type: string
       required:
-        - regionNr
+        - regionNumber
 
     TemporaryWorkAgencyTeam:
       description: |
@@ -2120,26 +2127,26 @@ components:
         🇬🇧 FIXME.
       type: object
       properties:
-        teamNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+        teamNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
         description:
           description: |
             🇩🇪 Bezeichnung des Teams.
             🇬🇧 Description of the team.
           type: string
-        branchNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNr"
+        branchNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
       required:
-        - teamNr
+        - teamNumber
 
-    TemporaryWorkConsultant:
+    TemporaryWorkAgencyConsultant:
       description: |
         🇩🇪 Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
         🇬🇧 FIXME.
       type: object
       properties:
-        consultantNr:
-          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+        consultantNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
         firstName:
           description: |
             🇩🇪 Vorname
@@ -2150,10 +2157,10 @@ components:
             🇩🇪 Nachname
             🇬🇧 Last name
           type: string
-        teamNr:
-          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
+        teamNumber:
+          $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
       required:
-        - consultantNr
+        - consultantNumber
 
     UvgIscoSalary:
       description: |
@@ -2161,9 +2168,9 @@ components:
         🇬🇧 LAA isco salary: Sum of salaries per company part, ISCO occupation type and AP/ANP-Code for each employee.
       type: object
       properties:
-        iscoSalaryNr:
-          $ref: "#/components/schemas/IscoSalaryNr"
-        businessUnitCode:
+        iscoSalaryNumber:
+          $ref: "#/components/schemas/IscoSalaryNumber"
+        companyPartCode:
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils.
             🇬🇧 Letter of the associated company part.
@@ -2209,19 +2216,19 @@ components:
             🇬🇧 LAA salary: Contribution-liable salary, calculated based on the LAA base salary for the insured persons taking into account the maximum salary.
           type: number
           multipleOf: 0.01
-        employeeNr:
+        leasedEmployeeNumber:
           description: |
             🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
-            🇬🇧 Reference to the temporary employee. Mandatory for temporary employees.
-          $ref: "#/components/schemas/EmployeeNr"
-        permanentEmployeeNr:
+            🇬🇧 Reference to the leased employee. Mandatory for leased employees.
+          $ref: "#/components/schemas/EmployeeNumber"
+        permanentEmployeeNumber:
           description: |
             🇩🇪 Referenz auf den Festangestellten. Zwingend bei Festangestellten.
             🇬🇧 Reference to the permanent employee. Mandatory for permanent employees.
-          $ref: "#/components/schemas/EmployeeNr"
+          $ref: "#/components/schemas/EmployeeNumber"
       required:
-        - iscoSalaryNr
-        - businessUnitCode
+        - iscoSalaryNumber
+        - companyPartCode
         - iscoCode
         - buNbuApAnpCode
         - uvgLaaGrossSalary
