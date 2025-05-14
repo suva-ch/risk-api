@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.0
 
 info:
   version: 0.10.0
@@ -44,7 +44,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Subnummer'
+                  $ref: '#/components/schemas/SubNumber'
         400:
           $ref: '#/components/responses/BadRequestError'
         404:
@@ -80,7 +80,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SubnummerFiltered'
+                  $ref: '#/components/schemas/SubNumberFiltered'
         400:
           $ref: '#/components/responses/BadRequestError'
         404:
@@ -176,14 +176,14 @@ components:
         🇬🇧 Desired language for occupation descriptions.
 
   schemas:
-    Subnummer:
+    SubNumber:
       description: |
         🇩🇪 Datenstruktur einer Subnummer.
 
         🇬🇧 Data structure of a subnumber.
       type: object
       properties:
-        subnumberCode:
+        subNumberCode:
           type: string
           description: |
             🇩🇪 Subnummer als 2-stellige Zahl.
@@ -210,14 +210,14 @@ components:
             🇬🇧 Premium Model of subnumber.
             UVG_CLASSIC: classic UVG with risk identification based on description of operation
             UVG_OCCUPATION_CODES: UVG with risk identification based on occupation codes
-        businessUnits:
+        companyParts:
           type: array
           description: |
             🇩🇪 Enthält Betriebsteile, wenn das Prämienmodell `UVG_CLASSIC` ist.
 
-            🇬🇧 Contains business parts if the premium model is `UVG_CLASSIC`.
+            🇬🇧 Contains company parts if the premium model is `UVG_CLASSIC`.
           items:
-            $ref: '#/components/schemas/BusinessUnit'
+            $ref: '#/components/schemas/CompanyPart'
         occupationCodes:
           type: array
           description: |
@@ -230,14 +230,14 @@ components:
         - subnumberCode
         - premiumModel
 
-    SubnummerFiltered:
+    SubNumberFiltered:
       description: |
         🇩🇪 Gefilterte Datenstruktur einer Subnummer mit sprachspezifischen Beschreibungen.
 
         🇬🇧 Filtered data structure of a subnumber with language-specific descriptions.
       type: object
       properties:
-        subnumberCode:
+        subNumberCode:
           type: string
           description: |
             🇩🇪 Subnummer als 2-stellige Zahl.
@@ -250,31 +250,31 @@ components:
         premiumModel:
           type: string
           enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
-        businessUnits:
+        companyParts:
           type: array
           items:
-            $ref: '#/components/schemas/BusinessUnitFiltered'
+            $ref: '#/components/schemas/CompanyPartFiltered'
         occupationCodes:
           type: array
           items:
             $ref: '#/components/schemas/OccupationCodeFiltered'
       required:
-        - subnumberCode
+        - subNumberCode
         - premiumModel
 
-    BusinessUnit:
+    CompanyPart:
       description: |
         🇩🇪 Ein Betriebsteil innerhalb einer Subnummer.
 
-        🇬🇧 A business part within a subnumber.
+        🇬🇧 A company part within a subnumber.
       type: object
       properties:
-        businessUnitCode:
+        companyPartCode:
           type: string
           description: |
             🇩🇪 Buchstabe zur Identifikation des Betriebsteils.
 
-            🇬🇧 Letter identifier for the business part.
+            🇬🇧 Letter identifier for the company part.
           example: 'A'
           pattern: '^[A-Z]$'
         description:
@@ -283,22 +283,22 @@ components:
             🇩🇪 Textbeschreibung des Betriebsteils in der Sprache des Kunden (keine Mehrsprachigkeit verfügbar).
             Bei anonymem Zugriff werden diese Daten nicht geliefert.
 
-            🇬🇧 Text description of the business part in the customer's language (multilingualism not available).
+            🇬🇧 Text description of the company part in the customer's language (multilingualism not available).
             This data is not available for anonymous access.
       required:
-        - businessUnitCode
+        - companyPartCode
 
-    BusinessUnitFiltered:
+    CompanyPartFiltered:
       type: object
       properties:
-        businessUnitCode:
+        companyPartCode:
           type: string
           example: 'A'
           pattern: '^[A-Z]$'
         description:
           type: string
       required:
-        - businessUnitCode
+        - companyPartCode
 
     OccupationCode:
       description: |
@@ -326,8 +326,7 @@ components:
             🇩🇪 Eindeutige ID des Suva-Berufscodes.
 
             🇬🇧 Unique ID of the Suva occupation code.
-
-        IscoOccupationTypeId:
+        iscoOccupationTypeId:
           description: |
             🇩🇪 5-Stellige Nummer für Berufsarten aus der Schweizer Berufsnomenklatur.
             z.B. '71140' für 'Eisenleger'
@@ -336,7 +335,6 @@ components:
             e.G. '71140' for 'Reinforcing iron and rebar worker'
           type: integer
           example: 71140
-
         active:
           type: boolean
           description: |
@@ -351,19 +349,19 @@ components:
             🇬🇧 Language- and gender-specific occupation description.
           items:
             $ref: '#/components/schemas/OccupationDescription'
-        businessUnitCode:
+        companyPartCode:
           type: string
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils für Schadenmeldung
 
-            🇬🇧 Letter of the associated business part for accident reporting.
+            🇬🇧 Letter of the associated company part for accident reporting.
           example: 'A'
           pattern: '^[A-Z]$'
       required:
         - suvaOccupationCodeId
-        - IscoOccupationTypeId
+        - iscoOccupationTypeId
         - active
-        - businessUnitCode
+        - companyPartCode
 
     OccupationCodeFiltered:
       type: object
@@ -375,21 +373,21 @@ components:
         suvaOccupationCodeId:
           type: string
           format: uuid
-        IscoOccupationTypeId:
+        iscoOccupationTypeId:
           type: integer
         active:
           type: boolean
         description:
           type: string
-        businessUnitCode:
+        companyPartCode:
           type: string
           example: 'A'
           pattern: '^[A-Z]$'
       required:
         - suvaOccupationCodeId
-        - IscoOccupationTypeId
+        - iscoOccupationTypeId
         - active
-        - businessUnitCode
+        - companyPartCode
 
     OccupationDescription:
       description: |

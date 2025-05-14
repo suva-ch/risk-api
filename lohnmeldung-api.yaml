@@ -12,16 +12,16 @@ servers:
   - url: https://apitest.suva.ch/salary-declaration
     description: Staging server
 tags:
-  - name: Employees
+  - name: Leased Employees
+  - name: Permanent Employees
   - name: Messages
   - name: Mission Companies
   - name: Missions
-  - name: Permanent Employees
   - name: Salary Declarations
   - name: Temporary Work Agency Branches
   - name: Temporary Work Agency Regions
   - name: Temporary Work Agency Teams
-  - name: Temporary Work Consultants
+  - name: Temporary Work Agency Consultants
   - name: UVG ISCO Salaries
 
 paths:
@@ -152,7 +152,7 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/employees:
+  /v1/salary-declarations/{salaryDeclarationId}/leased-employees:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
@@ -163,24 +163,24 @@ paths:
       description: |
         🇩🇪 Gibt eine Liste von Leihangestellten zurück.
 
-        🇬🇧 Returns a list of employees.
+        🇬🇧 Returns a list of leased employees.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: getEmployees
+      operationId: getLeasedEmployees
       responses:
         '200':
           description: |
             🇩🇪 Eine Liste mit Leihangestellten.
             
-            🇬🇧 A list of employees.
+            🇬🇧 A list of leased employees.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Employee"
+                  $ref: "#/components/schemas/LeasedEmployee"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -190,12 +190,12 @@ paths:
       description: |
         🇩🇪 Erstellt oder aktualisiert Leihangestellte.
 
-        🇬🇧 Create or update employees.
+        🇬🇧 Create or update leased employees.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveEmployees
+      operationId: saveLeasedEmployees
       requestBody:
         required: true
         content:
@@ -203,18 +203,18 @@ paths:
             schema:
               type: object
               properties:
-                employees:
+                leasedEmployees:
                   type: array
                   items:
-                    $ref: "#/components/schemas/Employee"
+                    $ref: "#/components/schemas/LeasedEmployee"
               required:
-                - employees
+                - leasedEmployees
       responses:
         '204':
           description: |
             🇩🇪 Leihangestellte erstellt oder aktualisiert.
 
-            🇬🇧 Employees created or updated.
+            🇬🇧 Leased employees created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
@@ -226,7 +226,7 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/employees/{employeeNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/leased-employees/{employeeNr}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
@@ -238,22 +238,22 @@ paths:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Leihangestellten zurück.
 
-        🇬🇧 Returns the details of an existing employee.
+        🇬🇧 Returns the details of an existing leased employee.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: getEmployee
+      operationId: getLeasedEmployee
       responses:
         '200':
           description: |
             🇩🇪 Details eines Leihangestellten.
 
-            🇬🇧 Details of an employee.
+            🇬🇧 Details of a leased employee.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/LeasedEmployee"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -263,18 +263,18 @@ paths:
       description: |
         🇩🇪 Löscht einen bestehenden Leihangestellten.
 
-        🇬🇧 Deletes an existing employee.
+        🇬🇧 Deletes an existing leased employee.
       tags:
-        - Employees
+        - Leased Employees
       security:
         - ApiKeyAuth: [ ]
-      operationId: deleteEmployee
+      operationId: deleteLeasedEmployee
       responses:
         '204':
           description: |
             🇩🇪 Leihangestellter gelöscht.
             
-            🇬🇧 Employee deleted.
+            🇬🇧 Leased employee deleted.
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -398,7 +398,7 @@ paths:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Einsatzbetriebes zurück.
 
-        🇬🇧 Returns the details of an existing employee.
+        🇬🇧 Returns the details of an existing mission company.
       tags:
         - Mission Companies
       security:
@@ -1053,7 +1053,7 @@ paths:
         '404':
           $ref: "#/components/responses/NotFoundError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
@@ -1064,24 +1064,24 @@ paths:
       description: |
         🇩🇪 Gibt eine Liste von Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns a list of temporary work consultants.
+        🇬🇧 Returns a list of temporary work agency consultants.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: getTemporaryWorkConsultants
+      operationId: getTemporaryWorkAgencyConsultants
       responses:
         '200':
           description: |
             🇩🇪 Eine Liste mit Personalverleiher-Berater.
 
-            🇬🇧 A list of temporary work consultants.
+            🇬🇧 A list of temporary work agency consultants.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                  "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1091,12 +1091,12 @@ paths:
       description: |
         🇩🇪 Erstellt oder aktualisiert Personalverleiher-Berater.
 
-        🇬🇧 Create or update temporary work consultants.
+        🇬🇧 Create or update temporary work agency consultants.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: saveTemporaryWorkConsultants
+      operationId: saveTemporaryWorkAgencyConsultants
       requestBody:
         required: true
         content:
@@ -1104,18 +1104,18 @@ paths:
             schema:
               type: object
               properties:
-                temporaryWorkConsultants:
+                temporaryWorkAgencyConsultants:
                   type: array
                   items:
-                    "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                    "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
               required:
-                - temporaryWorkConsultants
+                - temporaryWorkAgencyConsultants
       responses:
         '204':
           description: |
             🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work consultants created or updated.
+            🇬🇧 Temporary work agency consultants created or updated.
         '400':
           $ref: "#/components/responses/BadRequestError"
         '401':
@@ -1127,34 +1127,34 @@ paths:
         '422':
           $ref: "#/components/responses/UnprocessableContentError"
 
-  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-consultants/{temporaryWorkConsultantNr}:
+  /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-consultants/{temporaryWorkAgencyConsultantNr}:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
       - $ref: "#/components/parameters/X-Client-Name"
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/TemporaryWorkConsultantNr"
+      - $ref: "#/components/parameters/TemporaryWorkAgencyConsultantNr"
     
     get:
       description: |
         🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns the details of an existing temporary work consultant.
+        🇬🇧 Returns the details of an existing temporary work agency consultant.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: getTemporaryWorkConsultant
+      operationId: getTemporaryWorkAgencyConsultant
       responses:
         '200':
           description: |
             🇩🇪 Details eines Personalverleiher-Beraters.
 
-            🇬🇧 Details of a temporary work consultant.
+            🇬🇧 Details of a temporary work agency consultant.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/TemporaryWorkConsultant"
+                "$ref": "#/components/schemas/TemporaryWorkAgencyConsultant"
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1164,18 +1164,18 @@ paths:
       description: |
         🇩🇪 Löscht einen bestehenden Personalverleiher-Berater.
 
-        🇬🇧 Deletes an existing temporary work consultant.
+        🇬🇧 Deletes an existing temporary work agency consultant.
       tags:
-        - Temporary Work Consultants
+        - Temporary Work Agency Consultants
       security:
         - ApiKeyAuth: [ ]
-      operationId: deleteTemporaryWorkConsultant
+      operationId: deleteTemporaryWorkAgencyConsultant
       responses:
         '204':
           description: |
             🇩🇪 Personalverleiher-Berater gelöscht.
             
-            🇬🇧 Temporary work consultant deleted.
+            🇬🇧 Temporary work agency consultant deleted.
         '401':
           $ref: "#/components/responses/NotAuthenticatedError"
         '404':
@@ -1374,12 +1374,12 @@ components:
       schema:
         $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
 
-    TemporaryWorkConsultantNr:
-      name: temporaryWorkConsultantNr
+    TemporaryWorkAgencyConsultantNr:
+      name: temporaryWorkAgencyConsultantNr
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+        $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNr"
 
     # headers
 
@@ -1441,7 +1441,7 @@ components:
                 type: string
                 example: '8-01747-90000'
                 pattern: '^\d{1}-\d{5}-\d{5}$'
-              subNr:
+              subNumber:
                 description: |
                   🇩🇪 Subnummer als 2-stellige Zahl.
                   🇬🇧 Subnumber as a 2-digit code.          
@@ -1453,7 +1453,7 @@ components:
               - accountingPeriodFrom
               - accountingPeriodUntil
               - customerNr
-              - subNr
+              - subNumber
 
     PatchSalaryDeclaration:
       description: |
@@ -1587,17 +1587,24 @@ components:
         🇬🇧 FIXME
       type: string
 
-    TemporaryWorkConsultantNr:
+    TemporaryWorkAgencyConsultantNr:
       description: |
         🇩🇪 Nummer des Personalverleiher Berater (ERP-System)
         🇬🇧 FIXME
       type: string
 
+    LeasedEmployee:
+      description: |
+        🇩🇪 Leihangestellter
+        🇬🇧 Leased employee
+      allOf:
+        - $ref: "#/components/schemas/Employee"
+
     # FIXME Complex
     Employee:
       description: |
-        🇩🇪 Leihangestellter
-        🇬🇧 Temporary employee
+        🇩🇪 Angestellter
+        🇬🇧 Employee
       type: object
       properties:
         employeeNr:
@@ -1764,14 +1771,14 @@ components:
             🇬🇧 FIXME
           type: string
           format: date
-        contractIscoCode:
+        iscoOccupationTypeId:
           description: |
             🇩🇪 ISCO-Berufsart
             🇬🇧 ISCO occupation type
           type: string
           pattern: '^\d{5}$'
           example: "93130"
-        contractIndividualJobTitle:
+        occupationDescription:
           description: |
             🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
             🇬🇧 FIXME
@@ -1899,11 +1906,11 @@ components:
             🇩🇪 Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNr"
-        temporaryWorkConsultantNr:
+        temporaryWorkAgencyConsultantNr:
           description: |
             🇩🇪 Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
             🇬🇧 FIXME.
-          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+          $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNr"
 
       required:
         - missionNr
@@ -1911,7 +1918,7 @@ components:
         - missionCompanyNr
         - periodFrom
         - periodUntil
-        - contractIscoCode
+        - iscoOccupationTypeId
         - kindOfWagePayment
 
     MissionCompany:
@@ -2072,7 +2079,7 @@ components:
           type: string
           example: '8-01747-90000'
           pattern: '^\d{1}-\d{5}-\d{5}$'
-        subNr:
+        subNumber:
           description: |
             🇩🇪 Subnummer als 2-stellige Zahl.
             🇬🇧 Subnumber as a 2-digit code.          
@@ -2132,14 +2139,14 @@ components:
       required:
         - teamNr
 
-    TemporaryWorkConsultant:
+    TemporaryWorkAgencyConsultant:
       description: |
         🇩🇪 Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
         🇬🇧 FIXME.
       type: object
       properties:
         consultantNr:
-          $ref: "#/components/schemas/TemporaryWorkConsultantNr"
+          $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNr"
         firstName:
           description: |
             🇩🇪 Vorname
@@ -2163,7 +2170,7 @@ components:
       properties:
         iscoSalaryNr:
           $ref: "#/components/schemas/IscoSalaryNr"
-        businessUnitCode:
+        companyPartCode:
           description: |
             🇩🇪 Buchstabe des zugehörigen Betriebsteils.
             🇬🇧 Letter of the associated company part.
@@ -2209,10 +2216,10 @@ components:
             🇬🇧 LAA salary: Contribution-liable salary, calculated based on the LAA base salary for the insured persons taking into account the maximum salary.
           type: number
           multipleOf: 0.01
-        employeeNr:
+        leasedEmployeeNr:
           description: |
             🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
-            🇬🇧 Reference to the temporary employee. Mandatory for temporary employees.
+            🇬🇧 Reference to the leased employee. Mandatory for leased employees.
           $ref: "#/components/schemas/EmployeeNr"
         permanentEmployeeNr:
           description: |
@@ -2221,7 +2228,7 @@ components:
           $ref: "#/components/schemas/EmployeeNr"
       required:
         - iscoSalaryNr
-        - businessUnitCode
+        - companyPartCode
         - iscoCode
         - buNbuApAnpCode
         - uvgLaaGrossSalary
