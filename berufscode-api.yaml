@@ -159,10 +159,10 @@ paths:
               properties:
                 suvaOccupationCodeId:
                   $ref: "#/components/schemas/SuvaOccupationCodeId"
-                occupationCodeNr1:
-                  $ref: "#/components/schemas/OccupationCodeNr"
-                occupationCodeNr2:
-                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNumber1:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
+                occupationCodeNumber2:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
               required:
                 - suvaOccupationCodeId
       responses:
@@ -199,10 +199,10 @@ paths:
               title: SubmitOccupationCode
               type: object
               properties:
-                occupationCodeNr1:
-                  $ref: "#/components/schemas/OccupationCodeNr"
-                occupationCodeNr2:
-                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNumber1:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
+                occupationCodeNumber2:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
                 preferredLanguage:
                   $ref: "#/components/schemas/Language"
                 descriptions:
@@ -273,13 +273,13 @@ paths:
               title: UpdateOccupationCode
               type: object
               properties:
-                occupationCodeNr1:
-                  $ref: "#/components/schemas/OccupationCodeNr"
-                occupationCodeNr2:
-                  $ref: "#/components/schemas/OccupationCodeNr"
+                occupationCodeNumber1:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
+                occupationCodeNumber2:
+                  $ref: "#/components/schemas/OccupationCodeNumber"
               required:
-                - occupationCodeNr1
-                - occupationCodeNr2
+                - occupationCodeNumber1
+                - occupationCodeNumber2
       responses:
         401:
           $ref: "#/components/responses/NotAuthenticatedError"
@@ -527,10 +527,10 @@ components:
       properties:
         id:
           $ref: "#/components/schemas/OccupationCodeId"
-        occupationCodeNr1:
-          $ref: "#/components/schemas/OccupationCodeNr"
-        occupationCodeNr2:
-          $ref: "#/components/schemas/OccupationCodeNr"
+        occupationCodeNumber1:
+          $ref: "#/components/schemas/OccupationCodeNumber"
+        occupationCodeNumber2:
+          $ref: "#/components/schemas/OccupationCodeNumber"
         descriptions:
           type: array
           items:
@@ -806,7 +806,7 @@ components:
       type: string
       enum: [ buv, nbuv ]
 
-    OccupationCodeNr:
+    OccupationCodeNumber:
       description: |
         🇩🇪 Individueller Schlüssel zur Kennzeichnung des Berufscodes.
         🇬🇧 Individual key for identifying the occupation code.

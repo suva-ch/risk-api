@@ -307,13 +307,13 @@ components:
         🇬🇧 Details of an occupation code.
       type: object
       properties:
-        occupationCodeNr1:
+        occupationCodeNumber1:
           type: string
           description: |
             🇩🇪 Berufscode-Nummer 1 - vom Kunden vergeben
 
             🇬🇧 Occupation code number 1 - assigned by the customer.
-        occupationCodeNr2:
+        occupationCodeNumber2:
           type: string
           description: |
             🇩🇪 Berufscode-Nummer 2 - vom Kunden vergeben
@@ -366,9 +366,9 @@ components:
     OccupationCodeFiltered:
       type: object
       properties:
-        occupationCodeNr1:
+        occupationCodeNumber1:
           type: string
-        occupationCodeNr2:
+        occupationCodeNumber2:
           type: string
         suvaOccupationCodeId:
           type: string
