@@ -2146,7 +2146,7 @@ components:
           type: string
           example: "A"
           pattern: "^[A-Z]$"
-        iscoCode:
+        iscoOccupationTypeId:
           description: |
             🇩🇪 ISCO-Berufsart
             🇬🇧 ISCO occupation type
@@ -2198,7 +2198,7 @@ components:
       required:
         - iscoSalaryNumber
         - companyPartCode
-        - iscoCode
+        - iscoOccupationTypeId
         - buNbuApAnpCode
         - uvgLaaGrossSalary
         - uvgLaaBaseSalary
