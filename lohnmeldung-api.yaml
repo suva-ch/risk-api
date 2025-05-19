@@ -1743,7 +1743,7 @@ components:
             🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
             🇬🇧 FIXME
           type: string
-        contractContractualJobTitle:
+        contractualJobTitle:
           description: |
             🇩🇪 Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
             🇬🇧 FIXME
@@ -1754,7 +1754,7 @@ components:
             🇬🇧 FIXME
           type: string
           enum: [monthly, daily, hourly, lesson]
-        monthlySalary:
+        monthlyWage:
           description: |
             🇩🇪 Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
             🇬🇧 FIXME
@@ -1768,37 +1768,37 @@ components:
           multipleOf: 0.01
           minimum: 0
           maximum: 100
-        labourDays:
+        totalDays:
           description: |
             🇩🇪 Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
             🇬🇧 FIXME
           type: number
           multipleOf: 0.01
-        dailyRate:
+        dailyWage:
           description: |
             🇩🇪 Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
             🇬🇧 FIXME
           type: number
           multipleOf: 0.01
-        labourHours:
+        totalHours:
           description: |
             🇩🇪 Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
             🇬🇧 FIXME
           type: number
           multipleOf: 0.01
-        hourlyRate:
+        hourlyWage:
           description: |
             🇩🇪 Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
             🇬🇧 FIXME
           type: number
           multipleOf: 0.01
-        labourLessons:
+        totalLessons:
           description: |
             🇩🇪 Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
             🇬🇧 FIXME
           type: number
           multipleOf: 0.01
-        lessonRate:
+        lessonWage:
           description: |
             🇩🇪 Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
             🇬🇧 FIXME
