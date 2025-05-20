@@ -117,6 +117,33 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
 
+    put:
+      description: |
+        🇩🇪 Aktualisiert eine Lohnmeldung.
+
+        🇬🇧 Updates a salary declaration.
+      tags:
+        - Salary Declarations
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: updateSalaryDeclaration
+      requestBody:
+        $ref: "#/components/requestBodies/UpdateSalaryDeclaration"
+      responses:
+        "204":
+          description: |
+            🇩🇪 Lohnmeldung aktualisiert.
+
+            🇬🇧 Salary declaration updated.
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+        "409":
+          $ref: "#/components/responses/ConflictError"
+        "422":
+          $ref: "#/components/responses/UnprocessableContentError"
+
     patch:
       description: |
         🇩🇪 Aktualisiert den Status einer Lohnmeldung.
@@ -1374,6 +1401,31 @@ components:
         type: string
 
   requestBodies:
+    UpdateSalaryDeclaration:
+      description: |
+        🇩🇪 FIXME
+        🇬🇧 FIXME
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+              messageType:
+                $ref: "#/components/schemas/SalaryDeclarationType"
+              accountingPeriodFrom:
+                type: string
+                format: date
+              accountingPeriodUntil:
+                type: string
+                format: date              
+            required:
+              - messageType
+              - accountingPeriodFrom
+              - accountingPeriodUntil
+    
     SaveSalaryDeclaration:
       description: |
         🇩🇪 FIXME
