@@ -223,6 +223,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 leasedEmployees:
                   type: array
                   items:
@@ -347,6 +349,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 missionCompanies:
                   type: array
                   items:
@@ -469,6 +473,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 missions:
                   type: array
                   items:
@@ -568,6 +574,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 permanentEmployees:
                   type: array
                   items:
@@ -692,6 +700,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 temporaryWorkAgencyBranches:
                   type: array
                   items:
@@ -816,6 +826,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 temporaryWorkAgencyRegions:
                   type: array
                   items:
@@ -940,6 +952,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 temporaryWorkAgencyTeams:
                   type: array
                   items:
@@ -1064,6 +1078,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 temporaryWorkAgencyConsultants:
                   type: array
                   items:
@@ -1187,6 +1203,8 @@ paths:
             schema:
               type: object
               properties:
+                deleteOmittedItems:
+                  $ref: '#/components/schemas/DeleteOmittedItems'
                 uvgIscoSalaries:
                   type: array
                   items:
@@ -1571,6 +1589,13 @@ components:
         🇩🇪 Nummer des Personalverleiher Berater (ERP-System)
         🇬🇧 FIXME
       type: string
+
+    DeleteOmittedItems:
+      description: |
+        🇩🇪 Wenn `true`, werden die ausgelassenen Items aus der Liste gelöscht. Default-Wert ist `false`.
+        🇬🇧 Whether the omitted items in the list should be deleted or left untouched. Defaults to `false`.
+      type: boolean
+      default: false
 
     LeasedEmployee:
       description: |
