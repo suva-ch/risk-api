@@ -26,11 +26,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und optional der Suva KundenNr. 
-        Falls keine KundenNr angegeben wird, wird die Authentifizierung zur Identifikation des Kunden verwendet.
+        🇩🇪 Liefert eine Liste von Subnummern basierend auf dem Ereignis-Datum und der Suva KundenNr. 
 
-        🇬🇧 Provides a list of subnumbers based on the event date and optionally the Suva customer ID. 
-        If no customer ID is specified, authentication will identify the customer.
+        🇬🇧 Provides a list of subnumbers based on the event date and the Suva customer ID.
       tags:
         - Policendaten
       operationId: getPolicy
@@ -204,9 +202,9 @@ components:
             This data is not available for anonymous access.
         premiumModel:
           type: string
-          enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
+          enum: [ UVG_CLASSIC, UVG_OCCUPATION_CODES ]
           description: |
-            🇩🇪 Premien-Modell der Subnummer.
+            🇩🇪 Prämienmodell der Subnummer.
             UVG_CLASSIC: klassisch UVG mit Risiko-Ermittlung auf Basis von Betriebsbeschreibung
             UVG_OCCUPATION_CODES: UVG mit Risiko-Ermittlung auf Basis von Berufscodes
 
@@ -252,7 +250,7 @@ components:
           type: string
         premiumModel:
           type: string
-          enum: [UVG_CLASSIC, UVG_OCCUPATION_CODES]
+          enum: [ UVG_CLASSIC, UVG_OCCUPATION_CODES ]
         companyParts:
           type: array
           items:
@@ -420,7 +418,7 @@ components:
 
         🇬🇧 Gender
       type: string
-      enum: [female, genderless, male]
+      enum: [ female, genderless, male ]
 
     Language:
       description: |
@@ -428,7 +426,7 @@ components:
 
         🇬🇧 Language
       type: string
-      enum: [de, fr, it, en]
+      enum: [ de, fr, it, en ]
 
     Error:
       description: |
