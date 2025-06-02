@@ -557,6 +557,31 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
 
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Festangestellte zurück.
+
+        🇬🇧 Returns a list of permanent employees.
+      tags:
+        - Permanent Employees
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getPermanentEmployees
+      responses:
+        "200":
+          description: |
+            🇩🇪 Eine Liste mit Festangestellten.
+
+            🇬🇧 A list of permanent employees.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PermanentEmployee"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+
     put:
       description: |
         🇩🇪 Erstellt oder aktualisiert Festangestellte.
