@@ -1427,8 +1427,6 @@ components:
                 $ref: "#/components/schemas/SalaryDeclarationType"
             required:
               - messageType
-              - accountingPeriodFrom
-              - accountingPeriodUntil
     
     SaveSalaryDeclaration:
       description: |
