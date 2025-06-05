@@ -1425,16 +1425,8 @@ components:
                 type: string
               messageType:
                 $ref: "#/components/schemas/SalaryDeclarationType"
-              accountingPeriodFrom:
-                type: string
-                format: date
-              accountingPeriodUntil:
-                type: string
-                format: date              
             required:
               - messageType
-              - accountingPeriodFrom
-              - accountingPeriodUntil
     
     SaveSalaryDeclaration:
       description: |
