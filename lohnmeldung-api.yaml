@@ -1659,11 +1659,6 @@ components:
           type: string
           pattern: '^\d{3}.\d{4}.\d{4}.\d{2}$'
           example: "756.1234.5678.90"
-        socialInsuranceIdentificationUnknown:
-          description: |
-            🇩🇪 Wenn `true` ist die AHV-Nummer unbekannt.
-            🇬🇧 If `true` social insurance identification is unknown.
-          type: boolean
       required:
         - employeeNumber
         - lastName
