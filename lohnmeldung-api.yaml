@@ -1950,11 +1950,6 @@ components:
             🇬🇧 FIXME
           type: string
           example: "CHE-123.456.789"
-        uidNumberUnknown:
-          description: |
-            🇩🇪 Wenn `true` ist die UID unbekannt.
-            🇬🇧 If `true` UID is unknown.
-          type: boolean
         name:
           description: |
             🇩🇪 Name des Einsatzbetriebes
