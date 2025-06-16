@@ -2046,6 +2046,7 @@ components:
         - dateOfBirth
         - employmentPeriodFrom
         - employmentPeriodUntil
+        - unsteadyEmployed
 
     SalaryDeclaration:
       description: |
