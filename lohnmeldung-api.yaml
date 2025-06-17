@@ -13,14 +13,15 @@ servers:
     description: Staging server
 tags:
   - name: Leased Employees
-  - name: Permanent Employees
+  - name: Messages
   - name: Mission Companies
   - name: Missions
+  - name: Permanent Employees
   - name: Salary Declarations
   - name: Temporary Work Agency Branches
+  - name: Temporary Work Agency Consultants
   - name: Temporary Work Agency Regions
   - name: Temporary Work Agency Teams
-  - name: Temporary Work Agency Consultants
   - name: UVG ISCO Salaries
 
 paths:
@@ -299,6 +300,38 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
           $ref: "#/components/responses/NotFoundError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/messages:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt eine Liste von Rückmeldungen zurück.
+
+        🇬🇧 Returns a list of messages.
+      tags:
+        - Messages
+      security:
+        - ApiKeyAuth: []
+      operationId: getMessages
+      responses:
+        "200":
+          description: |
+            🇩🇪 Eine Liste mit Rückmeldungen.
+
+            🇬🇧 A list of messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Message"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
 
   /v1/salary-declarations/{salaryDeclarationId}/mission-companies:
     parameters:
@@ -1698,7 +1731,7 @@ components:
         - id
         - key
 
-    LocalizedValue:
+    LocalizedMessage:
       description: |
         🇩🇪 Ein sprachbezogener Wert.
         🇬🇧 A language-specific value.
@@ -1706,62 +1739,55 @@ components:
       properties:
         language:
           $ref: "#/components/schemas/Language"
-        value:
+        text:
           type: string
       required:
         - language
-        - value
+        - text
 
     Message:
       description: |
-        🇩🇪 Rückmeldung der Suva-Validierungen zu den übermittelten Lohn- und Einsatzdaten. Ermöglicht iterative Korrekturen bis zur vollständigen Validierung
-        🇬🇧 FIXME
+        🇩🇪 Rückmeldung der Suva-Validierungen zu den übermittelten Lohn- und Einsatzdaten.
+        🇬🇧 Feedback from the Suva validations of the transmitted salary and mission data.
       type: object
       properties:
         id:
           description: |
-            🇩🇪 Eindeutige ID der Rückmeldung
-            🇬🇧 FIXME.
+            🇩🇪 Eindeutige ID der Rückmeldung.
+            🇬🇧 Unique ID of the message.
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        salaryDeclarationId:
-          $ref: "#/components/schemas/SalaryDeclarationId"
-        key:
+          format: uuid
+        messageKey:
           description: |
-            🇩🇪 Eindeutige ID der Validierung Rückmeldung (ID pro Art der Validierung)
-            🇬🇧 FIXME.
+            🇩🇪 Eindeutige ID der Validierung Rückmeldung (ID pro Art der Validierung).
+            🇬🇧 Unique ID of the validation message (ID per validation type).
           type: string
         messageType:
           description: |
-            🇩🇪 Art der Rückmeldung
-            🇬🇧 FIXME.
+            🇩🇪 Art der Rückmeldung.
+            🇬🇧 Type of the message.
           type: string
-          enum: [info, warning, error]
-        messages:
+          enum: [warning, error]
+        localizedMessages:
           description: |
-            🇩🇪 Die Rückmeldung in verschiedenen Sprachen
-            🇬🇧 FIXME.
+            🇩🇪 Die Rückmeldung in verschiedenen Sprachen.
+            🇬🇧 The message in different languages.
           type: array
           items:
-            $ref: "#/components/schemas/LocalizedValue"
+            $ref: "#/components/schemas/LocalizedMessage"
         args:
           description:
             🇩🇪 Argumente für die Aufbereitung einer eigenen Rückmeldung.
-            🇬🇧 FIXME.
+            🇬🇧 Arguments for creating custom messages.
           type: object
           additionalProperties:
             type: string
       required:
         - id
-        - salaryDeclarationId
         - key
         - messageType
-        - messages
+        - localizedMessages
+        - args
 
     Mission:
       description: |
