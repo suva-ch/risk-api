@@ -17,6 +17,7 @@ tags:
   - name: Mission Companies
   - name: Missions
   - name: Permanent Employees
+  - name: Receipts
   - name: Salary Declarations
   - name: Temporary Work Agency Branches
   - name: Temporary Work Agency Consultants
@@ -709,6 +710,46 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
 
+  /v1/salary-declarations/{salaryDeclarationId}/receipts/{receiptId}:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+      - $ref: "#/components/parameters/ReceiptId"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Quittung für eine akzeptiere Lohnmeldung zurück.
+
+        🇬🇧 Returns the receipt of an accepted salary declaration.
+      tags:
+        - Receipts
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getReceipt
+      responses:
+        "200":
+          description: |
+            🇩🇪 Quittung einer akzeptierten Lohnmeldung.
+            
+            🇬🇧 Receipt of an accepted salary declaration.
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              example: attachment; filename="name.pdf"
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+  
+  
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
@@ -1376,6 +1417,13 @@ components:
       schema:
         $ref: "#/components/schemas/MissionNumber"
 
+    ReceiptId:
+      name: receiptId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/ReceiptId"
+
     SalaryDeclarationId:
       name: salaryDeclarationId
       in: path
@@ -1601,6 +1649,13 @@ components:
         🇩🇪 Nummer des Einsatz (ERP-System)
         🇬🇧 FIXME
       type: string
+
+    ReceiptId:
+      description: |
+        🇩🇪 ID für eine Quittung.
+        🇬🇧 ID of a receipt.
+      type: string
+      format: uuid
 
     SalaryDeclarationId:
       description: |
