@@ -2132,7 +2132,17 @@ components:
           type: string
           example: "01"
           pattern: '^\d{2}$'
-
+        receipts:
+          type: array
+          items:
+            title: Receipt
+            properties:
+              language:
+                $ref: '#/components/schemas/Language'
+              url:
+                type: string
+                format: uri
+    
     TemporaryWorkAgencyBranch:
       description: |
         🇩🇪 Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
