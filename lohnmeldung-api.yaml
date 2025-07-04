@@ -2016,6 +2016,7 @@ components:
         - periodFrom
         - periodUntil
         - iscoOccupationTypeId
+        - occupationDescription
         - kindOfWagePayment
 
     MissionCompany:
@@ -2114,6 +2115,11 @@ components:
               minimum: 0
               maximum: 100
               example: 80
+            occupationDescription:
+              description: |
+                🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
+                🇬🇧 FIXME
+              type: string
             unsteadyEmployed:
               description: |
                 🇩🇪 Wenn `true` ist der Festangestellte unregelmässig angestellt.
@@ -2127,6 +2133,7 @@ components:
         - dateOfBirth
         - employmentPeriodFrom
         - employmentPeriodUntil
+        - occupationDescription
         - unsteadyEmployed
 
     SalaryDeclaration:
