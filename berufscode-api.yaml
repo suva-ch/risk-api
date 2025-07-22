@@ -302,8 +302,8 @@ paths:
 
     get:
       description: >-
-        🇩🇪 Abfrage aller nicht quittierten Events.
-        🇬🇧 Query of all unacknowledged events.
+        🇩🇪 Abfrage aller nicht quittierten Events für die Informationen vorliegen (EventStatus == processed).
+        🇬🇧 Query of all unacknowledged events where data is present (EventStatus == processed).
       tags:
         - Events
       operationId: getEvents
