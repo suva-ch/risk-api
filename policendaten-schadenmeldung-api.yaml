@@ -336,6 +336,15 @@ components:
             e.G. '71140' for 'Reinforcing iron and rebar worker'
           type: integer
           example: 71140
+        iscoBerufscodeId:
+          description: |
+            🇩🇪 8-Stellige Nummer für den entsprechenden Berufscode aus der Schweizer Berufsnomenklatur.
+            z.B. '33304096' für 'DV-Organisator'
+
+            🇬🇧 8-digit code for occupations from the Swiss occupational nomenclature.
+            e.G. '33304096' for 'Organizational person in informatics'
+          type: integer
+          example: 33304096
         active:
           type: boolean
           description: |
@@ -361,6 +370,7 @@ components:
       required:
         - suvaOccupationCodeId
         - iscoOccupationTypeId
+        - iscoBerufscodeId
         - active
         - companyPartCode
 
@@ -376,6 +386,8 @@ components:
           format: uuid
         iscoOccupationTypeId:
           type: integer
+        iscoBerufscodeId:
+          type: integer
         active:
           type: boolean
         description:
@@ -387,6 +399,7 @@ components:
       required:
         - suvaOccupationCodeId
         - iscoOccupationTypeId
+        - iscoBerufscodeId
         - active
         - companyPartCode
 
