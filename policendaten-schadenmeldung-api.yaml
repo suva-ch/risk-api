@@ -340,10 +340,14 @@ components:
           description: |
             🇩🇪 8-Stellige Nummer für den entsprechenden Berufscode aus der Schweizer Berufsnomenklatur.
             z.B. '33304096' für 'DV-Organisator'
+            Suva-eigene Isco-Berufscodes starten mit einem 'S'
+            z.B. 'S0000001'
 
             🇬🇧 8-digit code for occupations from the Swiss occupational nomenclature.
             e.G. '33304096' for 'Organizational person in informatics'
-          type: integer
+            Suva own Isco occupation codes start with an 'S'
+            e.G. 'S0000001'
+          type: string
           example: 33304096
         active:
           type: boolean
@@ -387,7 +391,7 @@ components:
         iscoOccupationTypeId:
           type: integer
         iscoBerufscodeId:
-          type: integer
+          type: string
         active:
           type: boolean
         description:
