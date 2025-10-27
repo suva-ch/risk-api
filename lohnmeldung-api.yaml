@@ -2204,7 +2204,19 @@ components:
               url:
                 type: string
                 format: uri
-    
+        completionUrl:
+          type: string
+          format: url
+      required:
+        - declarationId
+        - createdAt
+        - status
+        - messageType
+        - accountingPeriodFrom
+        - accountingPeriodUntil
+        - customerNumber
+        - subNumber
+
     TemporaryWorkAgencyBranch:
       description: |
         🇩🇪 Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
