@@ -2204,9 +2204,16 @@ components:
               url:
                 type: string
                 format: uri
-        completionUrl:
-          type: string
-          format: url
+        completionUrls:
+          type: array
+          items:
+            title: CompletionUrl
+            properties:
+              language:
+                $ref: '#/components/schemas/Language'
+              url:
+                type: string
+                format: uri
       required:
         - declarationId
         - createdAt
