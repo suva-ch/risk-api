@@ -1467,7 +1467,7 @@ components:
       description: |
         🇩🇪 Name des Herstellers der Client-Anwendung.
         🇬🇧 Name of the vendor responsible for the client application.
-      required: false
+      required: true
       schema:
         type: string
 
@@ -1477,7 +1477,7 @@ components:
       description: |
         🇩🇪 Produkt-Name der Client-Anwendung.
         🇬🇧 Product name of the client application.
-      required: false
+      required: true
       schema:
         type: string
 
@@ -1487,7 +1487,7 @@ components:
       description: |
         🇩🇪 Version der Anwendung.
         🇬🇧 Version of the application.
-      required: false
+      required: true
       schema:
         type: string
 
