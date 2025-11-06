@@ -126,7 +126,7 @@ paths:
       tags:
         - Salary Declarations
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: updateSalaryDeclaration
       requestBody:
         $ref: "#/components/requestBodies/UpdateSalaryDeclaration"
@@ -599,7 +599,7 @@ paths:
       tags:
         - Permanent Employees
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getPermanentEmployees
       responses:
         "200":
@@ -726,7 +726,7 @@ paths:
       tags:
         - Receipts
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getReceipt
       responses:
         "200":
@@ -1839,7 +1839,7 @@ components:
             type: string
       required:
         - id
-        - key
+        - messageKey
         - messageType
         - localizedMessages
         - args
