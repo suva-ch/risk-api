@@ -9,8 +9,10 @@ info:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://apitest.suva.ch/salary-declaration
+  - url: https://apitest.suva.ch/salary-declarations
     description: Staging server
+  - url: https://api.suva.ch/salary-declarations
+    description: Production server
 tags:
   - name: Leased Employees
   - name: Messages
