@@ -28,6 +28,7 @@ tags:
   - name: Temporary Work Agency Regions
   - name: Temporary Work Agency Teams
   - name: UVG ISCO Salaries
+  - name: Contact
 
 paths:
   /v1/salary-declarations:
@@ -177,6 +178,77 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
           $ref: "#/components/responses/NotFoundError"
+        "422":
+          $ref: "#/components/responses/UnprocessableContentError"
+
+  /v1/salary-declarations/{salaryDeclarationId}/contact:
+    parameters:
+      - $ref: "#/components/parameters/X-Client-Vendor"
+      - $ref: "#/components/parameters/X-Client-Name"
+      - $ref: "#/components/parameters/X-Client-Version"
+      - $ref: "#/components/parameters/SalaryDeclarationId"
+
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Kontaktes zurück.
+
+        🇬🇧 Returns the details of an existing contact.
+      tags:
+        - Contact
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getContact
+      responses:
+        "200":
+          description: |
+            🇩🇪 Details eines Kontaktes.
+
+            🇬🇧 Details of a contact.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Contact"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+    put:
+      description: |
+        🇩🇪 Erstellt einen Kontakt oder ersetzt den bestehenden Kontakt. Es ist nur ein einziger Kontakt zugelassen.
+
+        🇬🇧 Create a new contact or replace the existing contact. Only one contact is allowed.
+      tags:
+        - Contact
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: saveContact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contact:
+                  description: |
+                    🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
+                    🇬🇧 Contact for questions regarding the salary declaration
+                  $ref: "#/components/schemas/Contact"
+              required:
+                - contact
+      responses:
+        "204":
+          description: |
+            🇩🇪 Kontakt erstellt.
+
+            🇬🇧 Contact created.
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+        "409":
+          $ref: "#/components/responses/ConflictError"
         "422":
           $ref: "#/components/responses/UnprocessableContentError"
 
@@ -1512,7 +1584,7 @@ components:
                 $ref: "#/components/schemas/SalaryDeclarationType"
             required:
               - messageType
-    
+
     SaveSalaryDeclaration:
       description: |
         🇩🇪 FIXME
@@ -1547,18 +1619,12 @@ components:
                 type: string
                 example: "01"
                 pattern: '^\d{2}$'
-              contact:
-                description: |
-                  🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
-                  🇬🇧 Contact for questions regarding the salary declaration
-                $ref: "#/components/schemas/Contact"
             required:
               - messageType
               - accountingPeriodFrom
               - accountingPeriodUntil
               - customerNumber
               - subNumber
-              - contact
 
     PatchSalaryDeclaration:
       description: |
@@ -2256,11 +2322,6 @@ components:
               url:
                 type: string
                 format: uri
-        contact:
-          description: |
-            🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
-            🇬🇧 Contact for questions regarding the salary declaration
-          $ref: "#/components/schemas/Contact"
       required:
         - declarationId
         - createdAt
@@ -2270,7 +2331,6 @@ components:
         - accountingPeriodUntil
         - customerNumber
         - subNumber
-        - contact
 
     TemporaryWorkAgencyBranch:
       description: |
