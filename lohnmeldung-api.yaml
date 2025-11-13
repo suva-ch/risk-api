@@ -4,6 +4,7 @@ info:
   title: Lohnmeldung API
   description: |
     🇩🇪 Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Lohn- und Einsatzmeldung.
+    FR Décrit les interfaces proposées à un ERP côté de la Suva pour la déclaration des salaires et des engagements.
     🇬🇧 Describes the interfaces offered to an ERP system by Suva for salary and mission declaration.
   license:
     name: Apache License 2.0
