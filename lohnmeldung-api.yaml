@@ -1547,12 +1547,18 @@ components:
                 type: string
                 example: "01"
                 pattern: '^\d{2}$'
+              contact:
+                description: |
+                  🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
+                  🇬🇧 Contact for questions regarding the salary declaration
+                $ref: "#/components/schemas/Contact"
             required:
               - messageType
               - accountingPeriodFrom
               - accountingPeriodUntil
               - customerNumber
               - subNumber
+              - contact
 
     PatchSalaryDeclaration:
       description: |
@@ -1714,6 +1720,38 @@ components:
         - $ref: "#/components/schemas/Employee"
 
     # FIXME Complex
+    Contact:
+      description: |
+        🇩🇪 Kontakt
+        🇬🇧 Contact
+      type: object
+      properties:
+        firstName:
+          description: |
+            🇩🇪 Vorname
+            🇬🇧 First name
+          type: string
+        lastName:
+          description: |
+            🇩🇪 Nachname
+            🇬🇧 Last name
+          type: string
+        email:
+          description: |
+            🇩🇪 E-Mail
+            🇬🇧 E-Mail
+          type: string
+        phoneNumber:
+          description: |
+            🇩🇪 Telefon-Nummer
+            🇬🇧 Phone number
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - phoneNumber
+
     Employee:
       description: |
         🇩🇪 Angestellter
@@ -2218,6 +2256,11 @@ components:
               url:
                 type: string
                 format: uri
+        contact:
+          description: |
+            🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
+            🇬🇧 Contact for questions regarding the salary declaration
+          $ref: "#/components/schemas/Contact"
       required:
         - declarationId
         - createdAt
@@ -2227,6 +2270,7 @@ components:
         - accountingPeriodUntil
         - customerNumber
         - subNumber
+        - contact
 
     TemporaryWorkAgencyBranch:
       description: |
