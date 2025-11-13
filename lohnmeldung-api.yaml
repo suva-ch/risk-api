@@ -7,12 +7,14 @@ info:
     🇬🇧 Describes the interfaces offered to an ERP system by Suva for salary and mission declaration.
   license:
     name: Apache License 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
 servers:
-  - url: https://apitest.suva.ch/salary-declarations
+  - url: 'https://apitest.suva.ch/salary-declarations'
     description: Staging server
-  - url: https://api.suva.ch/salary-declarations
+  - url: 'https://api.suva.ch/salary-declarations'
     description: Production server
+
 tags:
   - name: Leased Employees
   - name: Messages
