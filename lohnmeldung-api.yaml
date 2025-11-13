@@ -1547,12 +1547,18 @@ components:
                 type: string
                 example: "01"
                 pattern: '^\d{2}$'
+              contact:
+                description: |
+                  🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
+                  🇬🇧 Contact for questions regarding the salary declaration
+                $ref: "#/components/schemas/Contact"
             required:
               - messageType
               - accountingPeriodFrom
               - accountingPeriodUntil
               - customerNumber
               - subNumber
+              - contact
 
     PatchSalaryDeclaration:
       description: |
@@ -1740,6 +1746,11 @@ components:
             🇩🇪 Telefon-Nummer
             🇬🇧 Phone number
           type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - phoneNumber
 
     Employee:
       description: |
@@ -2259,6 +2270,7 @@ components:
         - accountingPeriodUntil
         - customerNumber
         - subNumber
+        - contact
 
     TemporaryWorkAgencyBranch:
       description: |
