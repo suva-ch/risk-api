@@ -1714,6 +1714,31 @@ components:
         - $ref: "#/components/schemas/Employee"
 
     # FIXME Complex
+    Contact:
+      description: |
+      type: object
+      properties:
+        firstName:
+          description: |
+            🇩🇪 Vorname
+            🇬🇧 First name
+          type: string
+        lastName:
+          description: |
+            🇩🇪 Nachname
+            🇬🇧 Last name
+          type: string
+        email:
+          description: |
+            🇩🇪 E-Mail
+            🇬🇧 E-Mail
+          type: string
+        phoneNumber:
+          description: |
+            🇩🇪 Telefon-Nummer
+            🇬🇧 Phone number
+          type: string
+
     Employee:
       description: |
         🇩🇪 Angestellter
@@ -2218,6 +2243,8 @@ components:
               url:
                 type: string
                 format: uri
+        contact:
+          $ref: "#/components/schemas/Contact"
       required:
         - declarationId
         - createdAt
