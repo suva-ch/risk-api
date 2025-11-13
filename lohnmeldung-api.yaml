@@ -188,6 +188,31 @@ paths:
       - $ref: "#/components/parameters/X-Client-Version"
       - $ref: "#/components/parameters/SalaryDeclarationId"
 
+    get:
+      description: |
+        🇩🇪 Gibt die Details eines bestehenden Kontaktes zurück.
+
+        🇬🇧 Returns the details of an existing contact.
+      tags:
+        - Contact
+      security:
+        - ApiKeyAuth: [ ]
+      operationId: getContact
+      responses:
+        "200":
+          description: |
+            🇩🇪 Details eines Kontaktes.
+
+            🇬🇧 Details of a contact.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Contact"
+        "401":
+          $ref: "#/components/responses/NotAuthenticatedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
     put:
       description: |
         🇩🇪 Erstellt einen Kontakt oder ersetzt den bestehenden Kontakt. Es ist nur ein einziger Kontakt zugelassen.
@@ -226,60 +251,6 @@ paths:
           $ref: "#/components/responses/ConflictError"
         "422":
           $ref: "#/components/responses/UnprocessableContentError"
-
-  /v1/salary-declarations/{salaryDeclarationId}/contact/{contactNumber}:
-    parameters:
-      - $ref: "#/components/parameters/X-Client-Vendor"
-      - $ref: "#/components/parameters/X-Client-Name"
-      - $ref: "#/components/parameters/X-Client-Version"
-      - $ref: "#/components/parameters/SalaryDeclarationId"
-      - $ref: "#/components/parameters/ContactNumber"
-
-    get:
-      description: |
-        🇩🇪 Gibt die Details eines bestehenden Kontaktes zurück.
-
-        🇬🇧 Returns the details of an existing contact.
-      tags:
-        - Contact
-      security:
-        - ApiKeyAuth: []
-      operationId: getContact
-      responses:
-        "200":
-          description: |
-            🇩🇪 Details eines Kontaktes.
-
-            🇬🇧 Details of a contact.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Contact"
-        "401":
-          $ref: "#/components/responses/NotAuthenticatedError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-
-    delete:
-      description: |
-        🇩🇪 Löscht einen bestehenden Kontakt.
-
-        🇬🇧 Deletes an existing contact.
-      tags:
-        - Contact
-      security:
-        - ApiKeyAuth: []
-      operationId: deleteContact
-      responses:
-        "204":
-          description: |
-            🇩🇪 Kontakt gelöscht.
-
-            🇬🇧 Contact deleted.
-        "401":
-          $ref: "#/components/responses/NotAuthenticatedError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
 
   /v1/salary-declarations/{salaryDeclarationId}/leased-employees:
     parameters:
@@ -1536,13 +1507,6 @@ components:
       schema:
         $ref: "#/components/schemas/SalaryDeclarationId"
 
-    ContactNumber:
-      name: contactNumber
-      in: path
-      required: true
-      schema:
-        $ref: "#/components/schemas/ContactNumber"
-
     TemporaryWorkAgencyBranchNumber:
       name: temporaryWorkAgencyBranchNumber
       in: path
@@ -1769,12 +1733,6 @@ components:
       type: string
       format: uuid
 
-    ContactNumber:
-      description: |
-        🇩🇪 Nummer eines Kontaktes.
-        🇬🇧 Number of a contact.
-      type: string
-
     SalaryDeclarationId:
       description: |
         🇩🇪 ID für eine Lohn- und Einsatzmeldung.
@@ -1834,8 +1792,6 @@ components:
         🇬🇧 Contact
       type: object
       properties:
-        contactNumber:
-          $ref: "#/components/schemas/ContactNumber"
         firstName:
           description: |
             🇩🇪 Vorname
