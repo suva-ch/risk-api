@@ -228,10 +228,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                contact:
-                  $ref: "#/components/schemas/Contact"
+              $ref: "#/components/schemas/Contact"
               required:
                 - contact
       responses:
