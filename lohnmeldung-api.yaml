@@ -821,7 +821,7 @@ paths:
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
           $ref: "#/components/responses/NotFoundError"
-  
+
   /v1/salary-declarations/{salaryDeclarationId}/temporary-work-agency-branches:
     parameters:
       - $ref: "#/components/parameters/X-Client-Vendor"
@@ -1574,8 +1574,6 @@ components:
           schema:
             type: object
             properties:
-              comment:
-                type: string
               messageType:
                 $ref: "#/components/schemas/SalaryDeclarationType"
             required:
@@ -1591,8 +1589,6 @@ components:
           schema:
             type: object
             properties:
-              comment:
-                type: string
               messageType:
                 $ref: "#/components/schemas/SalaryDeclarationType"
               accountingPeriodFrom:
