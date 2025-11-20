@@ -3,8 +3,8 @@ info:
   version: 0.1.0
   title: Lohnmeldung API
   description: |
-    🇩🇪 Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Lohn- und Einsatzmeldung.
-    🇬🇧 Describes the interfaces offered to an ERP system by Suva for salary and mission declaration.
+    (DE) Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Lohn- und Einsatzmeldung.
+    (EN) Describes the interfaces offered to an ERP system by Suva for salary and mission declaration.
   license:
     name: Apache License 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -39,9 +39,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Lohnmeldungen zurück.
+        (DE) Gibt eine Liste von Lohnmeldungen zurück.
 
-        🇬🇧 Returns a list of salary declarations.
+        (EN) Returns a list of salary declarations.
       tags:
         - Salary Declarations
       security:
@@ -50,9 +50,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Lohnmeldungen.
+            (DE) Eine Liste mit Lohnmeldungen.
 
-            🇬🇧 A list of salary declarations.
+            (EN) A list of salary declarations.
           content:
             application/json:
               schema:
@@ -64,9 +64,9 @@ paths:
 
     post:
       description: |
-        🇩🇪 Erstellt eine Lohnmeldung.
+        (DE) Erstellt eine Lohnmeldung.
 
-        🇬🇧 Creates a salary declaration.
+        (EN) Creates a salary declaration.
       tags:
         - Salary Declarations
       security:
@@ -77,9 +77,9 @@ paths:
       responses:
         "201":
           description: |
-            🇩🇪 Lohnmeldung erstellt.
+            (DE) Lohnmeldung erstellt.
 
-            🇬🇧 Salary declaration created.
+            (EN) Salary declaration created.
           content:
             application/json:
               schema:
@@ -100,9 +100,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details einer bestehenden Lohnmeldung zurück.
+        (DE) Gibt die Details einer bestehenden Lohnmeldung zurück.
 
-        🇬🇧 Returns the details of an existing salary declaration.
+        (EN) Returns the details of an existing salary declaration.
       tags:
         - Salary Declarations
       security:
@@ -111,9 +111,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details einer Lohnmeldung.
+            (DE) Details einer Lohnmeldung.
 
-            🇬🇧 Details of a salary declaration.
+            (EN) Details of a salary declaration.
           content:
             application/json:
               schema:
@@ -125,9 +125,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Aktualisiert eine Lohnmeldung.
+        (DE) Aktualisiert eine Lohnmeldung.
 
-        🇬🇧 Updates a salary declaration.
+        (EN) Updates a salary declaration.
       tags:
         - Salary Declarations
       security:
@@ -138,9 +138,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Lohnmeldung aktualisiert.
+            (DE) Lohnmeldung aktualisiert.
 
-            🇬🇧 Salary declaration updated.
+            (EN) Salary declaration updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -152,9 +152,9 @@ paths:
 
     patch:
       description: |
-        🇩🇪 Aktualisiert den Status einer Lohnmeldung.
+        (DE) Aktualisiert den Status einer Lohnmeldung.
 
-        🇬🇧 Update the state of a salary declaration.
+        (EN) Update the state of a salary declaration.
       tags:
         - Salary Declarations
       security:
@@ -165,9 +165,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Lohnmeldung aktualisiert.
+            (DE) Lohnmeldung aktualisiert.
 
-            🇬🇧 Salary declaration updated.
+            (EN) Salary declaration updated.
           content:
             application/json:
               schema:
@@ -190,9 +190,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Kontaktes zurück.
+        (DE) Gibt die Details eines bestehenden Kontaktes zurück.
 
-        🇬🇧 Returns the details of an existing contact.
+        (EN) Returns the details of an existing contact.
       tags:
         - Contact
       security:
@@ -201,9 +201,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Kontaktes.
+            (DE) Details eines Kontaktes.
 
-            🇬🇧 Details of a contact.
+            (EN) Details of a contact.
           content:
             application/json:
               schema:
@@ -215,9 +215,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt einen Kontakt oder ersetzt den bestehenden Kontakt. Es ist nur ein einziger Kontakt zugelassen.
+        (DE) Erstellt einen Kontakt oder ersetzt den bestehenden Kontakt. Es ist nur ein einziger Kontakt zugelassen.
 
-        🇬🇧 Create a new contact or replace the existing contact. Only one contact is allowed.
+        (EN) Create a new contact or replace the existing contact. Only one contact is allowed.
       tags:
         - Contact
       security:
@@ -234,9 +234,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Kontakt erstellt.
+            (DE) Kontakt erstellt.
 
-            🇬🇧 Contact created.
+            (EN) Contact created.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -255,9 +255,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Leihangestellten zurück.
+        (DE) Gibt eine Liste von Leihangestellten zurück.
 
-        🇬🇧 Returns a list of leased employees.
+        (EN) Returns a list of leased employees.
       tags:
         - Leased Employees
       security:
@@ -266,9 +266,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Leihangestellten.
+            (DE) Eine Liste mit Leihangestellten.
 
-            🇬🇧 A list of leased employees.
+            (EN) A list of leased employees.
           content:
             application/json:
               schema:
@@ -280,9 +280,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Leihangestellte.
+        (DE) Erstellt oder aktualisiert Leihangestellte.
 
-        🇬🇧 Create or update leased employees.
+        (EN) Create or update leased employees.
       tags:
         - Leased Employees
       security:
@@ -306,9 +306,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Leihangestellte erstellt oder aktualisiert.
+            (DE) Leihangestellte erstellt oder aktualisiert.
 
-            🇬🇧 Leased employees created or updated.
+            (EN) Leased employees created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -328,9 +328,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Leihangestellten zurück.
+        (DE) Gibt die Details eines bestehenden Leihangestellten zurück.
 
-        🇬🇧 Returns the details of an existing leased employee.
+        (EN) Returns the details of an existing leased employee.
       tags:
         - Leased Employees
       security:
@@ -339,9 +339,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Leihangestellten.
+            (DE) Details eines Leihangestellten.
 
-            🇬🇧 Details of a leased employee.
+            (EN) Details of a leased employee.
           content:
             application/json:
               schema:
@@ -353,9 +353,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Leihangestellten.
+        (DE) Löscht einen bestehenden Leihangestellten.
 
-        🇬🇧 Deletes an existing leased employee.
+        (EN) Deletes an existing leased employee.
       tags:
         - Leased Employees
       security:
@@ -364,9 +364,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Leihangestellter gelöscht.
+            (DE) Leihangestellter gelöscht.
 
-            🇬🇧 Leased employee deleted.
+            (EN) Leased employee deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -381,9 +381,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Rückmeldungen zurück.
+        (DE) Gibt eine Liste von Rückmeldungen zurück.
 
-        🇬🇧 Returns a list of messages.
+        (EN) Returns a list of messages.
       tags:
         - Messages
       security:
@@ -392,9 +392,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Rückmeldungen.
+            (DE) Eine Liste mit Rückmeldungen.
 
-            🇬🇧 A list of messages.
+            (EN) A list of messages.
           content:
             application/json:
               schema:
@@ -413,9 +413,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Einsatzbetrieben zurück.
+        (DE) Gibt eine Liste von Einsatzbetrieben zurück.
 
-        🇬🇧 Returns a list of mission companies.
+        (EN) Returns a list of mission companies.
       tags:
         - Mission Companies
       security:
@@ -424,9 +424,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Einsatzbetrieben.
+            (DE) Eine Liste mit Einsatzbetrieben.
 
-            🇬🇧 A list of mission companies.
+            (EN) A list of mission companies.
           content:
             application/json:
               schema:
@@ -438,9 +438,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Einsatzbetriebe.
+        (DE) Erstellt oder aktualisiert Einsatzbetriebe.
 
-        🇬🇧 Create or update mission companies
+        (EN) Create or update mission companies
       tags:
         - Mission Companies
       security:
@@ -464,9 +464,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Einsatzbetriebe erstellt oder aktualisiert.
+            (DE) Einsatzbetriebe erstellt oder aktualisiert.
 
-            🇬🇧 Mission companies created or updated.
+            (EN) Mission companies created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -484,9 +484,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Einsatzbetriebes zurück.
+        (DE) Gibt die Details eines bestehenden Einsatzbetriebes zurück.
 
-        🇬🇧 Returns the details of an existing mission company.
+        (EN) Returns the details of an existing mission company.
       tags:
         - Mission Companies
       security:
@@ -495,9 +495,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Einsatzbetriebes.
+            (DE) Details eines Einsatzbetriebes.
 
-            🇬🇧 Details of a mission company.
+            (EN) Details of a mission company.
           content:
             application/json:
               schema:
@@ -509,9 +509,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Einsatzbetrieb.
+        (DE) Löscht einen bestehenden Einsatzbetrieb.
 
-        🇬🇧 Deletes an existing mission company.
+        (EN) Deletes an existing mission company.
       tags:
         - Mission Companies
       security:
@@ -520,9 +520,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Einsatzbetrieb gelöscht.
+            (DE) Einsatzbetrieb gelöscht.
 
-            🇬🇧 Mission company deleted.
+            (EN) Mission company deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -537,9 +537,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Einsätzen zurück.
+        (DE) Gibt eine Liste von Einsätzen zurück.
 
-        🇬🇧 Returns a list of missions.
+        (EN) Returns a list of missions.
       tags:
         - Missions
       security:
@@ -548,9 +548,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Einsätzen.
+            (DE) Eine Liste mit Einsätzen.
 
-            🇬🇧 A list of missions.
+            (EN) A list of missions.
           content:
             application/json:
               schema:
@@ -562,9 +562,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Einsätze.
+        (DE) Erstellt oder aktualisiert Einsätze.
 
-        🇬🇧 Create or update missions.
+        (EN) Create or update missions.
       tags:
         - Missions
       security:
@@ -588,9 +588,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Einsätze erstellt oder aktualisiert.
+            (DE) Einsätze erstellt oder aktualisiert.
 
-            🇬🇧 Missions created or updated.
+            (EN) Missions created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -610,9 +610,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Einsatzes zurück.
+        (DE) Gibt die Details eines bestehenden Einsatzes zurück.
 
-        🇬🇧 Returns the details of an existing mission.
+        (EN) Returns the details of an existing mission.
       tags:
         - Missions
       security:
@@ -621,9 +621,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Einsatzes.
+            (DE) Details eines Einsatzes.
 
-            🇬🇧 Details of a mission.
+            (EN) Details of a mission.
           content:
             application/json:
               schema:
@@ -635,9 +635,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Einsatz.
+        (DE) Löscht einen bestehenden Einsatz.
 
-        🇬🇧 Deletes an existing mission.
+        (EN) Deletes an existing mission.
       tags:
         - Missions
       security:
@@ -646,9 +646,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Einsatz gelöscht.
+            (DE) Einsatz gelöscht.
 
-            🇬🇧 Mission deleted.
+            (EN) Mission deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -663,9 +663,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Festangestellte zurück.
+        (DE) Gibt eine Liste von Festangestellte zurück.
 
-        🇬🇧 Returns a list of permanent employees.
+        (EN) Returns a list of permanent employees.
       tags:
         - Permanent Employees
       security:
@@ -674,9 +674,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Festangestellten.
+            (DE) Eine Liste mit Festangestellten.
 
-            🇬🇧 A list of permanent employees.
+            (EN) A list of permanent employees.
           content:
             application/json:
               schema:
@@ -688,9 +688,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Festangestellte.
+        (DE) Erstellt oder aktualisiert Festangestellte.
 
-        🇬🇧 Create or update permanent employees.
+        (EN) Create or update permanent employees.
       tags:
         - Permanent Employees
       security:
@@ -714,9 +714,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Festangestellte erstellt oder aktualisiert.
+            (DE) Festangestellte erstellt oder aktualisiert.
 
-            🇬🇧 Permanent employees created or updated.
+            (EN) Permanent employees created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -736,9 +736,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Festangestellten zurück.
+        (DE) Gibt die Details eines bestehenden Festangestellten zurück.
 
-        🇬🇧 Returns the details of an existing permanent employee.
+        (EN) Returns the details of an existing permanent employee.
       tags:
         - Permanent Employees
       security:
@@ -747,9 +747,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Festangestellten.
+            (DE) Details eines Festangestellten.
 
-            🇬🇧 Details of a permanent employee.
+            (EN) Details of a permanent employee.
           content:
             application/json:
               schema:
@@ -761,9 +761,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Festangestellten.
+        (DE) Löscht einen bestehenden Festangestellten.
 
-        🇬🇧 Deletes an existing permanent employee.
+        (EN) Deletes an existing permanent employee.
       tags:
         - Permanent Employees
       security:
@@ -772,9 +772,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Festangestellter gelöscht.
+            (DE) Festangestellter gelöscht.
 
-            🇬🇧 Permanent employee deleted.
+            (EN) Permanent employee deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -790,9 +790,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Quittung für eine akzeptiere Lohnmeldung zurück.
+        (DE) Gibt die Quittung für eine akzeptiere Lohnmeldung zurück.
 
-        🇬🇧 Returns the receipt of an accepted salary declaration.
+        (EN) Returns the receipt of an accepted salary declaration.
       tags:
         - Receipts
       security:
@@ -801,9 +801,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Quittung einer akzeptierten Lohnmeldung.
+            (DE) Quittung einer akzeptierten Lohnmeldung.
             
-            🇬🇧 Receipt of an accepted salary declaration.
+            (EN) Receipt of an accepted salary declaration.
           headers:
             Content-Disposition:
               schema:
@@ -828,9 +828,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Personalverleiher-Filialen zurück.
+        (DE) Gibt eine Liste von Personalverleiher-Filialen zurück.
 
-        🇬🇧 Returns a list of temporary work agency branches.
+        (EN) Returns a list of temporary work agency branches.
       tags:
         - Temporary Work Agency Branches
       security:
@@ -839,9 +839,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Personalverleiher-Filialen.
+            (DE) Eine Liste mit Personalverleiher-Filialen.
 
-            🇬🇧 A list of temporary work agency branches.
+            (EN) A list of temporary work agency branches.
           content:
             application/json:
               schema:
@@ -853,9 +853,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Filialen.
+        (DE) Erstellt oder aktualisiert Personalverleiher-Filialen.
 
-        🇬🇧 Create or update temporary work agency branches.
+        (EN) Create or update temporary work agency branches.
       tags:
         - Temporary Work Agency Branches
       security:
@@ -879,9 +879,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Filialen erstellt oder aktualisiert.
+            (DE) Personalverleiher-Filialen erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency branches created or updated.
+            (EN) Temporary work agency branches created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -901,9 +901,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Filiale zurück.
+        (DE) Gibt die Details eines bestehenden Personalverleiher-Filiale zurück.
 
-        🇬🇧 Returns the details of an existing temporary work agency branch.
+        (EN) Returns the details of an existing temporary work agency branch.
       tags:
         - Temporary Work Agency Branches
       security:
@@ -912,9 +912,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details einer Personalverleiher-Filiale.
+            (DE) Details einer Personalverleiher-Filiale.
 
-            🇬🇧 Details of a temporary work agency branch.
+            (EN) Details of a temporary work agency branch.
           content:
             application/json:
               schema:
@@ -926,9 +926,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht eine bestehende Personalverleiher-Filiale.
+        (DE) Löscht eine bestehende Personalverleiher-Filiale.
 
-        🇬🇧 Deletes an existing temporary work agency branch.
+        (EN) Deletes an existing temporary work agency branch.
       tags:
         - Temporary Work Agency Branches
       security:
@@ -937,9 +937,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Filiale gelöscht.
+            (DE) Personalverleiher-Filiale gelöscht.
 
-            🇬🇧 temporary work agency branch deleted.
+            (EN) temporary work agency branch deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -954,9 +954,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Personalverleiher-Regionen zurück.
+        (DE) Gibt eine Liste von Personalverleiher-Regionen zurück.
 
-        🇬🇧 Returns a list of temporary work agency regions.
+        (EN) Returns a list of temporary work agency regions.
       tags:
         - Temporary Work Agency Regions
       security:
@@ -965,9 +965,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Personalverleiher-Regionen.
+            (DE) Eine Liste mit Personalverleiher-Regionen.
 
-            🇬🇧 A list of temporary work agency regions.
+            (EN) A list of temporary work agency regions.
           content:
             application/json:
               schema:
@@ -979,9 +979,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Regionen.
+        (DE) Erstellt oder aktualisiert Personalverleiher-Regionen.
 
-        🇬🇧 Create or update temporary work agency regions.
+        (EN) Create or update temporary work agency regions.
       tags:
         - Temporary Work Agency Regions
       security:
@@ -1005,9 +1005,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Regionen erstellt oder aktualisiert.
+            (DE) Personalverleiher-Regionen erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency regions created or updated.
+            (EN) Temporary work agency regions created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -1027,9 +1027,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details einer bestehenden Personalverleiher-Region zurück.
+        (DE) Gibt die Details einer bestehenden Personalverleiher-Region zurück.
 
-        🇬🇧 Returns the details of an existing temporary work agency region.
+        (EN) Returns the details of an existing temporary work agency region.
       tags:
         - Temporary Work Agency Regions
       security:
@@ -1038,9 +1038,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details einer Personalverleiher-Region.
+            (DE) Details einer Personalverleiher-Region.
 
-            🇬🇧 Details of a temporary work agency region.
+            (EN) Details of a temporary work agency region.
           content:
             application/json:
               schema:
@@ -1052,9 +1052,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht eine bestehende Personalverleiher-Region.
+        (DE) Löscht eine bestehende Personalverleiher-Region.
 
-        🇬🇧 Deletes an existing temporary work agency region.
+        (EN) Deletes an existing temporary work agency region.
       tags:
         - Temporary Work Agency Regions
       security:
@@ -1063,9 +1063,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Region gelöscht.
+            (DE) Personalverleiher-Region gelöscht.
 
-            🇬🇧 Temporary work agency region deleted.
+            (EN) Temporary work agency region deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -1080,9 +1080,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Personalverleiher-Teams zurück.
+        (DE) Gibt eine Liste von Personalverleiher-Teams zurück.
 
-        🇬🇧 Returns a list of temporary work agency teams.
+        (EN) Returns a list of temporary work agency teams.
       tags:
         - Temporary Work Agency Teams
       security:
@@ -1091,9 +1091,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Personalverleiher-Teams.
+            (DE) Eine Liste mit Personalverleiher-Teams.
 
-            🇬🇧 A list of temporary work agency teams.
+            (EN) A list of temporary work agency teams.
           content:
             application/json:
               schema:
@@ -1105,9 +1105,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Teams.
+        (DE) Erstellt oder aktualisiert Personalverleiher-Teams.
 
-        🇬🇧 Create or update temporary work agency teams.
+        (EN) Create or update temporary work agency teams.
       tags:
         - Temporary Work Agency Teams
       security:
@@ -1131,9 +1131,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Teams erstellt oder aktualisiert.
+            (DE) Personalverleiher-Teams erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency teams created or updated.
+            (EN) Temporary work agency teams created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -1153,9 +1153,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details ein bestehende Personalverleiher-Team zurück.
+        (DE) Gibt die Details ein bestehende Personalverleiher-Team zurück.
 
-        🇬🇧 Returns the details of an existing temporary work agency team.
+        (EN) Returns the details of an existing temporary work agency team.
       tags:
         - Temporary Work Agency Teams
       security:
@@ -1164,9 +1164,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Personalverleiher-Teams.
+            (DE) Details eines Personalverleiher-Teams.
 
-            🇬🇧 Details of a temporary work agency team.
+            (EN) Details of a temporary work agency team.
           content:
             application/json:
               schema:
@@ -1178,9 +1178,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht ein bestehendes Personalverleiher-Team.
+        (DE) Löscht ein bestehendes Personalverleiher-Team.
 
-        🇬🇧 Deletes an existing temporary work agency team.
+        (EN) Deletes an existing temporary work agency team.
       tags:
         - Temporary Work Agency Teams
       security:
@@ -1189,9 +1189,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Team gelöscht.
+            (DE) Personalverleiher-Team gelöscht.
 
-            🇬🇧 Temporary work agency team deleted.
+            (EN) Temporary work agency team deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -1206,9 +1206,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von Personalverleiher-Berater zurück.
+        (DE) Gibt eine Liste von Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns a list of temporary work agency consultants.
+        (EN) Returns a list of temporary work agency consultants.
       tags:
         - Temporary Work Agency Consultants
       security:
@@ -1217,9 +1217,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit Personalverleiher-Berater.
+            (DE) Eine Liste mit Personalverleiher-Berater.
 
-            🇬🇧 A list of temporary work agency consultants.
+            (EN) A list of temporary work agency consultants.
           content:
             application/json:
               schema:
@@ -1231,9 +1231,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert Personalverleiher-Berater.
+        (DE) Erstellt oder aktualisiert Personalverleiher-Berater.
 
-        🇬🇧 Create or update temporary work agency consultants.
+        (EN) Create or update temporary work agency consultants.
       tags:
         - Temporary Work Agency Consultants
       security:
@@ -1257,9 +1257,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Berater erstellt oder aktualisiert.
+            (DE) Personalverleiher-Berater erstellt oder aktualisiert.
 
-            🇬🇧 Temporary work agency consultants created or updated.
+            (EN) Temporary work agency consultants created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -1279,9 +1279,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
+        (DE) Gibt die Details eines bestehenden Personalverleiher-Berater zurück.
 
-        🇬🇧 Returns the details of an existing temporary work agency consultant.
+        (EN) Returns the details of an existing temporary work agency consultant.
       tags:
         - Temporary Work Agency Consultants
       security:
@@ -1290,9 +1290,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines Personalverleiher-Beraters.
+            (DE) Details eines Personalverleiher-Beraters.
 
-            🇬🇧 Details of a temporary work agency consultant.
+            (EN) Details of a temporary work agency consultant.
           content:
             application/json:
               schema:
@@ -1304,9 +1304,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden Personalverleiher-Berater.
+        (DE) Löscht einen bestehenden Personalverleiher-Berater.
 
-        🇬🇧 Deletes an existing temporary work agency consultant.
+        (EN) Deletes an existing temporary work agency consultant.
       tags:
         - Temporary Work Agency Consultants
       security:
@@ -1315,9 +1315,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 Personalverleiher-Berater gelöscht.
+            (DE) Personalverleiher-Berater gelöscht.
 
-            🇬🇧 Temporary work agency consultant deleted.
+            (EN) Temporary work agency consultant deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -1332,9 +1332,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt eine Liste von UVG-ISCO-Löhnen zurück.
+        (DE) Gibt eine Liste von UVG-ISCO-Löhnen zurück.
 
-        🇬🇧 Returns a list of UVG ISCO salaries.
+        (EN) Returns a list of UVG ISCO salaries.
       tags:
         - UVG ISCO Salaries
       security:
@@ -1343,9 +1343,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Eine Liste mit UVG-ISCO-Löhnen.
+            (DE) Eine Liste mit UVG-ISCO-Löhnen.
 
-            🇬🇧 A list of UVG ISCO salaries.
+            (EN) A list of UVG ISCO salaries.
           content:
             application/json:
               schema:
@@ -1357,9 +1357,9 @@ paths:
 
     put:
       description: |
-        🇩🇪 Erstellt oder aktualisiert UVG-ISCO-Löhne.
+        (DE) Erstellt oder aktualisiert UVG-ISCO-Löhne.
 
-        🇬🇧 Create or update UVG ISCO salaries.
+        (EN) Create or update UVG ISCO salaries.
       tags:
         - UVG ISCO Salaries
       security:
@@ -1382,9 +1382,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 UVG-ISCO-Löhne erstellt oder aktualisiert.
+            (DE) UVG-ISCO-Löhne erstellt oder aktualisiert.
 
-            🇬🇧 UVG ISCO salaries created or updated.
+            (EN) UVG ISCO salaries created or updated.
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -1404,9 +1404,9 @@ paths:
 
     get:
       description: |
-        🇩🇪 Gibt die Details eines bestehenden UVG-ISCO-Lohnes zurück.
+        (DE) Gibt die Details eines bestehenden UVG-ISCO-Lohnes zurück.
 
-        🇬🇧 Returns the details of an existing UVG ISCO salary.
+        (EN) Returns the details of an existing UVG ISCO salary.
       tags:
         - UVG ISCO Salaries
       security:
@@ -1415,9 +1415,9 @@ paths:
       responses:
         "200":
           description: |
-            🇩🇪 Details eines UVG-ISCO-Lohnes.
+            (DE) Details eines UVG-ISCO-Lohnes.
 
-            🇬🇧 Details of an UVG ISCO salary.
+            (EN) Details of an UVG ISCO salary.
           content:
             application/json:
               schema:
@@ -1429,9 +1429,9 @@ paths:
 
     delete:
       description: |
-        🇩🇪 Löscht einen bestehenden UVG-ISCO-Lohn.
+        (DE) Löscht einen bestehenden UVG-ISCO-Lohn.
 
-        🇬🇧 Deletes an existing UVG ISCO salary.
+        (EN) Deletes an existing UVG ISCO salary.
       tags:
         - UVG ISCO Salaries
       security:
@@ -1440,9 +1440,9 @@ paths:
       responses:
         "204":
           description: |
-            🇩🇪 UVG-ISCO-Lohn gelöscht.
+            (DE) UVG-ISCO-Lohn gelöscht.
 
-            🇬🇧 UVG ISCO salary deleted.
+            (EN) UVG ISCO salary deleted.
         "401":
           $ref: "#/components/responses/NotAuthenticatedError"
         "404":
@@ -1452,8 +1452,8 @@ components:
   securitySchemes:
     ApiKeyAuth:
       description: |
-        🇩🇪 Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
-        🇬🇧 Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
+        (DE) Authentifizierung über Bearer-Token - siehe OAuth-Beispiele auf https://github.com/suva-ch/risk-api-demo-python/tree/main
+        (EN) Authentication via Bearer Token - see OAuth examples at https://github.com/suva-ch/risk-api-demo-python/tree/main
       type: http
       scheme: bearer
 
@@ -1534,8 +1534,8 @@ components:
       name: X-Client-Vendor
       in: header
       description: |
-        🇩🇪 Name des Herstellers der Client-Anwendung.
-        🇬🇧 Name of the vendor responsible for the client application.
+        (DE) Name des Herstellers der Client-Anwendung.
+        (EN) Name of the vendor responsible for the client application.
       required: true
       schema:
         type: string
@@ -1544,8 +1544,8 @@ components:
       name: X-Client-Name
       in: header
       description: |
-        🇩🇪 Produkt-Name der Client-Anwendung.
-        🇬🇧 Product name of the client application.
+        (DE) Produkt-Name der Client-Anwendung.
+        (EN) Product name of the client application.
       required: true
       schema:
         type: string
@@ -1554,8 +1554,8 @@ components:
       name: X-Client-Version
       in: header
       description: |
-        🇩🇪 Version der Anwendung.
-        🇬🇧 Version of the application.
+        (DE) Version der Anwendung.
+        (EN) Version of the application.
       required: true
       schema:
         type: string
@@ -1563,8 +1563,8 @@ components:
   requestBodies:
     UpdateSalaryDeclaration:
       description: |
-        🇩🇪 FIXME
-        🇬🇧 FIXME
+        (DE) FIXME
+        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1578,8 +1578,8 @@ components:
 
     SaveSalaryDeclaration:
       description: |
-        🇩🇪 FIXME
-        🇬🇧 FIXME
+        (DE) FIXME
+        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1596,15 +1596,15 @@ components:
                 format: date
               customerNumber:
                 description: |
-                  🇩🇪 Die Suva-Kundennummer
-                  🇬🇧 Suva customer ID
+                  (DE) Die Suva-Kundennummer
+                  (EN) Suva customer ID
                 type: string
                 example: "8-01747-90000"
                 pattern: '^\d{1}-\d{5}-\d{5}$'
               subNumber:
                 description: |
-                  🇩🇪 Subnummer als 2-stellige Zahl.
-                  🇬🇧 Subnumber as a 2-digit code.
+                  (DE) Subnummer als 2-stellige Zahl.
+                  (EN) Subnumber as a 2-digit code.
                 type: string
                 example: "01"
                 pattern: '^\d{2}$'
@@ -1617,8 +1617,8 @@ components:
 
     PatchSalaryDeclaration:
       description: |
-        🇩🇪 FIXME
-        🇬🇧 FIXME
+        (DE) FIXME
+        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1639,8 +1639,8 @@ components:
   responses:
     BadRequestError:
       description: |
-        🇩🇪 Anfrage kann nicht verarbeitet werden.
-        🇬🇧 Request cannot be processed.
+        (DE) Anfrage kann nicht verarbeitet werden.
+        (EN) Request cannot be processed.
       content:
         application/json:
           schema:
@@ -1648,8 +1648,8 @@ components:
 
     NotAuthenticatedError:
       description: |
-        🇩🇪 Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
-        🇬🇧 No valid authentication data available for the requested resource.
+        (DE) Keine gültigen Authentifizierungsdaten für die angeforderte Ressource vorhanden.
+        (EN) No valid authentication data available for the requested resource.
       content:
         application/json:
           schema:
@@ -1657,8 +1657,8 @@ components:
 
     NotFoundError:
       description: |
-        🇩🇪 Die angeforderte Resource konnte nicht gefunden werden.
-        🇬🇧 The requested resource could not be found.
+        (DE) Die angeforderte Resource konnte nicht gefunden werden.
+        (EN) The requested resource could not be found.
       content:
         application/json:
           schema:
@@ -1666,8 +1666,8 @@ components:
 
     ConflictError:
       description: |
-        🇩🇪 Die Anfrage konnte nicht verarbeitet werden, da es einen Konflikt mit dem aktuellen Zustand der Resource gibt.
-        🇬🇧 The request could not be processed due to a conflict with the current state of the resource.
+        (DE) Die Anfrage konnte nicht verarbeitet werden, da es einen Konflikt mit dem aktuellen Zustand der Resource gibt.
+        (EN) The request could not be processed due to a conflict with the current state of the resource.
       content:
         application/json:
           schema:
@@ -1675,8 +1675,8 @@ components:
 
     UnprocessableContentError:
       description: |
-        🇩🇪 Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
-        🇬🇧 The request could not be processed because it contains invalid data.
+        (DE) Die Anfrage konnte nicht verarbeiten werden, da sie ungültige Daten enthält.
+        (EN) The request could not be processed because it contains invalid data.
       content:
         application/json:
           schema:
@@ -1686,120 +1686,120 @@ components:
     # FIXME Simple
     EmployeeNumber:
       description: |
-        🇩🇪 Nummer des Angestellten (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Angestellten (ERP-System)
+        (EN) FIXME
       type: string
 
     IscoSalaryNumber:
       description: |
-        🇩🇪 Nummer des ISCO-Lohn (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des ISCO-Lohn (ERP-System)
+        (EN) FIXME
       type: string
 
     Language:
       description: |
-        🇩🇪 Sprache
-        🇬🇧 Language
+        (DE) Sprache
+        (EN) Language
       type: string
       enum: [de, fr, it, en]
 
     MissionCompanyNumber:
       description: |
-        🇩🇪 Nummer des Einsatzbetrieb (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Einsatzbetrieb (ERP-System)
+        (EN) FIXME
       type: string
 
     MissionNumber:
       description: |
-        🇩🇪 Nummer des Einsatz (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Einsatz (ERP-System)
+        (EN) FIXME
       type: string
 
     ReceiptId:
       description: |
-        🇩🇪 ID für eine Quittung.
-        🇬🇧 ID of a receipt.
+        (DE) ID für eine Quittung.
+        (EN) ID of a receipt.
       type: string
       format: uuid
 
     SalaryDeclarationId:
       description: |
-        🇩🇪 ID für eine Lohn- und Einsatzmeldung.
-        🇬🇧 ID of an salary and mission declaration.
+        (DE) ID für eine Lohn- und Einsatzmeldung.
+        (EN) ID of an salary and mission declaration.
       type: string
       format: uuid
 
     SalaryDeclarationType:
       description: |
-        🇩🇪 Meldungstyp: periodisch, Jahresmeldung definitiv, oder Jahresmeldung Ersatz
-        🇬🇧
+        (DE) Meldungstyp: periodisch, Jahresmeldung definitiv, oder Jahresmeldung Ersatz
+        (EN)
       type: string
       enum: [periodic, annual_definitive, annual_replacement]
 
     TemporaryWorkAgencyBranchNumber:
       description: |
-        🇩🇪 Nummer des Personalverleiher Filiale (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Personalverleiher Filiale (ERP-System)
+        (EN) FIXME
       type: string
 
     TemporaryWorkAgencyRegionNumber:
       description: |
-        🇩🇪 Nummer des Personalverleiher Region (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Personalverleiher Region (ERP-System)
+        (EN) FIXME
       type: string
 
     TemporaryWorkAgencyTeamNumber:
       description: |
-        🇩🇪 Nummer des Personalverleiher Team (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Personalverleiher Team (ERP-System)
+        (EN) FIXME
       type: string
 
     TemporaryWorkAgencyConsultantNumber:
       description: |
-        🇩🇪 Nummer des Personalverleiher Berater (ERP-System)
-        🇬🇧 FIXME
+        (DE) Nummer des Personalverleiher Berater (ERP-System)
+        (EN) FIXME
       type: string
 
     DeleteOmittedItems:
       description: |
-        🇩🇪 Wenn `true`, werden die ausgelassenen Items aus der Liste gelöscht. Default-Wert ist `false`.
-        🇬🇧 Whether the omitted items in the list should be deleted or left untouched. Defaults to `false`.
+        (DE) Wenn `true`, werden die ausgelassenen Items aus der Liste gelöscht. Default-Wert ist `false`.
+        (EN) Whether the omitted items in the list should be deleted or left untouched. Defaults to `false`.
       type: boolean
       default: false
 
     LeasedEmployee:
       description: |
-        🇩🇪 Leihangestellter
-        🇬🇧 Leased employee
+        (DE) Leihangestellter
+        (EN) Leased employee
       allOf:
         - $ref: "#/components/schemas/Employee"
 
     # FIXME Complex
     Contact:
       description: |
-        🇩🇪 Kontakt für Rückfragen zur Lohnmeldung
-        🇬🇧 Contact for questions regarding the salary declaration
+        (DE) Kontakt für Rückfragen zur Lohnmeldung
+        (EN) Contact for questions regarding the salary declaration
       type: object
       properties:
         firstName:
           description: |
-            🇩🇪 Vorname
-            🇬🇧 First name
+            (DE) Vorname
+            (EN) First name
           type: string
         lastName:
           description: |
-            🇩🇪 Nachname
-            🇬🇧 Last name
+            (DE) Nachname
+            (EN) Last name
           type: string
         email:
           description: |
-            🇩🇪 E-Mail
-            🇬🇧 E-Mail
+            (DE) E-Mail
+            (EN) E-Mail
           type: string
         phoneNumber:
           description: |
-            🇩🇪 Telefon-Nummer
-            🇬🇧 Phone number
+            (DE) Telefon-Nummer
+            (EN) Phone number
           type: string
       required:
         - firstName
@@ -1809,38 +1809,38 @@ components:
 
     Employee:
       description: |
-        🇩🇪 Angestellter
-        🇬🇧 Employee
+        (DE) Angestellter
+        (EN) Employee
       type: object
       properties:
         employeeNumber:
           $ref: "#/components/schemas/EmployeeNumber"
         firstName:
           description: |
-            🇩🇪 Vorname
-            🇬🇧 First name
+            (DE) Vorname
+            (EN) First name
           type: string
         lastName:
           description: |
-            🇩🇪 Nachname
-            🇬🇧 Last name
+            (DE) Nachname
+            (EN) Last name
           type: string
         sex:
           description: |
-            🇩🇪 Geschlecht
-            🇬🇧 Gender
+            (DE) Geschlecht
+            (EN) Gender
           type: string
           enum: [f, female, m, male]
         dateOfBirth:
           description: |
-            🇩🇪 Geburtsdatum
-            🇬🇧 Date of birth
+            (DE) Geburtsdatum
+            (EN) Date of birth
           type: string
           format: date
         socialInsuranceIdentification:
           description: |
-            🇩🇪 AHV-Nummer
-            🇬🇧 Social insurance identification
+            (DE) AHV-Nummer
+            (EN) Social insurance identification
           type: string
           pattern: '^\d{3}.\d{4}.\d{4}.\d{2}$'
           example: "756.1234.5678.90"
@@ -1853,28 +1853,28 @@ components:
 
     Error:
       description: |
-        🇩🇪 Fehlermeldung
-        🇬🇧 Error message
+        (DE) Fehlermeldung
+        (EN) Error message
       properties:
         message:
           description: |
-            🇩🇪 Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
-            🇬🇧 Error message provided in English. Example: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
+            (DE) Die in englischer Sprache gelieferte Fehlermeldung. Beispiel: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
+            (EN) Error message provided in English. Example: 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found'.
           type: string
         id:
           description: |
-            🇩🇪 Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben unterschiedliche ID's.
-            🇬🇧 Unique ID of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have different IDs.
+            (DE) Eindeutige ID der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben unterschiedliche ID's.
+            (EN) Unique ID of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have different IDs.
           type: string
         key:
           description: |
-            🇩🇪 Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben denselben Key.
-            🇬🇧 Key of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have the same key.
+            (DE) Key der Fehlermeldung. Beispiel: Zwei Fehlermeldungen 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' haben denselben Key.
+            (EN) Key of the error message. Example: Two error messages 'Occupation code with id '00000000-0000-0000-0000-000000000000' not found' have the same key.
           type: string
         args:
           description: |
-            🇩🇪 Argumente für die Aufbereitung einer Fehlermeldung.
-            🇬🇧 Arguments for formatting an error message.
+            (DE) Argumente für die Aufbereitung einer Fehlermeldung.
+            (EN) Arguments for formatting an error message.
           type: object
           additionalProperties:
             type: string
@@ -1885,8 +1885,8 @@ components:
 
     LocalizedMessage:
       description: |
-        🇩🇪 Ein sprachbezogener Wert.
-        🇬🇧 A language-specific value.
+        (DE) Ein sprachbezogener Wert.
+        (EN) A language-specific value.
       type: object
       properties:
         language:
@@ -1899,38 +1899,38 @@ components:
 
     Message:
       description: |
-        🇩🇪 Rückmeldung der Suva-Validierungen zu den übermittelten Lohn- und Einsatzdaten.
-        🇬🇧 Feedback from the Suva validations of the transmitted salary and mission data.
+        (DE) Rückmeldung der Suva-Validierungen zu den übermittelten Lohn- und Einsatzdaten.
+        (EN) Feedback from the Suva validations of the transmitted salary and mission data.
       type: object
       properties:
         id:
           description: |
-            🇩🇪 Eindeutige ID der Rückmeldung.
-            🇬🇧 Unique ID of the message.
+            (DE) Eindeutige ID der Rückmeldung.
+            (EN) Unique ID of the message.
           type: string
           format: uuid
         messageKey:
           description: |
-            🇩🇪 Eindeutige ID der Validierung Rückmeldung (ID pro Art der Validierung).
-            🇬🇧 Unique ID of the validation message (ID per validation type).
+            (DE) Eindeutige ID der Validierung Rückmeldung (ID pro Art der Validierung).
+            (EN) Unique ID of the validation message (ID per validation type).
           type: string
         messageType:
           description: |
-            🇩🇪 Art der Rückmeldung.
-            🇬🇧 Type of the message.
+            (DE) Art der Rückmeldung.
+            (EN) Type of the message.
           type: string
           enum: [warning, error]
         localizedMessages:
           description: |
-            🇩🇪 Die Rückmeldung in verschiedenen Sprachen.
-            🇬🇧 The message in different languages.
+            (DE) Die Rückmeldung in verschiedenen Sprachen.
+            (EN) The message in different languages.
           type: array
           items:
             $ref: "#/components/schemas/LocalizedMessage"
         args:
           description:
-            🇩🇪 Argumente für die Aufbereitung einer eigenen Rückmeldung.
-            🇬🇧 Arguments for creating custom messages.
+            (DE) Argumente für die Aufbereitung einer eigenen Rückmeldung.
+            (EN) Arguments for creating custom messages.
           type: object
           additionalProperties:
             type: string
@@ -1943,8 +1943,8 @@ components:
 
     Mission:
       description: |
-        🇩🇪 Einsatz
-        🇬🇧 Mission
+        (DE) Einsatz
+        (EN) Mission
       type: object
       properties:
         missionNumber:
@@ -1955,155 +1955,155 @@ components:
           $ref: "#/components/schemas/MissionCompanyNumber"
         periodFrom:
           description: |
-            🇩🇪 Beginndatum der Einsatzperiode
-            🇬🇧 FIXME
+            (DE) Beginndatum der Einsatzperiode
+            (EN) FIXME
           type: string
           format: date
         periodUntil:
           description: |
-            🇩🇪 Endedatum der Einsatzperiode
-            🇬🇧 FIXME
+            (DE) Endedatum der Einsatzperiode
+            (EN) FIXME
           type: string
           format: date
         iscoOccupationTypeId:
           description: |
-            🇩🇪 ISCO-Berufsart
-            🇬🇧 ISCO occupation type
+            (DE) ISCO-Berufsart
+            (EN) ISCO occupation type
           type: string
           pattern: '^\d{5}$'
           example: "93130"
         occupationDescription:
           description: |
-            🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
-            🇬🇧 FIXME
+            (DE) Individuelle Berufsbezeichnung des Personalverleihers
+            (EN) FIXME
           type: string
         contractualJobTitle:
           description: |
-            🇩🇪 Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
-            🇬🇧 FIXME
+            (DE) Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
+            (EN) FIXME
           type: string
         kindOfWagePayment:
           description: |
-            🇩🇪 Art der Lohnzahlung
-            🇬🇧 FIXME
+            (DE) Art der Lohnzahlung
+            (EN) FIXME
           type: string
           enum: [monthly, daily, hourly, lesson]
         monthlyWage:
           description: |
-            🇩🇪 Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
-            🇬🇧 FIXME
+            (DE) Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         activityRate:
           description: |
-            🇩🇪 Beschäftigungsgrad. Zwingend wenn `kindOfWagePayment = monthly`
-            🇬🇧 FIXME
+            (DE) Beschäftigungsgrad. Zwingend wenn `kindOfWagePayment = monthly`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
           minimum: 0
           maximum: 100
         totalDays:
           description: |
-            🇩🇪 Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
-            🇬🇧 FIXME
+            (DE) Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         dailyWage:
           description: |
-            🇩🇪 Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
-            🇬🇧 FIXME
+            (DE) Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         totalHours:
           description: |
-            🇩🇪 Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
-            🇬🇧 FIXME
+            (DE) Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         hourlyWage:
           description: |
-            🇩🇪 Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
-            🇬🇧 FIXME
+            (DE) Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         totalLessons:
           description: |
-            🇩🇪 Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
-            🇬🇧 FIXME
+            (DE) Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         lessonWage:
           description: |
-            🇩🇪 Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
-            🇬🇧 FIXME
+            (DE) Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
+            (EN) FIXME
           type: number
           multipleOf: 0.01
         missionplace:
           description: |
-            🇩🇪 Einsatzort
-            🇬🇧 Mission place
+            (DE) Einsatzort
+            (EN) Mission place
           type: object
           properties:
             description:
               description: |
-                🇩🇪 Beschreibung des Einsatzortes
-                🇬🇧 FIXME
+                (DE) Beschreibung des Einsatzortes
+                (EN) FIXME
               type: string
             zip:
               description: |
-                🇩🇪 Postleitzahl des Einsatzortes
-                🇬🇧 FIXME
+                (DE) Postleitzahl des Einsatzortes
+                (EN) FIXME
               type: string
             contact:
               description: |
-                🇩🇪 Kontaktperson am Einsatzort
-                🇬🇧 FIXME
+                (DE) Kontaktperson am Einsatzort
+                (EN) FIXME
               type: object
               properties:
                 firstName:
                   description: |
-                    🇩🇪 Vorname
-                    🇬🇧 First name
+                    (DE) Vorname
+                    (EN) First name
                   type: string
                 lastName:
                   description: |
-                    🇩🇪 Nachname
-                    🇬🇧 Last name
+                    (DE) Nachname
+                    (EN) Last name
                   type: string
                 email:
                   description: |
-                    🇩🇪 E-Mail
-                    🇬🇧 E-Mail
+                    (DE) E-Mail
+                    (EN) E-Mail
                   type: string
                 phoneNumber:
                   description: |
-                    🇩🇪 Telefon-Nummer
-                    🇬🇧 Phone number
+                    (DE) Telefon-Nummer
+                    (EN) Phone number
                   type: string
                 mobileNumber:
                   description: |
-                    🇩🇪 Mobiltelefon-Nummer
-                    🇬🇧 Mobilephone number
+                    (DE) Mobiltelefon-Nummer
+                    (EN) Mobilephone number
                   type: string
         temporaryWorkAgencyRegionNumber:
           description: |
-            🇩🇪 Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            🇬🇧 FIXME.
+            (DE) Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            (EN) FIXME.
           $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
         temporaryWorkAgencyBranchNumber:
           description: |
-            🇩🇪 Nummer der zuständigen Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            🇬🇧 FIXME.
+            (DE) Nummer der zuständigen Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            (EN) FIXME.
           $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
         temporaryWorkAgencyTeamNumber:
           description: |
-            🇩🇪 Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
-            🇬🇧 FIXME.
+            (DE) Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
+            (EN) FIXME.
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
         temporaryWorkAgencyConsultantNumber:
           description: |
-            🇩🇪 Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            🇬🇧 FIXME.
+            (DE) Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+            (EN) FIXME.
           $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
 
       required:
@@ -2118,62 +2118,62 @@ components:
 
     MissionCompany:
       description: |
-        🇩🇪 Die Einsatzfirma, bei welchen die Einsätze stattgefunden haben.
-        🇬🇧 FIXME
+        (DE) Die Einsatzfirma, bei welchen die Einsätze stattgefunden haben.
+        (EN) FIXME
       type: object
       properties:
         missionCompanyNumber:
           $ref: "#/components/schemas/MissionCompanyNumber"
         uidNumber:
-          description: 🇩🇪 Die Unternehmens-Identifikationsnummer (UID)
-            🇬🇧 FIXME
+          description: (DE) Die Unternehmens-Identifikationsnummer (UID)
+            (EN) FIXME
           type: string
           example: "CHE-123.456.789"
         name:
           description: |
-            🇩🇪 Name des Einsatzbetriebes
-            🇬🇧 Name of the mission company
+            (DE) Name des Einsatzbetriebes
+            (EN) Name of the mission company
           type: string
         address:
           description: |
-            🇩🇪 Adresse des Einsatzbetriebes
-            🇬🇧 FIXME
+            (DE) Adresse des Einsatzbetriebes
+            (EN) FIXME
           type: object
           properties:
             complementaryLine:
               description: |
-                🇩🇪 Adresszusatz
-                🇬🇧 FIXME
+                (DE) Adresszusatz
+                (EN) FIXME
               type: string
             street:
               description: |
-                🇩🇪 Strasse
-                🇬🇧 Street
+                (DE) Strasse
+                (EN) Street
               type: string
             postbox:
               description: |
-                🇩🇪 Postfach
-                🇬🇧 Postbox
+                (DE) Postfach
+                (EN) Postbox
               type: string
             locality:
               description: |
-                🇩🇪 Lokalität wie Region / Provinz
-                🇬🇧 FIXME
+                (DE) Lokalität wie Region / Provinz
+                (EN) FIXME
               type: string
             zipCode:
               description: |
-                🇩🇪 Postleitzahl
-                🇬🇧 Zip code
+                (DE) Postleitzahl
+                (EN) Zip code
               type: string
             city:
               description: |
-                🇩🇪 Ort
-                🇬🇧 City
+                (DE) Ort
+                (EN) City
               type: string
             country:
               description: |
-                🇩🇪 Land
-                🇬🇧 Country
+                (DE) Land
+                (EN) Country
               type: string
               example: CH
           required:
@@ -2185,28 +2185,28 @@ components:
 
     PermanentEmployee:
       description: |
-        🇩🇪 Festangestellter
-        🇬🇧 Permanent employee
+        (DE) Festangestellter
+        (EN) Permanent employee
       allOf:
         - $ref: "#/components/schemas/Employee"
         - type: object
           properties:
             employmentPeriodFrom:
               description: |
-                🇩🇪 Beginndatum der Anstellung (innerhalb der accountingPeriod). Bei Anstellung vor dem Abrechnungsjahr: 1.1. des Abrechnungsjahrs
-                🇬🇧 FIXME
+                (DE) Beginndatum der Anstellung (innerhalb der accountingPeriod). Bei Anstellung vor dem Abrechnungsjahr: 1.1. des Abrechnungsjahrs
+                (EN) FIXME
               type: string
               format: date
             employmentPeriodUntil:
               description: |
-                🇩🇪 Endedatum der Anstellung (innerhalb der accountingPeriod). Bei Weiterbeschäftigung nach dem Abrechnungsjahr: 31.12. des Abrechnungsjahrs
-                🇬🇧 FIXME
+                (DE) Endedatum der Anstellung (innerhalb der accountingPeriod). Bei Weiterbeschäftigung nach dem Abrechnungsjahr: 31.12. des Abrechnungsjahrs
+                (EN) FIXME
               type: string
               format: date
             activityRate:
               description: |
-                🇩🇪 Beschäftigungsgrad in Prozent
-                🇬🇧 FIXME
+                (DE) Beschäftigungsgrad in Prozent
+                (EN) FIXME
               type: number
               format: float
               minimum: 0
@@ -2214,13 +2214,13 @@ components:
               example: 80
             occupationDescription:
               description: |
-                🇩🇪 Individuelle Berufsbezeichnung des Personalverleihers
-                🇬🇧 FIXME
+                (DE) Individuelle Berufsbezeichnung des Personalverleihers
+                (EN) FIXME
               type: string
             unsteadyEmployed:
               description: |
-                🇩🇪 Wenn `true` ist der Festangestellte unregelmässig angestellt.
-                🇬🇧 FIXME
+                (DE) Wenn `true` ist der Festangestellte unregelmässig angestellt.
+                (EN) FIXME
               type: boolean
       required:
         - employeeNumber
@@ -2235,8 +2235,8 @@ components:
 
     SalaryDeclaration:
       description: |
-        🇩🇪 Lohn- und Einsatzdeklaration
-        🇬🇧 Salary and mission declaration
+        (DE) Lohn- und Einsatzdeklaration
+        (EN) Salary and mission declaration
       type: object
       properties:
         declarationId:
@@ -2249,8 +2249,8 @@ components:
           format: date-time
         status:
           description: |
-            🇩🇪 Status der Lohn- und Einsatzdeklaration
-            🇬🇧 Status of the salary and mission declaration
+            (DE) Status der Lohn- und Einsatzdeklaration
+            (EN) Status of the salary and mission declaration
           type: string
           enum:
             [
@@ -2264,8 +2264,8 @@ components:
             ]
         transmittedOn:
           description: |
-            🇩🇪 Zeitpunkt der Übermittlung
-            🇬🇧 Timestamp of transmission
+            (DE) Zeitpunkt der Übermittlung
+            (EN) Timestamp of transmission
           type: string
           format: date-time
         messageType:
@@ -2278,15 +2278,15 @@ components:
           format: date
         customerNumber:
           description: |
-            🇩🇪 Die Suva-Kundennummer
-            🇬🇧 Suva customer ID
+            (DE) Die Suva-Kundennummer
+            (EN) Suva customer ID
           type: string
           example: "8-01747-90000"
           pattern: '^\d{1}-\d{5}-\d{5}$'
         subNumber:
           description: |
-            🇩🇪 Subnummer als 2-stellige Zahl.
-            🇬🇧 Subnumber as a 2-digit code.
+            (DE) Subnummer als 2-stellige Zahl.
+            (EN) Subnumber as a 2-digit code.
           type: string
           example: "01"
           pattern: '^\d{2}$'
@@ -2322,16 +2322,16 @@ components:
 
     TemporaryWorkAgencyBranch:
       description: |
-        🇩🇪 Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        🇬🇧 FIXME.
+        (DE) Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        (EN) FIXME.
       type: object
       properties:
         branchNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
         description:
           description: |
-            🇩🇪 Bezeichnung der Filiale.
-            🇬🇧 Description of the branch.
+            (DE) Bezeichnung der Filiale.
+            (EN) Description of the branch.
           type: string
         regionNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
@@ -2340,32 +2340,32 @@ components:
 
     TemporaryWorkAgencyRegion:
       description: |
-        🇩🇪 Die zuständige Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        🇬🇧 FIXME.
+        (DE) Die zuständige Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        (EN) FIXME.
       type: object
       properties:
         regionNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
         description:
           description: |
-            🇩🇪 Bezeichnung der Region.
-            🇬🇧 Description of the region.
+            (DE) Bezeichnung der Region.
+            (EN) Description of the region.
           type: string
       required:
         - regionNumber
 
     TemporaryWorkAgencyTeam:
       description: |
-        🇩🇪 Das zuständige Team beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        🇬🇧 FIXME.
+        (DE) Das zuständige Team beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        (EN) FIXME.
       type: object
       properties:
         teamNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
         description:
           description: |
-            🇩🇪 Bezeichnung des Teams.
-            🇬🇧 Description of the team.
+            (DE) Bezeichnung des Teams.
+            (EN) Description of the team.
           type: string
         branchNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
@@ -2374,21 +2374,21 @@ components:
 
     TemporaryWorkAgencyConsultant:
       description: |
-        🇩🇪 Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        🇬🇧 FIXME.
+        (DE) Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
+        (EN) FIXME.
       type: object
       properties:
         consultantNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
         firstName:
           description: |
-            🇩🇪 Vorname
-            🇬🇧 First name
+            (DE) Vorname
+            (EN) First name
           type: string
         lastName:
           description: |
-            🇩🇪 Nachname
-            🇬🇧 Last name
+            (DE) Nachname
+            (EN) Last name
           type: string
         teamNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
@@ -2397,34 +2397,34 @@ components:
 
     UvgIscoSalary:
       description: |
-        🇩🇪 UVG-ISCO-Löhne: Lohnsummen pro Betriebsteil, ISCO-Berufsart und BU/NBU-Code für jeden Angestellten.
-        🇬🇧 LAA isco salary: Sum of salaries per company part, ISCO occupation type and AP/ANP-Code for each employee.
+        (DE) UVG-ISCO-Löhne: Lohnsummen pro Betriebsteil, ISCO-Berufsart und BU/NBU-Code für jeden Angestellten.
+        (EN) LAA isco salary: Sum of salaries per company part, ISCO occupation type and AP/ANP-Code for each employee.
       type: object
       properties:
         iscoSalaryNumber:
           $ref: "#/components/schemas/IscoSalaryNumber"
         companyPartCode:
           description: |
-            🇩🇪 Buchstabe des zugehörigen Betriebsteils.
-            🇬🇧 Letter of the associated company part.
+            (DE) Buchstabe des zugehörigen Betriebsteils.
+            (EN) Letter of the associated company part.
           type: string
           example: "A"
           pattern: "^[A-Z]$"
         iscoOccupationTypeId:
           description: |
-            🇩🇪 ISCO-Berufsart
-            🇬🇧 ISCO occupation type
+            (DE) ISCO-Berufsart
+            (EN) ISCO occupation type
           type: string
           pattern: '^\d{5}$'
           example: "93130"
         buNbuApAnpCode:
           description: |
-            🇩🇪 BU/NBU-Code: 
+            (DE) BU/NBU-Code: 
                * `0` - nicht UVG-versichert
                * `1` - BUV- und NBUV-versichert mit NBUV-Abzug
                * `2` - BUV- und NBUV-versichert ohne NBUV-Abzug
                * `3` - nur BUV-versichert
-            🇬🇧 AP/ANP-Code:
+            (EN) AP/ANP-Code:
               * `0` - not LAA insured
               * `1` - AP- and ANP-insured with ANP deduction
               * `2` - AP- and ANP-insured without ANP deduction
@@ -2433,31 +2433,31 @@ components:
           enum: [0, 1, 2, 3]
         uvgLaaGrossSalary:
           description: |
-            🇩🇪 UVG-Bruttolohn: Summe aller aufbauenden Lohnarten.
-            🇬🇧 LAA gross salary: Sum of all constituting salary types.
+            (DE) UVG-Bruttolohn: Summe aller aufbauenden Lohnarten.
+            (EN) LAA gross salary: Sum of all constituting salary types.
           type: number
           multipleOf: 0.01
         uvgLaaBaseSalary:
           description: |
-            🇩🇪 UVG-Basislohn: Summe aller UVG-pflichtigen Lohnarten, ohne Rücksicht auf den versicherten Höchstlohn und den BU/NBU-Code.
-            🇬🇧 LAA base salary: Sum of all LAA liable salary types, regardless of the insured maximum salary and the AP/ANP code.
+            (DE) UVG-Basislohn: Summe aller UVG-pflichtigen Lohnarten, ohne Rücksicht auf den versicherten Höchstlohn und den BU/NBU-Code.
+            (EN) LAA base salary: Sum of all LAA liable salary types, regardless of the insured maximum salary and the AP/ANP code.
           type: number
           multipleOf: 0.01
         uvgLaaContributorySalary:
           description: |
-            🇩🇪 UVG-Lohn: Beitragspflichtiger Lohn, berechnet aufgrund der UVG-Basislohn für die versicherten Personen unter Berücksichtigung des Höchstlohnes.
-            🇬🇧 LAA salary: Contribution-liable salary, calculated based on the LAA base salary for the insured persons taking into account the maximum salary.
+            (DE) UVG-Lohn: Beitragspflichtiger Lohn, berechnet aufgrund der UVG-Basislohn für die versicherten Personen unter Berücksichtigung des Höchstlohnes.
+            (EN) LAA salary: Contribution-liable salary, calculated based on the LAA base salary for the insured persons taking into account the maximum salary.
           type: number
           multipleOf: 0.01
         leasedEmployeeNumber:
           description: |
-            🇩🇪 Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
-            🇬🇧 Reference to the leased employee. Mandatory for leased employees.
+            (DE) Referenz auf den Leihangestellten. Zwingend bei Leihangestellten.
+            (EN) Reference to the leased employee. Mandatory for leased employees.
           $ref: "#/components/schemas/EmployeeNumber"
         permanentEmployeeNumber:
           description: |
-            🇩🇪 Referenz auf den Festangestellten. Zwingend bei Festangestellten.
-            🇬🇧 Reference to the permanent employee. Mandatory for permanent employees.
+            (DE) Referenz auf den Festangestellten. Zwingend bei Festangestellten.
+            (EN) Reference to the permanent employee. Mandatory for permanent employees.
           $ref: "#/components/schemas/EmployeeNumber"
       required:
         - iscoSalaryNumber
