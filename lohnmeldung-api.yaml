@@ -1460,6 +1460,9 @@ components:
   parameters:
     EmployeeNumber:
       name: employeeNumber
+      description: |
+        (DE) Eindeutige Personalnummer aus dem ERP-System.
+        (EN) Unique employeeNumber from the ERP system.
       in: path
       required: true
       schema:
@@ -1467,6 +1470,9 @@ components:
 
     IscoSalaryNumber:
       name: iscoSalaryNumber
+      description: |
+        (DE) Eindeutige Nummer des Lohneintrags aus dem ERP-System.        
+        (EN) Unique salaryNumber from the ERP system.
       in: path
       required: true
       schema:
@@ -1474,6 +1480,9 @@ components:
 
     MissionCompanyNumber:
       name: missionCompanyNumber
+      description: |
+        (DE) Eindeutige Nummer des Einsatzbetriebs aus dem ERP-System.        
+        (EN) Unique MissionCompany number from the ERP system.
       in: path
       required: true
       schema:
@@ -1481,6 +1490,9 @@ components:
 
     MissionNumber:
       name: missionNumber
+      description: |
+        (DE) Eindeutige Einsatznummer aus dem ERP-System.        
+        (EN) Unique missionNumber from the ERP system.
       in: path
       required: true
       schema:
@@ -1488,6 +1500,9 @@ components:
 
     ReceiptId:
       name: receiptId
+      description: |
+        (DE) Von der Suva vergebener eindeutiger Identifikator der Quittung.        
+        (EN) Unique identifier of the reciept assigned by Suva.
       in: path
       required: true
       schema:
@@ -1495,6 +1510,9 @@ components:
 
     SalaryDeclarationId:
       name: salaryDeclarationId
+      description: |
+        (DE) Von der Suva vergebener eindeutiger Identifikator der Lohnmeldung.
+        (EN) Unique identifier of the SalaryDeclaration assigned by Suva.
       in: path
       required: true
       schema:
@@ -1502,6 +1520,9 @@ components:
 
     TemporaryWorkAgencyBranchNumber:
       name: temporaryWorkAgencyBranchNumber
+      description: |
+        (DE) Eindeutige Nummer zur Filiale aus dem ERP-System.        
+        (EN) Unique branch number from the ERP system.
       in: path
       required: true
       schema:
@@ -1509,6 +1530,9 @@ components:
 
     TemporaryWorkAgencyRegionNumber:
       name: temporaryWorkAgencyRegionNumber
+      description: |
+        (DE) Eindeutige Nummer zur Region aus dem ERP-System.        
+        (EN) Unique region number from the ERP system.
       in: path
       required: true
       schema:
@@ -1516,6 +1540,9 @@ components:
 
     TemporaryWorkAgencyTeamNumber:
       name: temporaryWorkAgencyTeamNumber
+      description: |
+        (DE) Eindeutige Nummer zum Team aus dem ERP-System.        
+        (EN) Unique team number from the ERP system.
       in: path
       required: true
       schema:
@@ -1523,6 +1550,9 @@ components:
 
     TemporaryWorkAgencyConsultantNumber:
       name: temporaryWorkAgencyConsultantNumber
+      description: |
+        (DE) Eindeutige Nummer zum Berater aus dem ERP-System.        
+        (EN) Unique consultant number from the ERP system.
       in: path
       required: true
       schema:
@@ -1562,9 +1592,6 @@ components:
 
   requestBodies:
     UpdateSalaryDeclaration:
-      description: |
-        (DE) FIXME
-        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1577,9 +1604,6 @@ components:
               - messageType
 
     SaveSalaryDeclaration:
-      description: |
-        (DE) FIXME
-        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1591,9 +1615,11 @@ components:
               accountingPeriodFrom:
                 type: string
                 format: date
+                example: "2026-01-01"
               accountingPeriodUntil:
                 type: string
                 format: date
+                example: "2026-01-31"
               customerNumber:
                 description: |
                   (DE) Die Suva-Kundennummer
@@ -1616,9 +1642,6 @@ components:
               - subNumber
 
     PatchSalaryDeclaration:
-      description: |
-        (DE) FIXME
-        (EN) FIXME
       required: true
       content:
         application/json:
@@ -1683,17 +1706,16 @@ components:
             $ref: "#/components/schemas/Error"
 
   schemas:
-    # FIXME Simple
     EmployeeNumber:
       description: |
         (DE) Nummer des Angestellten (ERP-System)
-        (EN) FIXME
+        (EN) Personnel number (ERP system)
       type: string
 
     IscoSalaryNumber:
       description: |
         (DE) Nummer des ISCO-Lohn (ERP-System)
-        (EN) FIXME
+        (EN) ISCO salary number (ERP system)
       type: string
 
     Language:
@@ -1706,13 +1728,13 @@ components:
     MissionCompanyNumber:
       description: |
         (DE) Nummer des Einsatzbetrieb (ERP-System)
-        (EN) FIXME
+        (EN) Mission company number (ERP system)
       type: string
 
     MissionNumber:
       description: |
         (DE) Nummer des Einsatz (ERP-System)
-        (EN) FIXME
+        (EN) Mission number (ERP system)
       type: string
 
     ReceiptId:
@@ -1732,32 +1754,32 @@ components:
     SalaryDeclarationType:
       description: |
         (DE) Meldungstyp: periodisch, Jahresmeldung definitiv, oder Jahresmeldung Ersatz
-        (EN)
+        (EN) Message type: periodic, annual report definitive or annual report replacement
       type: string
       enum: [periodic, annual_definitive, annual_replacement]
 
     TemporaryWorkAgencyBranchNumber:
       description: |
         (DE) Nummer des Personalverleiher Filiale (ERP-System)
-        (EN) FIXME
+        (EN) Temporary work agency branch number (ERP system)
       type: string
 
     TemporaryWorkAgencyRegionNumber:
       description: |
         (DE) Nummer des Personalverleiher Region (ERP-System)
-        (EN) FIXME
+        (EN) Temporary work agency region number (ERP system)
       type: string
 
     TemporaryWorkAgencyTeamNumber:
       description: |
         (DE) Nummer des Personalverleiher Team (ERP-System)
-        (EN) FIXME
+        (EN) Temporary work agency team number (ERP system)
       type: string
 
     TemporaryWorkAgencyConsultantNumber:
       description: |
         (DE) Nummer des Personalverleiher Berater (ERP-System)
-        (EN) FIXME
+        (EN) Temporary work agency consultant number (ERP system)
       type: string
 
     DeleteOmittedItems:
@@ -1774,7 +1796,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/Employee"
 
-    # FIXME Complex
     Contact:
       description: |
         (DE) Kontakt für Rückfragen zur Lohnmeldung
@@ -1956,13 +1977,13 @@ components:
         periodFrom:
           description: |
             (DE) Beginndatum der Einsatzperiode
-            (EN) FIXME
+            (EN) Start date of deployment period
           type: string
           format: date
         periodUntil:
           description: |
             (DE) Endedatum der Einsatzperiode
-            (EN) FIXME
+            (EN) End date of the employment period
           type: string
           format: date
         iscoOccupationTypeId:
@@ -1975,29 +1996,29 @@ components:
         occupationDescription:
           description: |
             (DE) Individuelle Berufsbezeichnung des Personalverleihers
-            (EN) FIXME
+            (EN) Individual job code selected by the temporary work agency
           type: string
         contractualJobTitle:
           description: |
             (DE) Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
-            (EN) FIXME
+            (EN) Based on the individual job code, there is at most an additional input field specific to the mission
           type: string
         kindOfWagePayment:
           description: |
             (DE) Art der Lohnzahlung
-            (EN) FIXME
+            (EN) Type of salary payment
           type: string
           enum: [monthly, daily, hourly, lesson]
         monthlyWage:
           description: |
             (DE) Monatslohn (UVG-Basis). Zwingend wenn `kindOfWagePayment = monthly`
-            (EN) FIXME
+            (EN) Monthly salary (UVG basis). This field is mandatory if `kindOfWagePayment = monthly`
           type: number
           multipleOf: 0.01
         activityRate:
           description: |
             (DE) Beschäftigungsgrad. Zwingend wenn `kindOfWagePayment = monthly`
-            (EN) FIXME
+            (EN) Employment rate. This field is mandatory if `kindOfWagePayment = monthly`
           type: number
           multipleOf: 0.01
           minimum: 0
@@ -2005,37 +2026,37 @@ components:
         totalDays:
           description: |
             (DE) Anzahl der geleisteten Arbeitstage. Zwingend wenn `kindOfWagePayment = daily`
-            (EN) FIXME
+            (EN) Number of working days in the deployment period. This field is mandatory if `kindOfWagePayment = daily`
           type: number
           multipleOf: 0.01
         dailyWage:
           description: |
             (DE) Geltender Tagesansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = daily`
-            (EN) FIXME
+            (EN) Current daily rate for this operation (UVG basis). This field is mandatory if `kindOfWagePayment = daily`
           type: number
           multipleOf: 0.01
         totalHours:
           description: |
             (DE) Anzahl der geleisteten Arbeitsstunden. Zwingend wenn `kindOfWagePayment = hourly`
-            (EN) FIXME
+            (EN) Number of hours worked during the deployment period. This field is mandatory if `kindOfWagePayment = hourly`
           type: number
           multipleOf: 0.01
         hourlyWage:
           description: |
             (DE) Geltender Stundensatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = hourly`
-            (EN) FIXME
+            (EN) Applicable hourly rate for this operation (UVG basis). This field is mandatory if `kindOfWagePayment = hourly`
           type: number
           multipleOf: 0.01
         totalLessons:
           description: |
             (DE) Anzahl der geleisteten Lektionen. Zwingend wenn `kindOfWagePayment = lesson`
-            (EN) FIXME
+            (EN) Number of lessons completed during the deployment period. This field is mandatory if `kindOfWagePayment = lesson`
           type: number
           multipleOf: 0.01
         lessonWage:
           description: |
             (DE) Geltender Lektionsansatz (UVG-Basis). Zwingend wenn `kindOfWagePayment = lesson`
-            (EN) FIXME
+            (EN) Current Lesson Approach for this Operation (UVG basis). This field is mandatory if `kindOfWagePayment = lesson`
           type: number
           multipleOf: 0.01
         missionplace:
@@ -2047,17 +2068,17 @@ components:
             description:
               description: |
                 (DE) Beschreibung des Einsatzortes
-                (EN) FIXME
+                (EN) Description of the location
               type: string
             zip:
               description: |
                 (DE) Postleitzahl des Einsatzortes
-                (EN) FIXME
+                (EN) Postal code of the place of operation
               type: string
             contact:
               description: |
                 (DE) Kontaktperson am Einsatzort
-                (EN) FIXME
+                (EN) Contact person at the operational facility
               type: object
               properties:
                 firstName:
@@ -2088,22 +2109,22 @@ components:
         temporaryWorkAgencyRegionNumber:
           description: |
             (DE) Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            (EN) FIXME.
+            (EN) Reference to the region of the temporary work agency.
           $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
         temporaryWorkAgencyBranchNumber:
           description: |
             (DE) Nummer der zuständigen Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            (EN) FIXME.
+            (EN) Reference to the nramch of the temporary work agency.
           $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
         temporaryWorkAgencyTeamNumber:
           description: |
             (DE) Nummer des zuständigen Teams beim Personalverleiher, welches den Einsatz vermittelt bzw. verkauft hat.
-            (EN) FIXME.
+            (EN) Reference to the team of the temporary work agency.
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
         temporaryWorkAgencyConsultantNumber:
           description: |
             (DE) Nummer der zuständigen Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-            (EN) FIXME.
+            (EN) Reference to the consultant of the temporary work agency.
           $ref: "#/components/schemas/TemporaryWorkAgencyConsultantNumber"
 
       required:
@@ -2119,14 +2140,14 @@ components:
     MissionCompany:
       description: |
         (DE) Die Einsatzfirma, bei welchen die Einsätze stattgefunden haben.
-        (EN) FIXME
+        (EN) The mission company in which the operations took place.
       type: object
       properties:
         missionCompanyNumber:
           $ref: "#/components/schemas/MissionCompanyNumber"
         uidNumber:
           description: (DE) Die Unternehmens-Identifikationsnummer (UID)
-            (EN) FIXME
+            (EN) Company Identification Number (UID)
           type: string
           example: "CHE-123.456.789"
         name:
@@ -2137,13 +2158,13 @@ components:
         address:
           description: |
             (DE) Adresse des Einsatzbetriebes
-            (EN) FIXME
+            (EN) Address details of the mission company
           type: object
           properties:
             complementaryLine:
               description: |
                 (DE) Adresszusatz
-                (EN) FIXME
+                (EN) Address supplement
               type: string
             street:
               description: |
@@ -2158,7 +2179,7 @@ components:
             locality:
               description: |
                 (DE) Lokalität wie Region / Provinz
-                (EN) FIXME
+                (EN) Locality as Region / Province
               type: string
             zipCode:
               description: |
@@ -2194,19 +2215,19 @@ components:
             employmentPeriodFrom:
               description: |
                 (DE) Beginndatum der Anstellung (innerhalb der accountingPeriod). Bei Anstellung vor dem Abrechnungsjahr: 1.1. des Abrechnungsjahrs
-                (EN) FIXME
+                (EN) Start date of employment (within accountingPeriod). If the permanent employee was already employed before the accounting year, the 1st of January of the accounting year is transmitted.
               type: string
               format: date
             employmentPeriodUntil:
               description: |
                 (DE) Endedatum der Anstellung (innerhalb der accountingPeriod). Bei Weiterbeschäftigung nach dem Abrechnungsjahr: 31.12. des Abrechnungsjahrs
-                (EN) FIXME
+                (EN) End date of employment (within accountingPeriod). If the permanent employee remains employed after the accounting year, the 31.12. of the accounting year is transmitted
               type: string
               format: date
             activityRate:
               description: |
                 (DE) Beschäftigungsgrad in Prozent
-                (EN) FIXME
+                (EN) Employment rate in percent
               type: number
               format: float
               minimum: 0
@@ -2215,12 +2236,12 @@ components:
             occupationDescription:
               description: |
                 (DE) Individuelle Berufsbezeichnung des Personalverleihers
-                (EN) FIXME
+                (EN) Individual job code
               type: string
             unsteadyEmployed:
               description: |
                 (DE) Wenn `true` ist der Festangestellte unregelmässig angestellt.
-                (EN) FIXME
+                (EN) If `true` the employment is irregular and therefore no degree of employment can be specified.
               type: boolean
       required:
         - employeeNumber
@@ -2323,7 +2344,7 @@ components:
     TemporaryWorkAgencyBranch:
       description: |
         (DE) Die zuständige Filiale beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        (EN) FIXME.
+        (EN) Branch of the temporary work agency.
       type: object
       properties:
         branchNumber:
@@ -2341,7 +2362,7 @@ components:
     TemporaryWorkAgencyRegion:
       description: |
         (DE) Die zuständige Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        (EN) FIXME.
+        (EN) Region of the temporary work agency.
       type: object
       properties:
         regionNumber:
@@ -2357,7 +2378,7 @@ components:
     TemporaryWorkAgencyTeam:
       description: |
         (DE) Das zuständige Team beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        (EN) FIXME.
+        (EN) Team of the temporary work agency.
       type: object
       properties:
         teamNumber:
@@ -2375,7 +2396,7 @@ components:
     TemporaryWorkAgencyConsultant:
       description: |
         (DE) Die zuständige Person beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
-        (EN) FIXME.
+        (EN) Consultant of the temporary work agency.
       type: object
       properties:
         consultantNumber:
