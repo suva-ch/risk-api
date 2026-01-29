@@ -647,6 +647,18 @@ components:
       type: string
       format: uuid
 
+    OccupationCodeSubmittedDecision:
+      description: |
+        🇩🇪 Ergebnis des Event.
+        - `accepted` Die Berufscode-Anfrage wurde erfolgreich verarbeitet und gemappt.
+        - `rejected` Die Berufscode-Anfrage wurde abgebrochen oder gelöscht.
+        
+        🇬🇧 Result of the event.
+        - `accepted` The submission of the occupation code was successfully processed and mapped.
+        - `rejected` The submission of the occupation code was cancelled or deleted.
+      type: string
+      enum: [ accepted, rejected ]
+
     EventStatus:
       description: |
         🇩🇪 Status des Event.
@@ -672,6 +684,8 @@ components:
           type: string
         occupation:
           $ref: "#/components/schemas/OccupationCode"
+        decision:
+          $ref: "#/components/schemas/OccupationCodeSubmittedDecision"
       required:
         - eventType
     
