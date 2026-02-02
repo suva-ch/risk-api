@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 0.9.0
+  version: 0.10.0
   title: Berufscode API
   description: |
     🇩🇪 Beschreibt die gegenüber einem ERP angebotenen Schnittstellen auf Seite Suva für die Pflege der Berufscodes.
@@ -683,12 +683,16 @@ components:
         eventType:
           type: string
         occupation:
+          description: |
+            🇩🇪 Wenn das Property `decision` den Wert `rejected` hat, ist `occupation` immer `null`.
+            
+            🇬🇧 If the property `decision` is set to `rejected`, `occupation` will always be `null`.
           $ref: "#/components/schemas/OccupationCode"
         decision:
           $ref: "#/components/schemas/OccupationCodeSubmittedDecision"
       required:
         - eventType
-    
+
     EventIscoOccupationTypeChanged:
       description: |
         🇩🇪 Ein für den Kunden aktiver ISCO-Berufsart wurde von der Suva einem neuen Risiko (UKT) zugeordnet. Tätigkeiten mit dem geänderten Risiko erhalten potentiell dabei anderen Prämiensätze.
