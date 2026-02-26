@@ -2279,6 +2279,7 @@ components:
               transmitted,
               processing,
               completion_pending,
+              completion_obsolete,
               accepted,
               refused,
               deleted,
