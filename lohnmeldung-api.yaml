@@ -2149,6 +2149,7 @@ components:
           description: (DE) Die Unternehmens-Identifikationsnummer (UID)
             (EN) Company Identification Number (UID)
           type: string
+          pattern: '^CHE-\d+\.\d+\.\d+$'
           example: "CHE-123.456.789"
         name:
           description: |
