@@ -196,7 +196,7 @@ paths:
       tags:
         - Contact
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: getContact
       responses:
         "200":
@@ -221,7 +221,7 @@ paths:
       tags:
         - Contact
       security:
-        - ApiKeyAuth: [ ]
+        - ApiKeyAuth: []
       operationId: saveContact
       requestBody:
         required: true
@@ -2204,6 +2204,7 @@ components:
       required:
         - missionCompanyNumber
         - name
+        - address
 
     PermanentEmployee:
       description: |
