@@ -1711,12 +1711,14 @@ components:
         (DE) Nummer des Angestellten (ERP-System)
         (EN) Personnel number (ERP system)
       type: string
+      maxLength: 50
 
     IscoSalaryNumber:
       description: |
         (DE) Nummer des ISCO-Lohn (ERP-System)
         (EN) ISCO salary number (ERP system)
       type: string
+      maxLength: 50
 
     Language:
       description: |
@@ -1730,12 +1732,14 @@ components:
         (DE) Nummer des Einsatzbetrieb (ERP-System)
         (EN) Mission company number (ERP system)
       type: string
+      maxLength: 255
 
     MissionNumber:
       description: |
         (DE) Nummer des Einsatz (ERP-System)
         (EN) Mission number (ERP system)
       type: string
+      maxLength: 50
 
     ReceiptId:
       description: |
@@ -1763,24 +1767,28 @@ components:
         (DE) Nummer des Personalverleiher Filiale (ERP-System)
         (EN) Temporary work agency branch number (ERP system)
       type: string
+      maxLength: 50
 
     TemporaryWorkAgencyRegionNumber:
       description: |
         (DE) Nummer des Personalverleiher Region (ERP-System)
         (EN) Temporary work agency region number (ERP system)
       type: string
+      maxLength: 50
 
     TemporaryWorkAgencyTeamNumber:
       description: |
         (DE) Nummer des Personalverleiher Team (ERP-System)
         (EN) Temporary work agency team number (ERP system)
       type: string
+      maxLength: 50
 
     TemporaryWorkAgencyConsultantNumber:
       description: |
         (DE) Nummer des Personalverleiher Berater (ERP-System)
         (EN) Temporary work agency consultant number (ERP system)
       type: string
+      maxLength: 50
 
     DeleteOmittedItems:
       description: |
@@ -1807,21 +1815,25 @@ components:
             (DE) Vorname
             (EN) First name
           type: string
+          maxLength: 255
         lastName:
           description: |
             (DE) Nachname
             (EN) Last name
           type: string
+          maxLength: 255
         email:
           description: |
             (DE) E-Mail
             (EN) E-Mail
           type: string
+          maxLength: 255
         phoneNumber:
           description: |
             (DE) Telefon-Nummer
             (EN) Phone number
           type: string
+          maxLength: 255
       required:
         - firstName
         - lastName
@@ -1841,11 +1853,13 @@ components:
             (DE) Vorname
             (EN) First name
           type: string
+          maxLength: 255
         lastName:
           description: |
             (DE) Nachname
             (EN) Last name
           type: string
+          maxLength: 255
         sex:
           description: |
             (DE) Geschlecht
@@ -1998,11 +2012,13 @@ components:
             (DE) Individuelle Berufsbezeichnung des Personalverleihers
             (EN) Individual job code selected by the temporary work agency
           type: string
+          maxLength: 255
         contractualJobTitle:
           description: |
             (DE) Spezifische Berufsbezeichnung des Personalverleihers für den Einsatz, falls abweichend vom individuellen Berufscode.
             (EN) Based on the individual job code, there is at most an additional input field specific to the mission
           type: string
+          maxLength: 255
         kindOfWagePayment:
           description: |
             (DE) Art der Lohnzahlung
@@ -2070,11 +2086,13 @@ components:
                 (DE) Beschreibung des Einsatzortes
                 (EN) Description of the location
               type: string
+              maxLength: 255
             zip:
               description: |
                 (DE) Postleitzahl des Einsatzortes
                 (EN) Postal code of the place of operation
               type: string
+              maxLength: 50
             contact:
               description: |
                 (DE) Kontaktperson am Einsatzort
@@ -2086,26 +2104,31 @@ components:
                     (DE) Vorname
                     (EN) First name
                   type: string
+                  maxLength: 255
                 lastName:
                   description: |
                     (DE) Nachname
                     (EN) Last name
                   type: string
+                  maxLength: 255
                 email:
                   description: |
                     (DE) E-Mail
                     (EN) E-Mail
                   type: string
+                  maxLength: 255
                 phoneNumber:
                   description: |
                     (DE) Telefon-Nummer
                     (EN) Phone number
                   type: string
+                  maxLength: 255
                 mobileNumber:
                   description: |
                     (DE) Mobiltelefon-Nummer
                     (EN) Mobilephone number
                   type: string
+                  maxLength: 255
         temporaryWorkAgencyRegionNumber:
           description: |
             (DE) Nummer der zuständigen Region beim Personalverleiher, welche den Einsatz vermittelt bzw. verkauft hat.
@@ -2151,11 +2174,13 @@ components:
           type: string
           pattern: '^CHE-\d+\.\d+\.\d+$'
           example: "CHE-123.456.789"
+          maxLength: 50
         name:
           description: |
             (DE) Name des Einsatzbetriebes
             (EN) Name of the mission company
           type: string
+          maxLength: 255
         address:
           description: |
             (DE) Adresse des Einsatzbetriebes
@@ -2167,37 +2192,44 @@ components:
                 (DE) Adresszusatz
                 (EN) Address supplement
               type: string
+              maxLength: 255
             street:
               description: |
                 (DE) Strasse
                 (EN) Street
               type: string
+              maxLength: 255
             postbox:
               description: |
                 (DE) Postfach
                 (EN) Postbox
               type: string
+              maxLength: 255
             locality:
               description: |
                 (DE) Lokalität wie Region / Provinz
                 (EN) Locality as Region / Province
               type: string
+              maxLength: 255
             zipCode:
               description: |
                 (DE) Postleitzahl
                 (EN) Zip code
               type: string
+              maxLength: 50
             city:
               description: |
                 (DE) Ort
                 (EN) City
               type: string
+              maxLength: 255
             country:
               description: |
                 (DE) Land
                 (EN) Country
               type: string
               example: CH
+              maxLength: 255
           required:
             - zipCode
             - city
@@ -2240,6 +2272,7 @@ components:
                 (DE) Individuelle Berufsbezeichnung des Personalverleihers
                 (EN) Individual job code
               type: string
+              maxLength: 255
             unsteadyEmployed:
               description: |
                 (DE) Wenn `true` ist der Festangestellte unregelmässig angestellt.
@@ -2357,6 +2390,7 @@ components:
             (DE) Bezeichnung der Filiale.
             (EN) Description of the branch.
           type: string
+          maxLength: 255
         regionNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyRegionNumber"
       required:
@@ -2375,6 +2409,7 @@ components:
             (DE) Bezeichnung der Region.
             (EN) Description of the region.
           type: string
+          maxLength: 255
       required:
         - regionNumber
 
@@ -2391,6 +2426,7 @@ components:
             (DE) Bezeichnung des Teams.
             (EN) Description of the team.
           type: string
+          maxLength: 255
         branchNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyBranchNumber"
       required:
@@ -2409,11 +2445,13 @@ components:
             (DE) Vorname
             (EN) First name
           type: string
+          maxLength: 255
         lastName:
           description: |
             (DE) Nachname
             (EN) Last name
           type: string
+          maxLength: 255
         teamNumber:
           $ref: "#/components/schemas/TemporaryWorkAgencyTeamNumber"
       required:
