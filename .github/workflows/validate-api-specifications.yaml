@@ -34,7 +34,9 @@ jobs:
         if: steps.changed.outputs.files != ''
         run: |
           npm install -g @stoplight/spectral-cli
+          FAILED=0
           for file in ${{ steps.changed.outputs.files }}; do
             echo "Validating $file..."
-            spectral lint "$file" --ruleset ./config/.spectral.yaml --fail-severity warn
+            spectral lint "$file" --ruleset ./config/.spectral.yaml --fail-severity warn || FAILED=1
           done
+          exit $FAILED
