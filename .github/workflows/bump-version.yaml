@@ -19,7 +19,6 @@ on:
 jobs:
   show-current:
     runs-on: ubuntu-latest
-    environment: version-bump
     steps:
       - uses: actions/checkout@v5
 
@@ -29,8 +28,16 @@ jobs:
           echo "## Current version of ${{ github.event.inputs.spec }}: **$CURRENT**" >> "$GITHUB_STEP_SUMMARY"
           echo "## Bumping to: **${{ github.event.inputs.version }}**" >> "$GITHUB_STEP_SUMMARY"
 
-  bump:
+  approve:
     needs: show-current
+    runs-on: ubuntu-latest
+    environment: version-bump
+    steps:
+      - name: Waiting for approval
+        run: echo "Approved, proceeding with version bump."
+
+  bump:
+    needs: approve
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
