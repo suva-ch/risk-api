@@ -6,7 +6,7 @@ info:
   description: |
     🇩🇪 Diese API liefert Policendaten basierend auf dem Ereignis-Datum für eine Schadenmeldung.
 
-    🇬🇧 This API provides policy data based on the event date for an accident report. 123
+    🇬🇧 This API provides policy data based on the event date for an accident report. 123 56
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
