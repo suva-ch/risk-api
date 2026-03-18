@@ -1600,6 +1600,12 @@ components:
             properties:
               messageType:
                 $ref: "#/components/schemas/SalaryDeclarationType"
+              hasSalaries:
+                description: |
+                  (DE) Gibt an ob es sich um eine Lohnmeldung mit oder ohne Löhne handelt. Optional, per default `true`.
+                  (EN) Indicates whether this salary declaration contains salaries or not. Optional, defaults to `true`.
+                type: boolean
+                default: true
             required:
               - messageType
 
@@ -1634,6 +1640,12 @@ components:
                 type: string
                 example: "01"
                 pattern: '^\d{2}$'
+              hasSalaries:
+                description: |
+                  (DE) Gibt an ob es sich um eine Lohnmeldung mit oder ohne Löhne handelt. Optional, per default `true`.
+                  (EN) Indicates whether this salary declaration contains salaries or not. Optional, defaults to `true`.
+                type: boolean
+                default: true
             required:
               - messageType
               - accountingPeriodFrom
@@ -2347,6 +2359,11 @@ components:
           type: string
           example: "01"
           pattern: '^\d{2}$'
+        hasSalaries:
+          description: |
+            (DE) Gibt an ob es sich um eine Lohnmeldung mit oder ohne Löhne handelt.
+            (EN) Indicates whether this salary declaration contains salaries or not.
+          type: boolean
         receipts:
           type: array
           items:
