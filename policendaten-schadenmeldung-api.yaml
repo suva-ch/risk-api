@@ -16,6 +16,9 @@ servers:
   - url: https://api.suva.ch/policies
     description: Production server
 
+tags:
+  - name: Policendaten
+
 paths:
   /v1/policies/{customerId}:
     parameters:
@@ -35,7 +38,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/EventDateParam"
       responses:
-        200:
+        "200":
           description: |
             🇩🇪 Liste von Subnummern der Police.
 
@@ -46,9 +49,9 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/SubNumber"
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
   /v1/policies/{customerId}/{language}/{gender}:
@@ -71,7 +74,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/EventDateParam"
       responses:
-        200:
+        "200":
           description: |
             🇩🇪 Gefilterte Liste von Subnummern.
 
@@ -82,9 +85,9 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/SubNumberFiltered"
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
 
 components:
@@ -348,7 +351,7 @@ components:
             Suva own Isco occupation codes start with an 'S'
             e.G. 'S0000001'
           type: string
-          example: 33304096
+          example: "33304096"
         active:
           type: boolean
           description: |
