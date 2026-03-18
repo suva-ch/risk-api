@@ -1,0 +1,36 @@
+name: OpenAPI Validation
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'berufscode-api.yaml'
+      - 'lohnmeldung-api.yaml'
+      - 'policendaten-schadenmeldung-api.yaml'
+
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed spec files
+        id: changed
+        run: |
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- \
+            'berufscode-api.yaml' \
+            'lohnmeldung-api.yaml' \
+            'policendaten-schadenmeldung-api.yaml')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+      - name: Validate changed specs
+        if: steps.changed.outputs.files != ''
+        run: |
+          npm install -g @stoplight/spectral-cli
+          for file in ${{ steps.changed.outputs.files }}; do
+            echo "Validating $file..."
+            spectral lint "$file" --ruleset ./config/.spectral.yaml --fail-severity warn
+          done
