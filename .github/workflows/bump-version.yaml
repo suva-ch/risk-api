@@ -1,0 +1,49 @@
+name: Bump OpenAPI Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: 'For which API do you want to increment the version?'
+        required: true
+        type: choice
+        options:
+          - berufscode-api.yaml
+          - lohnmeldung-api.yaml
+          - policendaten-schadenmeldung-api.yaml
+      version:
+        description: 'New version (e.g. 1.1.0)'
+        required: true
+        type: string
+
+jobs:
+  show-current:
+    runs-on: ubuntu-latest
+    environment: version-bump
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Show current version
+        run: |
+          CURRENT=$(yq e '.info.version' ${{ github.event.inputs.spec }})
+          echo "## Current version of ${{ github.event.inputs.spec }}: **$CURRENT**" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Bumping to: **${{ github.event.inputs.version }}**" >> "$GITHUB_STEP_SUMMARY"
+
+  bump:
+    needs: show-current
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Update version
+        run: |
+          yq e -i '.info.version = "${{ github.event.inputs.version }}"' \
+            ${{ github.event.inputs.spec }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add ${{ github.event.inputs.spec }}
+          git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
+          git push
