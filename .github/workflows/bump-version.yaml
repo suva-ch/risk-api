@@ -47,10 +47,18 @@ jobs:
           yq e -i '.info.version = "${{ github.event.inputs.version }}"' \
             ${{ github.event.inputs.spec }}
 
-      - name: Commit and push
+      - name: Create PR
         run: |
+          BRANCH="chore/bump-$(basename ${{ github.event.inputs.spec }} .yaml)-v${{ github.event.inputs.version }}"
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          git checkout -b "$BRANCH"
           git add ${{ github.event.inputs.spec }}
           git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
-          git push
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}" \
+            --body "Automated version bump" \
+            --base main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
