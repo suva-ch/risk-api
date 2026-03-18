@@ -21,10 +21,14 @@ jobs:
       - name: Get changed spec files
         id: changed
         run: |
-          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- \
-            'berufscode-api.yaml' \
-            'lohnmeldung-api.yaml' \
-            'policendaten-schadenmeldung-api.yaml')
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            FILES="berufscode-api.yaml lohnmeldung-api.yaml policendaten-schadenmeldung-api.yaml"
+          else
+            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- \
+              'berufscode-api.yaml' \
+              'lohnmeldung-api.yaml' \
+              'policendaten-schadenmeldung-api.yaml')
+          fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
       - name: Validate changed specs
         if: steps.changed.outputs.files != ''
