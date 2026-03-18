@@ -18,6 +18,13 @@ servers:
   - url: https://api.suva.ch/mock/occupation-codes
     description: Production mock server
 
+tags:
+  - name: Suva Occupation Codes
+  - name: ISCO Occupation Types
+  - name: Occupation Codes
+  - name: Company Parts
+  - name: Events
+
 paths:
   /v1/suva-occupation-codes:
     parameters:
@@ -35,7 +42,7 @@ paths:
         - ApiKeyAuth: [ ]
       operationId: getSuvaOccupationCodes
       responses:
-        200:
+        "200":
           description: |
             🇩🇪 Liste von Suva-Berufscodes.
             🇬🇧 List of Suva occupation codes.
@@ -64,9 +71,9 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
       responses:
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        200:
+        "200":
           description: |
             🇩🇪 Liste von ISCO-Berufsarten und zugeordnete Risiko-Klassen.
             🇬🇧 List of ISCO occupation types and associated risk classes.
@@ -95,9 +102,9 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PremiumYear"
       responses:
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        200:
+        "200":
           description: |
             🇩🇪 Liste von Betriebsteil-Situationen.
             🇬🇧 List of company part profiles.
@@ -124,9 +131,9 @@ paths:
         - ApiKeyAuth: [ ]
       operationId: getOccupationCodes
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        200:
+        "200":
           description: |
             🇩🇪 Liste von Berufscodes.
             🇬🇧 List of occupation codes.
@@ -166,13 +173,13 @@ paths:
               required:
                 - suvaOccupationCodeId
       responses:
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        200:
+        "200":
           description: Success
           content:
             application/json:
@@ -214,13 +221,13 @@ paths:
                 - preferredLanguage
                 - descriptions
       responses:
-        400:
+        "400":
           $ref: "#/components/responses/BadRequestError"
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        422:
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
-        200:
+        "200":
           description: Success
           content:
             application/json:
@@ -248,11 +255,11 @@ paths:
         - ApiKeyAuth: [ ]
       operationId: deactivateOccupationCode
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        204:
+        "204":
           description: Berufscode deaktiviert.
 
     put:
@@ -283,11 +290,11 @@ paths:
                 - occupationCodeNumber1
                 - occupationCodeNumber2
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        200:
+        "200":
           description: Berufscode aktualisiert.
           content:
             application/json:
@@ -310,9 +317,9 @@ paths:
       security:
         - ApiKeyAuth: [ ]
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        200:
+        "200":
           description: |
             🇩🇪 Liste von Events.
             🇬🇧 List of events.
@@ -340,11 +347,11 @@ paths:
       security:
         - ApiKeyAuth: [ ]
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        200:
+        "200":
           description: Der angefragte Event.
           content:
             application/json:
@@ -361,13 +368,13 @@ paths:
       security:
         - ApiKeyAuth: [ ]
       responses:
-        401:
+        "401":
           $ref: "#/components/responses/NotAuthenticatedError"
-        404:
+        "404":
           $ref: "#/components/responses/NotFoundError"
-        422:
+        "422":
           $ref: "#/components/responses/UnprocessableContentError"
-        204:
+        "204":
           description: |
             🇩🇪 Der Event ist quittiert.
             🇬🇧 The event is acknowledged.
