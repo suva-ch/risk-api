@@ -44,7 +44,7 @@ jobs:
 
       - name: Update version
         run: |
-          yq e -i '.info.version = "${{ github.event.inputs.version }}"' \
+          sed -i '/^info:/,/^[^ ]/{s/^\(\s*version:\s*\).*/\1'"'${{ github.event.inputs.version }}'"'/}' \
             ${{ github.event.inputs.spec }}
 
       - name: Create PR
@@ -56,9 +56,10 @@ jobs:
           git add ${{ github.event.inputs.spec }}
           git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
           git push origin "$BRANCH"
-          gh pr create \
+          PR_URL=$(gh pr create \
             --title "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}" \
             --body "Automated version bump" \
-            --base main
+            --base main)
+          echo "## PR created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
