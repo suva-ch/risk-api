@@ -40,18 +40,27 @@ jobs:
     needs: approve
     runs-on: ubuntu-latest
     steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Update version
         run: |
-          sed -i '/^info:/,/^[^ ]/{s/^\(\s*version:\s*\).*/\1'"'${{ github.event.inputs.version }}'"'/}' \
+          sed -i "s/^\(\s*version:\s*\).*/\1'${{ github.event.inputs.version }}'/" \
             ${{ github.event.inputs.spec }}
 
       - name: Create PR
         run: |
           BRANCH="chore/bump-$(basename ${{ github.event.inputs.spec }} .yaml)-v${{ github.event.inputs.version }}"
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "kf0-suva-ci-bot[bot]"
+          git config user.email "123456+kf0-suva-ci-bot[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
           git add ${{ github.event.inputs.spec }}
           git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
@@ -62,4 +71,4 @@ jobs:
             --base main)
           echo "## PR created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
