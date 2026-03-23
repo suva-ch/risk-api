@@ -1,0 +1,74 @@
+name: Bump OpenAPI Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: 'For which API do you want to increment the version?'
+        required: true
+        type: choice
+        options:
+          - berufscode-api.yaml
+          - lohnmeldung-api.yaml
+          - policendaten-schadenmeldung-api.yaml
+      version:
+        description: 'New version (e.g. 1.1.0)'
+        required: true
+        type: string
+
+jobs:
+  show-current:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Show current version
+        run: |
+          CURRENT=$(yq e '.info.version' ${{ github.event.inputs.spec }})
+          echo "## Current version of ${{ github.event.inputs.spec }}: **$CURRENT**" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Bumping to: **${{ github.event.inputs.version }}**" >> "$GITHUB_STEP_SUMMARY"
+
+  approve:
+    needs: show-current
+    runs-on: ubuntu-latest
+    environment: version-bump
+    steps:
+      - name: Waiting for approval
+        run: echo "Approved, proceeding with version bump."
+
+  bump:
+    needs: approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Update version
+        run: |
+          sed -i "s/^\(\s*version:\s*\).*/\1'${{ github.event.inputs.version }}'/" \
+            ${{ github.event.inputs.spec }}
+
+      - name: Create PR
+        run: |
+          BRANCH="chore/bump-$(basename ${{ github.event.inputs.spec }} .yaml)-v${{ github.event.inputs.version }}"
+          git config user.name "kf0-suva-ci-bot[bot]"
+          git config user.email "123456+kf0-suva-ci-bot[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add ${{ github.event.inputs.spec }}
+          git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
+          git push origin "$BRANCH"
+          PR_URL=$(gh pr create \
+            --title "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}" \
+            --body "Automated version bump" \
+            --base main)
+          echo "## PR created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
