@@ -734,7 +734,7 @@ components:
         🇩🇪 Sprach- und geschlechtsspezifische Berufsbezeichnung.
         🇬🇧 Language- and gender-specific occupation description.
       allOf:
-        - $ref: "#/components/schemas/LocalizedValue"
+        - $ref: "#/components/schemas/LocalizedValueLimited"
         - type: object
           properties:
             gender:
@@ -765,6 +765,18 @@ components:
       required:
         - occupationalAccidentInsurance
         - nonOccupationalAccidentInsurance
+
+    LocalizedValueLimited:
+      description: |
+        🇩🇪 Ein sprachbezogener Wert mit einer beschränkten Länge (max. 255 Zeichen).
+        🇬🇧 A language-specific value with a length limit (max 255 characters).
+      allOf:
+        - $ref: "#/components/schemas/LocalizedValue"
+        - type: object
+          properties:
+            value:
+              type: string
+              maxLength: 255
 
     LocalizedValue:
       description: |
