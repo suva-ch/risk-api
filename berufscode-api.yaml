@@ -776,6 +776,7 @@ components:
           $ref: "#/components/schemas/Language"
         value:
           type: string
+          maxLength: 255
       required:
         - language
         - value
