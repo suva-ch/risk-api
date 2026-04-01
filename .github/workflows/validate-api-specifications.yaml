@@ -22,7 +22,7 @@ jobs:
             FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- \
               'berufscode-api.yaml' \
               'lohnmeldung-api.yaml' \
-              'policendaten-schadenmeldung-api.yaml')
+              'policendaten-schadenmeldung-api.yaml' | tr '\n' ' ')
           fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
 
