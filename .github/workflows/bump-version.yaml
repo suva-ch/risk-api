@@ -1,0 +1,110 @@
+name: Bump OpenAPI Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: 'For which API do you want to increment the version?'
+        required: true
+        type: choice
+        options:
+          - berufscode-api.yaml
+          - lohnmeldung-api.yaml
+          - policendaten-schadenmeldung-api.yaml
+      version:
+        description: 'New version (e.g. 1.1.0)'
+        required: true
+        type: string
+
+jobs:
+  show-current:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Show current version
+        run: |
+          CURRENT=$(yq e '.info.version' ${{ github.event.inputs.spec }})
+          echo "## Current version of ${{ github.event.inputs.spec }}: **$CURRENT**" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Bumping to: **${{ github.event.inputs.version }}**" >> "$GITHUB_STEP_SUMMARY"
+
+  approve:
+    needs: show-current
+    runs-on: ubuntu-latest
+    environment: version-bump
+    steps:
+      - name: Waiting for approval
+        run: echo "Approved, proceeding with version bump."
+
+  bump:
+    needs: approve
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.create-pr.outputs.tag }}
+    steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Update version
+        run: |
+          sed -i "s/^\(\s*version:\s*\).*/\1'${{ github.event.inputs.version }}'/" \
+            ${{ github.event.inputs.spec }}
+
+      - name: Create PR and tag
+        id: create-pr
+        run: |
+          SPEC_NAME=$(basename ${{ github.event.inputs.spec }} .yaml)
+          TAG="${SPEC_NAME}-v${{ github.event.inputs.version }}"
+          BRANCH="chore/bump-${SPEC_NAME}-v${{ github.event.inputs.version }}"
+          
+          git config user.name "team-dom-ci-bot[bot]"
+          git config user.email "${{ secrets.APP_ID }}+team-dom-ci-bot[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add ${{ github.event.inputs.spec }}
+          git commit -m "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}"
+          
+          git tag -a "$TAG" -m "Release $SPEC_NAME v${{ github.event.inputs.version }}"
+          git push origin "$BRANCH" "$TAG"
+          
+          PR_URL=$(gh pr create \
+            --title "chore: bump ${{ github.event.inputs.spec }} to v${{ github.event.inputs.version }}" \
+            --body "Automated version bump. Tag: \`$TAG\`" \
+            --base main)
+          
+          echo "## PR created: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Tag created: \`$TAG\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+  draft-release:
+    needs: bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Create draft release
+        run: |
+          TAG="${{ needs.bump.outputs.tag }}"
+          gh release create "$TAG" \
+            --repo ${{ github.repository }} \
+            --title "$TAG" \
+            --draft \
+            --notes ""
+          RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/$TAG"
+          echo "## Draft release created: $RELEASE_URL" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
