@@ -2228,7 +2228,8 @@ components:
                 (DE) Postleitzahl
                 (EN) Zip code
               type: string
-              maxLength: 50
+              minLength: 1
+              maxLength: 10
             city:
               description: |
                 (DE) Ort
@@ -2241,10 +2242,12 @@ components:
                 (EN) Country
               type: string
               example: CH
-              maxLength: 255
+              minLength: 2
+              maxLength: 2
           required:
             - zipCode
             - city
+            - country
       required:
         - missionCompanyNumber
         - name
